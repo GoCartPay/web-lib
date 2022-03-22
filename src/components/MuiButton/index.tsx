@@ -7,6 +7,7 @@ export const MuiButton = ({
   ...muiProps
 }: {
   labelText: string
+
   color?: ButtonProps['color']
   muiProps?: ButtonProps
 }) => (
