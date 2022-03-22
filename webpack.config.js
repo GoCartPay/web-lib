@@ -13,7 +13,7 @@ module.exports = {
     filename: './[name]/index.js',
     path: path.resolve(__dirname, './dist'),
     library: {
-      type: 'umd',
+      type: 'umd'
     }
   },
   resolve: {
@@ -33,7 +33,7 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env']
           }
