@@ -3683,6 +3683,7 @@ function createTransitions(inputTransitions) {
 // like global values in the browser.
 const zIndex = {
   mobileStepper: 1000,
+  fab: 1050,
   speedDial: 1050,
   appBar: 1100,
   drawer: 1200,
@@ -3755,4 +3756,4 @@ function createTheme(options = {}, ...args) {
 }
 
 export { alpha as A, __rest as B, __assign as C, useTheme$2 as D, ThemeContext$1 as E, PropTypes as P, ThemeContext$2 as T, _extends as _, insertStyles as a, useInsertionEffectMaybe as b, createCommonjsModule as c, getRegisteredStyles as d, merge as e, style$1 as f, generateUtilityClass as g, responsivePropType$1 as h, isBrowser as i, createUnaryUnit as j, handleBreakpoints as k, getValue as l, memoize$1 as m, spacing as n, createEmptyBreakpointObject as o, removeUnusedBreakpoints as p, _objectWithoutPropertiesLoose as q, registerStyles as r, serializeStyles as s, capitalize as t, unwrapExports as u, values as v, withEmotionCache as w, createTheme$1 as x, useTheme as y, createTheme as z };
-//# sourceMappingURL=createTheme-0930b11c.js.map
+//# sourceMappingURL=createTheme-f1725a02.js.map

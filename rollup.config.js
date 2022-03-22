@@ -10,7 +10,13 @@ const glob = require('glob')
 
 // Collect all components; place them at the top level
 const components = glob.sync('./src/components/**/index.tsx').reduce((acc, path) => {
-    const entry = path.replace('/index.tsx', '/index').replace('./src/components/', '')
+    const entry = path.replace('/index.tsx', '/index').replace('./src/', '')//.replace('./src/components/', '')
+    acc[entry] = path
+    return acc
+  }, {})
+
+  const utils = glob.sync('./src/util/**/index.tsx').reduce((acc, path) => {
+    const entry = path.replace('/index.tsx', '/index').replace('./src/', '')//.replace('./src/components/', '')
     acc[entry] = path
     return acc
   }, {})
@@ -19,7 +25,7 @@ const theme = {'Theme/index': './src/Theme/index.tsx'}
 
 
 export default defineConfig({
-  input: {...components, ...theme},
+  input: {...components, ...theme, ...utils},
   output: {
       dir: './dist',
       format: 'es',
@@ -34,7 +40,7 @@ export default defineConfig({
     typescript({
       rollupCommonJSResolveHack: true,
       exclude: [
-        '**/__tests__/**',
+        '**/*.tests.tsx',
         '**/*.stories.*'
       ],
       clean: true

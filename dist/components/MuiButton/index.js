@@ -1,4 +1,4 @@
-import { P as PropTypes, _ as _extends, g as generateUtilityClass, c as createCommonjsModule, u as unwrapExports, m as memoize, w as withEmotionCache, s as serializeStyles, T as ThemeContext, i as isBrowser$3, a as insertStyles, b as useInsertionEffectMaybe$1, r as registerStyles, d as getRegisteredStyles, e as merge$1, f as style, h as responsivePropType, j as createUnaryUnit, k as handleBreakpoints, l as getValue, v as values$1, n as spacing, o as createEmptyBreakpointObject, p as removeUnusedBreakpoints, q as _objectWithoutPropertiesLoose, t as capitalize, x as createTheme, y as useTheme, z as createTheme$1, A as alpha, B as __rest, C as __assign } from '../createTheme-0930b11c.js';
+import { P as PropTypes, _ as _extends, g as generateUtilityClass, c as createCommonjsModule, u as unwrapExports, m as memoize, w as withEmotionCache, s as serializeStyles, T as ThemeContext, i as isBrowser$3, a as insertStyles, b as useInsertionEffectMaybe$1, r as registerStyles, d as getRegisteredStyles, e as merge$1, f as style, h as responsivePropType, j as createUnaryUnit, k as handleBreakpoints, l as getValue, v as values$1, n as spacing, o as createEmptyBreakpointObject, p as removeUnusedBreakpoints, q as _objectWithoutPropertiesLoose, t as capitalize, x as createTheme, y as useTheme, z as createTheme$1, A as alpha, B as __rest, C as __assign } from '../../createTheme-f1725a02.js';
 import * as React from 'react';
 import React__default, { useContext, createElement, useRef, Fragment, useLayoutEffect, Children, isValidElement, cloneElement } from 'react';
 import reactIs, { Memo, ForwardRef } from 'react-is';
@@ -1061,7 +1061,7 @@ tags.forEach(function (tagName) {
 
 var emStyled = newStyled;
 
-/** @license MUI v5.4.4
+/** @license MUI v5.5.2
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
