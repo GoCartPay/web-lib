@@ -63,6 +63,9 @@
     "eslint-plugin-react": "^7.29.4"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ]
   }
 }
