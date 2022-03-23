@@ -1,0 +1,75 @@
+{
+  "name": "@gocartpay/web-lib",
+  "description": "",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.5.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/builder-webpack5": "^6.4.19",
+    "@storybook/manager-webpack5": "^6.4.19",
+    "@storybook/react": "^6.4.19",
+    "@storybook/testing-library": "^0.0.9",
+    "@testing-library/react": "^12.1.4",
+    "babel-loader": "^8.2.3",
+    "eslint": "^8.11.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.7",
+    "prettier": "2.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.70.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "storybook-addon-designs": "^6.2.1",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "clean": "rm -r ./dist",
+    "test": "jest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build": "npm run clean ; rollup --config",
+    "prepare": "husky install",
+    "type:check": "tsc --skipLibCheck --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danwoods/sample-ui-lib.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danwoods/sample-ui-lib/issues"
+  },
+  "homepage": "https://github.com/danwoods/sample-ui-lib#readme",
+  "dependencies": {
+    "@storybook/jest": "^0.0.10",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "babel-jest": "^27.5.1",
+    "eslint-plugin-react": "^7.29.4"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "eslint --fix"
+    ],
+    "**/*": [
+      "prettier --write --ignore-unknown"
+    ]
+  }
+}
