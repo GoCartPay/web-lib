@@ -1,5 +1,5 @@
 {
-  "name": "@gocart/web-lib",
+  "name": "@gocartpay/web-lib",
   "description": "",
   "version": "1.0.0",
   "private": true,
@@ -43,7 +43,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "npm run clean ; rollup --config",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type:check": "tsc --skipLibCheck --noEmit"
   },
   "repository": {
     "type": "git",

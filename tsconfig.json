@@ -10,7 +10,9 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "rootDirs": ["src/components", "src/Theme"]
+    "rootDirs": ["src/components", "src/Theme"],
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.tsx"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*"]
 }
