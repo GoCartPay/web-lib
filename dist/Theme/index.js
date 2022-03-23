@@ -9553,7 +9553,7 @@ var mappedTheme = {
 };
 var theme = createTheme(mappedTheme);
 // @ts-ignore
-var ThemeProvider = function (props) { return React__default.createElement(ThemeProvider$1, __assign({ theme: theme }, props)); };
+var ThemeProvider = function (props) { return (React__default.createElement(ThemeProvider$1, __assign({ theme: theme }, props))); };
 
 export { ThemeProvider, theme as default, theme };
 //# sourceMappingURL=index.js.map

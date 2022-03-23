@@ -19,9 +19,11 @@
     "@storybook/manager-webpack5": "^6.4.19",
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
+    "@testing-library/react": "^12.1.4",
     "babel-loader": "^8.2.3",
     "eslint": "^8.11.0",
     "husky": "^7.0.4",
+    "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
     "prettier": "2.3.0",
     "react": "^17.0.2",
@@ -37,11 +39,10 @@
   },
   "scripts": {
     "clean": "rm -r ./dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run clean ; webpack --config webpack.config.js",
+    "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build:r": "npm run clean ; rollup --config",
+    "build": "npm run clean ; rollup --config",
     "prepare": "husky install"
   },
   "repository": {
@@ -56,13 +57,17 @@
   "homepage": "https://github.com/danwoods/sample-ui-lib#readme",
   "dependencies": {
     "@storybook/jest": "^0.0.10",
+    "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
+    "babel-jest": "^27.5.1",
     "eslint-plugin-react": "^7.29.4"
   },
   "lint-staged": {
+    "src/**/*": [
+      "eslint --fix"
+    ],
     "**/*": [
-      "eslint --fix",
       "prettier --write --ignore-unknown"
     ]
   }

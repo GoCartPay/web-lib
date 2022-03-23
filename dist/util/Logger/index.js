@@ -1,4 +1,4 @@
 const Div = () => console.log('++++ HIT +++++');
 
-export { Div };
+export { Div, Div as default };
 //# sourceMappingURL=index.js.map
