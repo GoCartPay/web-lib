@@ -16,14 +16,14 @@ Component Library for GoCart's UI
   <p align="center">
     Component Library for GoCart's React-based UI
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://61c388e27064e6003a60bbab-enrwpsgjbh.chromatic.com/?path=/story/introduction--page"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://61c388e27064e6003a60bbab-enrwpsgjbh.chromatic.com/?path=/story/introduction--page">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/GoCartPay/web-lib/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/GoCartPay/web-lib/issues">Request Feature</a>
   </p>
 </div>
 
@@ -79,6 +79,20 @@ To get a local copy up and running follow these simple example steps.
 3. Explore the docs
    ```sh
    npm run storybook
+   ```
+4. Make some changes
+5. Build the library
+   ```sh
+   npm run build
+   ```
+6. Commit the changes (including the `dist` folder)
+   ```sh
+   git add --all
+   git commit -m "Detailed commit message"
+   ```
+7. Push back up to repo
+   ```sh
+   git push
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
