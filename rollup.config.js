@@ -8,7 +8,7 @@ import { defineConfig } from 'rollup'
 
 const glob = require('glob')
 
-// Collect all components; place them at the top level
+// Collect all components
 const components = glob
   .sync('./src/components/**/index.tsx')
   .reduce((acc, path) => {
@@ -17,6 +17,7 @@ const components = glob
     return acc
   }, {})
 
+// Collect all utilities
 const utils = glob.sync('./src/util/**/index.tsx').reduce((acc, path) => {
   const entry = path.replace('/index.tsx', '/index').replace('./src/', '') //.replace('./src/components/', '')
   acc[entry] = path
@@ -35,14 +36,19 @@ export default defineConfig({
   },
   external: ['react', 'react-is', 'react/jsx-runtime'],
   plugins: [
+    // Allow loading json files
     json(),
+    // Externalize peer dependencies
     external(),
+    // Use Node's resolution algorithm
     resolve(),
+    // Allow typescript
     typescript({
       rollupCommonJSResolveHack: true,
       exclude: ['**/*.tests.tsx', '**/*.stories.*'],
       clean: true
     }),
+    // Helps with things like default exports
     commonjs({
       include: ['node_modules/**'],
       namedExports: {}
