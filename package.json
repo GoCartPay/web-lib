@@ -21,6 +21,7 @@
     "@storybook/testing-library": "^0.0.9",
     "@testing-library/react": "^12.1.4",
     "babel-loader": "^8.2.3",
+    "chromatic": "^6.5.3",
     "eslint": "^8.11.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
@@ -44,7 +45,8 @@
     "build-storybook": "build-storybook",
     "build": "npm run clean ; rollup --config",
     "prepare": "husky install",
-    "type:check": "tsc --skipLibCheck --noEmit"
+    "type:check": "tsc --skipLibCheck --noEmit",
+    "chromatic": "source .env && npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "repository": {
     "type": "git",
@@ -62,6 +64,7 @@
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "babel-jest": "^27.5.1",
+    "dotenv": "^8.6.0",
     "eslint-plugin-react": "^7.29.4"
   },
   "lint-staged": {
