@@ -59,7 +59,9 @@
   },
   "homepage": "https://github.com/danwoods/sample-ui-lib#readme",
   "dependencies": {
+    "@storybook/addons": "^6.4.19",
     "@storybook/jest": "^0.0.10",
+    "@storybook/theming": "^6.4.19",
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",

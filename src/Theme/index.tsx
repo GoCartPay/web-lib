@@ -3,27 +3,18 @@ import {
   createTheme,
   ThemeProvider as MuiThemeProvider
 } from '@mui/material/styles'
-import design from './design-tokens.tokens_test.json'
+import { palette } from './palette'
 
+/** Our partial theme */
 const mappedTheme = {
-  palette: {
-    text: Object.entries(design.color.light.text).reduce(
-      // @ts-ignore
-      (acc, cur) => ({ ...acc, [cur[0]]: cur[1].value }),
-      {}
-    ),
-    primary: Object.entries(design.color.light.primary).reduce(
-      // @ts-ignore
-      (acc, cur) => ({ ...acc, [cur[0]]: cur[1].value }),
-      {}
-    )
-  }
+  palette
 }
 
+/** Our full theme */
 export const theme = createTheme(mappedTheme)
 
-// @ts-ignore
-export const ThemeProvider = (props) => (
+/** Theme provider, pre-filled with Spruce theme */
+export const ThemeProvider = (props?: Record<string, unknown>) => (
   <MuiThemeProvider theme={theme} {...props} />
 )
 
