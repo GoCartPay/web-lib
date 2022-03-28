@@ -1,3 +1,4 @@
+/** @file Main theme utility */
 import React from 'react'
 import {
   createTheme,

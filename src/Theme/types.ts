@@ -1,3 +1,4 @@
+/** A single unit in the design token, ie: the value of `color.primary.main` */
 export type TokenUnit = {
   description: string // eg: "Reflects the text.primary variable from the theme object",
   type: 'color' | string
@@ -10,6 +11,7 @@ export type TokenUnit = {
   }
 }
 
+/** Our base-level design token */
 export interface DesignToken {
   color: {
     text: {
