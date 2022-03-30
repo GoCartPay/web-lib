@@ -10,5 +10,5 @@ export const typography = Object.keys(token.font.typography).reduce(
     ...acc,
     [cur.replace(/ /g, '')]: token.font.typography[cur].value
   }),
-  {}
+  { fontFamily: 'TWK Lausanne' }
 )
