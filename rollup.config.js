@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import resolve from 'rollup-plugin-node-resolve'
 import json from '@rollup/plugin-json'
+import url from 'rollup-plugin-url'
 
 import { defineConfig } from 'rollup'
 
@@ -52,6 +53,13 @@ export default defineConfig({
     commonjs({
       include: ['node_modules/**'],
       namedExports: {}
+    }),
+    url({
+      // by default, rollup-plugin-url will not handle font files
+      include: ['**/*.woff', '**/*.woff2', '**/*.ttf'],
+      // setting infinite limit will ensure that the files
+      // are always bundled with the code, not copied to /dist
+      limit: Infinity
     })
   ]
 })

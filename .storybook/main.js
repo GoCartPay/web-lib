@@ -10,7 +10,8 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     'storybook-addon-designs',
-    '@storybook/addon-interactions'
+    '@storybook/addon-interactions',
+    'storybook-addon-material-ui5'
   ],
   framework: '@storybook/react',
   core: {

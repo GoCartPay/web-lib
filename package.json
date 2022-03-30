@@ -11,6 +11,7 @@
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.0",
     "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-url": "^6.1.0",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
@@ -67,10 +68,11 @@
     "@typescript-eslint/parser": "^5.16.0",
     "babel-jest": "^27.5.1",
     "dotenv": "^8.6.0",
-    "eslint-plugin-react": "^7.29.4"
+    "eslint-plugin-react": "^7.29.4",
+    "storybook-addon-material-ui5": "^1.0.0"
   },
   "lint-staged": {
-    "src/**/*": [
+    "src/**/*.{js,jsx,ts,tsx,md,html}": [
       "eslint --fix"
     ],
     "**/*": [
