@@ -13,14 +13,14 @@ const glob = require('glob')
 const components = glob
   .sync('./src/components/**/index.tsx')
   .reduce((acc, path) => {
-    const entry = path.replace('/index.tsx', '/index').replace('./src/', '') //.replace('./src/components/', '')
+    const entry = path.replace('/index.tsx', '/index').replace('./src/', '')
     acc[entry] = path
     return acc
   }, {})
 
 // Collect all utilities
 const utils = glob.sync('./src/util/**/index.tsx').reduce((acc, path) => {
-  const entry = path.replace('/index.tsx', '/index').replace('./src/', '') //.replace('./src/components/', '')
+  const entry = path.replace('/index.tsx', '/index').replace('./src/', '')
   acc[entry] = path
   return acc
 }, {})
