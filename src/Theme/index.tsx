@@ -5,6 +5,7 @@ import {
   ThemeProvider as MuiThemeProvider
 } from '@mui/material/styles'
 import { palette } from './palette'
+import { shadows } from './shadows'
 import { typography } from './typography'
 import TWKLausanne from './typography/fonts/TWK-Lausanne/TWKLausanne-400.ttf'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -12,6 +13,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 /** Our partial theme */
 const mappedTheme = {
   palette,
+  shadows,
   typography
 }
 
