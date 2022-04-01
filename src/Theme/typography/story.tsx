@@ -1,6 +1,7 @@
 import React from 'react'
-
 import { theme } from '../index'
+import Typography from '@mui/material/Typography'
+import { Variant } from '@mui/material/styles/createTypography'
 
 /** Default sort */
 const sortingArr = [
@@ -29,8 +30,8 @@ const nonTypography = [
   'pxToRem'
 ]
 
-/** Normal color objects */
-const colors = Object.keys(theme.typography)
+/** "Sorted" object of typography variants */
+const typo = Object.keys(theme.typography)
   .sort((a, b) => sortingArr.indexOf(b) - sortingArr.indexOf(a))
   .reduce(
     (acc, cur) => ({
@@ -40,51 +41,30 @@ const colors = Object.keys(theme.typography)
     {}
   )
 
-const Color = ({ mapping, value }) => {
-  console.log({ mapping, value })
-  return (
-    <div style={{ margin: '24px' }}>
-      <div style={{ ...value, lineHeight: null }}>
-        {'Pack my box with five dozen liquor jugs'}
-      </div>
-      {/* <span>{value}</span> */}
-      <br />
-      <span>{mapping}</span>
-      <br />
-    </div>
-  )
-}
-
-console.log({ theme, colors })
-
-const Palette = () => {
+/** Main compinent that loops through typography variants */
+const TypographyDisplay = () => {
   return (
     <ul>
-      {Object.keys(colors).map((color) => {
-        console.log({ color, val: colors[color] })
+      {Object.keys(typo).map((t: Variant) => {
         return (
-          <Color
-            key={'theme.typography' + color}
-            mapping={'theme.typography.' + color}
-            value={colors[color]}
-          />
+          <div key={t}>
+            <Typography variant={t} gutterBottom>
+              {'Pack my box with five dozen liquor jugs'}
+            </Typography>
+            <span>{`theme.typography.${t}`}</span>
+          </div>
         )
       })}
     </ul>
   )
 }
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Spruce/Theme/Typography',
-  component: Palette
+  component: TypographyDisplay
 }
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <Palette {...args} />
+const Template = () => <TypographyDisplay />
 
 export const Default = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  labelText: 'Button'
-}
+Default.args = {}
