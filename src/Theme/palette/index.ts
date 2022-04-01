@@ -1,3 +1,8 @@
+/**
+ * @file Process the design token's color settings into something ready to
+ * use with MUI's `createTheme`
+ **/
+
 import design from '../design-tokens.tokens.json'
 import type { DesignToken, TokenUnit } from '../types'
 import type { Palette } from '@mui/material'

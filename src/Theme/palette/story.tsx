@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { theme } from '../index'
 
 /** Default sort */
@@ -54,7 +53,6 @@ const Color = ({ mapping, value }) => (
 )
 
 const ColorObj = ({ mapping, obj }) => {
-  console.log({ mapping, obj })
   return (
     <div
       style={{
@@ -94,7 +92,6 @@ const Palette = () => {
   return (
     <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
       {Object.keys(colors).map((color) => {
-        console.log({ color })
         return (
           <ColorObj
             key={'theme.pallete.' + color}
@@ -118,10 +115,8 @@ export default {
 }
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <Palette {...args} />
+const Template = () => <Palette />
 
 export const Default = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  labelText: 'Button'
-}
+Default.args = {}
