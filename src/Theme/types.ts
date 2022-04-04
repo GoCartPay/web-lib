@@ -13,9 +13,9 @@ export interface TokenUnit<Value = string> {
   }
 }
 
-type ColorUnit = TokenUnit<string>
+export type ColorUnit = TokenUnit<string>
 
-type TypographyUnit = TokenUnit<{
+export type TypographyUnit = TokenUnit<{
   fontSize: number // eg: 96,
   textDecoration: string // eg: 'none'
   fontFamily: string // eg: 'TWK Lausanne'

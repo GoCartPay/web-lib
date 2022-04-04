@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { MuiButton } from './index'
+import { ButtonProps } from '@mui/material/Button'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -13,7 +14,9 @@ export default {
 }
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <MuiButton {...args} />
+const Template = (args: ButtonProps & { labelText: string }) => (
+  <MuiButton {...args} />
+)
 
 export const Default = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
