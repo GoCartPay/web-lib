@@ -4,6 +4,7 @@
  **/
 
 import design from '../design-tokens.tokens.json'
+import TWKLausanne from './fonts/TWK-Lausanne/TWKLausanne-400.ttf'
 import type { DesignToken } from '../types'
 
 // Allow custom variants in TS
@@ -28,7 +29,22 @@ declare module '@mui/material/Typography' {
   }
 }
 
-// Type imported JSON
+/** Default font for Spruce */
+export const fontFace = `
+  @font-face {
+    font-family: 'TWK Lausanne';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url(${
+      // During testing the font may come through as an object and break the test
+      typeof TWKLausanne === 'string' ? TWKLausanne : ''
+    }) format('truetype');
+    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+  }
+`
+
+/** Typed imported JSON */
 const token: DesignToken = design
 
 /** Typography, ready to be added to theme or used on it's own */

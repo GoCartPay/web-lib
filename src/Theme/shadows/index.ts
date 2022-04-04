@@ -6,7 +6,12 @@
 import design from '../design-tokens.tokens.json'
 import { createTheme } from '@mui/material/styles'
 import type { Shadows } from '@mui/material/styles/shadows'
-import type { DesignToken, ElevationUnitValue } from '../types'
+import type {
+  DesignToken,
+  ElevationUnitValue,
+  SingleElevationUnit,
+  DoubleElevationUnit
+} from '../types'
 
 // Type imported JSON
 const token: DesignToken = design
@@ -22,7 +27,6 @@ const convertValueToStyle = (v: ElevationUnitValue) =>
 
 /** Box shadows, ready to be added to theme or used on it's own */
 const customShadows = Object.keys(token.effect.elevation)
-  // .filter((k) => validElevations.includes(k))
   .sort()
   .reduce(
     (acc, cur: '1' | '2' | '3' | '4' | '5' | '6' | '7') => {
@@ -36,13 +40,15 @@ const customShadows = Object.keys(token.effect.elevation)
           'value'
         )
       ) {
-        return [...acc, convertValueToStyle(token.effect.elevation[cur].value)]
+        const valueObj = token.effect.elevation[cur] as SingleElevationUnit
+        return [...acc, convertValueToStyle(valueObj.value)]
       } else {
+        const valueObj = token.effect.elevation[cur] as DoubleElevationUnit
         return [
           ...acc,
-          `${convertValueToStyle(
-            token.effect.elevation[cur]['0'].value
-          )}, ${convertValueToStyle(token.effect.elevation[cur]['1'].value)}`
+          `${convertValueToStyle(valueObj['0'].value)}, ${convertValueToStyle(
+            valueObj['1'].value
+          )}`
         ]
       }
     },

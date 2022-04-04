@@ -1,3 +1,5 @@
+/** @file Types used in theming */
+
 /** A single unit in the design token, ie: the value of `color.primary.main` */
 export interface TokenUnit<Value = string> {
   description?: string // eg: "Reflects the text.primary variable from the theme object",
@@ -36,15 +38,18 @@ export type ElevationUnitValue = {
   spread: number // eg: -12
 }
 
-export type ElevationUnit =
-  | TokenUnit<ElevationUnitValue>
-  // Some elevations have 2 light sources
-  | {
-      '0': { type: string; value: ElevationUnitValue }
-      '1': { type: string; value: ElevationUnitValue }
-      description: TokenUnit['description']
-      extensions: TokenUnit['extensions']
-    }
+/** An elevation unit with one light source */
+export type SingleElevationUnit = TokenUnit<ElevationUnitValue>
+
+/** An elevation unit with two light sources */
+export type DoubleElevationUnit = {
+  '0': { type: string; value: ElevationUnitValue }
+  '1': { type: string; value: ElevationUnitValue }
+  description: TokenUnit['description']
+  extensions: TokenUnit['extensions']
+}
+
+export type ElevationUnit = SingleElevationUnit | DoubleElevationUnit
 
 /**
  * Our base-level design token. Note that the actual design token
