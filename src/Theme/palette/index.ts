@@ -4,8 +4,8 @@
  **/
 
 import design from '../design-tokens.tokens.json'
-import type { DesignToken, TokenUnit } from '../types'
-import type { Palette } from '@mui/material'
+import { DesignToken, TokenUnit } from '../types'
+import { Palette } from '@mui/material'
 
 // Type imported JSON
 const token: DesignToken = design
