@@ -19,6 +19,7 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     // Max cyclomatic complexity is 15 - https://eslint.org/docs/rules/complexity
-    "complexity": ["error", 15]
+    "complexity": ["error", 15],
+    "react/prop-types": "off"
   }
 }

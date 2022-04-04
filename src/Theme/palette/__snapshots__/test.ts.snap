@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Produces correct output 1`] = `
+Object {
+  "action": Object {
+    "active": "#757575ff",
+    "disabled": "#bdbdbdff",
+    "disabledbackground": "#e0e0e0ff",
+    "focus_12p": "#419590ff",
+    "hover": "#000000ff",
+    "selected": "#ebebebff",
+    "shades": undefined,
+  },
+  "background": Object {
+    "default": "#fafafaff",
+    "paper": "#ffffffff",
+  },
+  "common": Object {
+    "black": undefined,
+    "white": undefined,
+  },
+  "error": Object {
+    "contrast": "#ffffffff",
+    "dark": "#c62828ff",
+    "light": "#ef5350ff",
+    "main": "#d32f2fff",
+  },
+  "info": Object {
+    "contrast": "#ffffffff",
+    "dark": "#01579bff",
+    "light": "#03a9f4ff",
+    "main": "#0288d1ff",
+  },
+  "other": Object {
+    "backdrop_overlay": "#808080ff",
+    "divider": "#e7e7e8ff",
+    "filled_input_background": "#f0f0f0ff",
+    "outlined_border-23p": "#c4c4c4ff",
+    "rating active": "#ffb400ff",
+    "snackbar": "#323232ff",
+    "standard_input_line": "#949494ff",
+  },
+  "primary": Object {
+    "contrast_text": "#ffffffff",
+    "dark": "#000000ff",
+    "light": "#717174ff",
+    "main": "#121317ff",
+  },
+  "secondary": Object {
+    "contrast": "#ffffffff",
+    "dark": "#044d47ff",
+    "light": "#419590ff",
+    "main": "#117b74ff",
+  },
+  "success": Object {
+    "contrast": "#ffffffff",
+    "dark": "#1b5e20ff",
+    "light": "#4caf50ff",
+    "main": "#2e7d32ff",
+  },
+  "text": Object {
+    "disabled": "#a5a5a7ff",
+    "primary": "#121317ff",
+    "secondary": "#717174ff",
+  },
+  "warning": Object {
+    "contrast": "#ffffffff",
+    "dark": "#e65100ff",
+    "light": "#ff9800ff",
+    "main": "#ed6c02ff",
+  },
+}
+`;

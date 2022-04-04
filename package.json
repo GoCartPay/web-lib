@@ -7,10 +7,12 @@
     "@babel/core": "^7.17.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.0",
     "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-url": "^6.1.0",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
@@ -24,6 +26,7 @@
     "chromatic": "^6.5.3",
     "eslint": "^8.11.0",
     "husky": "^7.0.4",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
     "prettier": "2.3.0",
@@ -59,16 +62,19 @@
   },
   "homepage": "https://github.com/danwoods/sample-ui-lib#readme",
   "dependencies": {
+    "@storybook/addons": "^6.4.19",
     "@storybook/jest": "^0.0.10",
+    "@storybook/theming": "^6.4.19",
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "babel-jest": "^27.5.1",
     "dotenv": "^8.6.0",
-    "eslint-plugin-react": "^7.29.4"
+    "eslint-plugin-react": "^7.29.4",
+    "storybook-addon-material-ui5": "^1.0.0"
   },
   "lint-staged": {
-    "src/**/*": [
+    "src/**/*.{js,jsx,ts,tsx,md,html}": [
       "eslint --fix"
     ],
     "**/*": [

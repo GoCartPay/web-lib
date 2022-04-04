@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import resolve from 'rollup-plugin-node-resolve'
 import json from '@rollup/plugin-json'
+import url from '@rollup/plugin-url'
 
 import { defineConfig } from 'rollup'
 
@@ -12,14 +13,14 @@ const glob = require('glob')
 const components = glob
   .sync('./src/components/**/index.tsx')
   .reduce((acc, path) => {
-    const entry = path.replace('/index.tsx', '/index').replace('./src/', '') //.replace('./src/components/', '')
+    const entry = path.replace('/index.tsx', '/index').replace('./src/', '')
     acc[entry] = path
     return acc
   }, {})
 
 // Collect all utilities
 const utils = glob.sync('./src/util/**/index.tsx').reduce((acc, path) => {
-  const entry = path.replace('/index.tsx', '/index').replace('./src/', '') //.replace('./src/components/', '')
+  const entry = path.replace('/index.tsx', '/index').replace('./src/', '')
   acc[entry] = path
   return acc
 }, {})
@@ -52,6 +53,13 @@ export default defineConfig({
     commonjs({
       include: ['node_modules/**'],
       namedExports: {}
+    }),
+    url({
+      // by default, rollup-plugin-url will not handle font files
+      include: ['**/*.woff', '**/*.woff2', '**/*.ttf'],
+      // setting infinite limit will ensure that the files
+      // are always bundled with the code, not copied to /dist
+      limit: Infinity
     })
   ]
 })
