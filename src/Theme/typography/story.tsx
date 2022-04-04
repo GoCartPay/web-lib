@@ -2,6 +2,8 @@ import React from 'react'
 import { theme } from '../index'
 import Typography from '@mui/material/Typography'
 import { Variant } from '@mui/material/styles/createTypography'
+import { TypographyUnit } from '../types'
+import { Theme } from '@mui/material'
 
 /** Default sort */
 const sortingArr = [
@@ -31,10 +33,10 @@ const nonTypography = [
 ]
 
 /** "Sorted" object of typography variants */
-const typo = Object.keys(theme.typography)
+const typo: { [idx: string]: TypographyUnit } = Object.keys(theme.typography)
   .sort((a, b) => sortingArr.indexOf(b) - sortingArr.indexOf(a))
   .reduce(
-    (acc, cur) => ({
+    (acc, cur: keyof Theme['typography']) => ({
       ...acc,
       ...(nonTypography.includes(cur) ? null : { [cur]: theme.typography[cur] })
     }),

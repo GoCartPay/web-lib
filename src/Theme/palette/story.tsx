@@ -1,3 +1,4 @@
+import { Theme } from '@mui/material'
 import React from 'react'
 import { theme } from '../index'
 
@@ -22,17 +23,20 @@ const nonColors = [
 ]
 
 /** Normal color objects */
-const colors = Object.keys(theme.palette)
+const colors: { [idx: string]: { [idx: string]: string } } = Object.keys(
+  theme.palette
+)
   .sort((a, b) => sortingArr.indexOf(b) - sortingArr.indexOf(a))
   .reduce(
-    (acc, cur) => ({
+    (acc, cur: keyof Theme['palette']) => ({
       ...acc,
       ...(nonColors.includes(cur) ? null : { [cur]: theme.palette[cur] })
     }),
     {}
   )
 
-const Color = ({ mapping, value }) => (
+/** Single color */
+const Color = ({ mapping, value }: { mapping: string; value: string }) => (
   <div style={{ margin: '24px' }}>
     <div
       style={{
@@ -52,7 +56,13 @@ const Color = ({ mapping, value }) => (
   </div>
 )
 
-const ColorObj = ({ mapping, obj }) => {
+const ColorObj = ({
+  mapping,
+  obj
+}: {
+  mapping: string
+  obj: { [idx: string]: string }
+}) => {
   return (
     <div
       style={{
