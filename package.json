@@ -2,7 +2,6 @@
   "name": "@gocartpay/web-lib",
   "description": "",
   "version": "1.0.0",
-  "private": true,
   "devDependencies": {
     "@babel/core": "^7.17.7",
     "@babel/preset-env": "^7.16.11",
