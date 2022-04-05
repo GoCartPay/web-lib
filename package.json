@@ -52,14 +52,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danwoods/sample-ui-lib.git"
+    "url": "git+https://github.com/GoCartPay/web-lib.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danwoods/sample-ui-lib/issues"
+    "url": "https://github.com/GoCartPay/web-lib"
   },
-  "homepage": "https://github.com/danwoods/sample-ui-lib#readme",
+  "homepage": "https://github.com/GoCartPay/web-lib#readme",
   "dependencies": {
     "@storybook/addons": "^6.4.19",
     "@storybook/jest": "^0.0.10",
