@@ -27,7 +27,8 @@ jobs:
           npm install
           npm run build
 
-    publish:
+    pub:
+      runs-on: ubuntu-latest
       needs: build
       name: Publish package
 
