@@ -22,6 +22,6 @@ jobs:
           # Defaults to the user or organization that owns the workflow file
           scope: '@gocartpay'
       - run: npm ci
-      - run: npm publish dist
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
