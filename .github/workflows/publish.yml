@@ -24,8 +24,7 @@ jobs:
       - run: npm set-script prepare ""
       - run: npm ci
       - run: npm run build
-      - run: cp ./package.json ./dist/
-      - run: ls
+      - run: cp ./package.json ./dist/ && cp ./README.md ./dist/
       - run: npm publish ./dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
