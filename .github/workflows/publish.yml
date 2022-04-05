@@ -23,6 +23,7 @@ jobs:
           scope: '@gocartpay'
       - run: npm ci
       - run: npm run build
+      - run: ls
       - run: npm publish ./dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
