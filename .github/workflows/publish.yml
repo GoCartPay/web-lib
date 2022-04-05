@@ -23,6 +23,7 @@ jobs:
           scope: '@gocartpay'
       - run: npm ci
       - run: npm run build
+      - run: cp ./package.json ./dist/
       - run: ls
       - run: npm publish ./dist
         env:
