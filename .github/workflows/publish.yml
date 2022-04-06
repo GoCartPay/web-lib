@@ -20,6 +20,7 @@ jobs:
       - run: npm set-script prepare ""
       - run: npm ci
       - run: npm run build
+      - run: npm version from-git
       - run: cp ./package.json ./dist/ && cp ./README.md ./dist/
       - run: npm publish ./dist
         env:
