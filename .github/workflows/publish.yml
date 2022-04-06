@@ -17,10 +17,10 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           # Defaults to the user or organization that owns the workflow file
           scope: '@gocartpay'
+      - run: npm version from-git
       - run: npm set-script prepare ""
       - run: npm ci
       - run: npm run build
-      - run: npm version from-git
       - run: cp ./package.json ./dist/ && cp ./README.md ./dist/
       - run: npm publish ./dist
         env:
