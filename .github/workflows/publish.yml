@@ -17,13 +17,15 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           # Defaults to the user or organization that owns the workflow file
           scope: '@gocartpay'
-      - run: git config user.email "you@example.com"
-      - run: git config user.name "Your Name"
-      - run: npm version from-git
+      # Prevent husky
       - run: npm set-script prepare ""
+      # Install packages
       - run: npm ci
+      # Run build
       - run: npm run build
+      # Copy files to dist dir (package.json is required)
       - run: cp ./package.json ./dist/ && cp ./README.md ./dist/
+      # Publish dist folder
       - run: npm publish ./dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
