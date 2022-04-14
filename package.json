@@ -63,6 +63,7 @@
   },
   "homepage": "https://github.com/GoCartPay/web-lib#readme",
   "dependencies": {
+    "@mui/icons-material": "^5.6.1",
     "@storybook/addons": "^6.4.19",
     "@storybook/jest": "^0.0.10",
     "@storybook/theming": "^6.4.19",
