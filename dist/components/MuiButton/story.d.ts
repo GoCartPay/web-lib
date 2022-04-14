@@ -1,12 +1,17 @@
-declare namespace _default {
-    export const title: string;
-    export { MuiButton as component };
-    export namespace argTypes {
-        namespace backgroundColor {
-            const control: string;
-        }
-    }
-}
+/// <reference types="react" />
+import { ButtonProps } from '@mui/material/Button';
+declare const _default: {
+    title: string;
+    component: ({ labelText, color, ...muiProps }: {
+        labelText: string;
+        color?: "primary" | "secondary" | "info" | "warning" | "error" | "success" | "inherit";
+        muiProps?: ButtonProps<"button", {}>;
+    }) => JSX.Element;
+    argTypes: {
+        backgroundColor: {
+            control: string;
+        };
+    };
+};
 export default _default;
-export const Default: any;
-import { MuiButton } from "./index";
+export declare const Default: any;

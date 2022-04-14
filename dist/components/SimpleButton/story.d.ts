@@ -1,12 +1,14 @@
-declare namespace _default {
-    export const title: string;
-    export { SimpleButton as component };
-    export namespace argTypes {
-        namespace backgroundColor {
-            const control: string;
-        }
-    }
-}
+/// <reference types="react" />
+declare const _default: {
+    title: string;
+    component: ({ labelText }: {
+        labelText: string;
+    }) => JSX.Element;
+    argTypes: {
+        backgroundColor: {
+            control: string;
+        };
+    };
+};
 export default _default;
-export const Default: any;
-import { SimpleButton } from "./index";
+export declare const Default: any;
