@@ -1,5 +1,4 @@
 import * as React from 'react'
-import './styles.css';
 import SwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
 
 export const EntryBackgroundDrawer = ({
