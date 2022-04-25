@@ -1,4 +1,4 @@
-import { P as PropTypes, m as memoize, w as withEmotionCache, T as ThemeContext, k as getRegisteredStyles, s as serializeStyles, a as _extends, r as registerStyles, l as insertStyles, n as merge, p as style, q as responsivePropType, t as createUnaryUnit, v as handleBreakpoints, x as getValue, y as values, z as spacing, A as createEmptyBreakpointObject, B as removeUnusedBreakpoints, _ as _objectWithoutPropertiesLoose, f as capitalize, C as createTheme, g as generateUtilityClass, d as defaultTheme } from './useThemeProps-fa80fdad.js';
+import { P as PropTypes, m as memoize, w as withEmotionCache, T as ThemeContext, l as getRegisteredStyles, s as serializeStyles, _ as _extends, r as registerStyles, n as insertStyles, p as merge, q as style, t as responsivePropType, v as createUnaryUnit, x as handleBreakpoints, y as getValue, z as values, A as spacing, B as createEmptyBreakpointObject, D as removeUnusedBreakpoints, a as _objectWithoutPropertiesLoose, e as capitalize, E as createTheme, g as generateUtilityClass, d as defaultTheme } from './useThemeProps-18e73732.js';
 import * as React from 'react';
 import React__default, { useContext, createElement, Fragment } from 'react';
 import { Memo, ForwardRef } from 'react-is';
@@ -165,6 +165,175 @@ function useForkRef(refA, refB) {
       setRef(refB, refValue);
     };
   }, [refA, refB]);
+}
+
+// based on https://github.com/WICG/focus-visible/blob/v4.1.5/src/focus-visible.js
+let hadKeyboardEvent = true;
+let hadFocusVisibleRecently = false;
+let hadFocusVisibleRecentlyTimeout;
+const inputTypesWhitelist = {
+  text: true,
+  search: true,
+  url: true,
+  tel: true,
+  email: true,
+  password: true,
+  number: true,
+  date: true,
+  month: true,
+  week: true,
+  time: true,
+  datetime: true,
+  'datetime-local': true
+};
+/**
+ * Computes whether the given element should automatically trigger the
+ * `focus-visible` class being added, i.e. whether it should always match
+ * `:focus-visible` when focused.
+ * @param {Element} node
+ * @returns {boolean}
+ */
+
+function focusTriggersKeyboardModality(node) {
+  const {
+    type,
+    tagName
+  } = node;
+
+  if (tagName === 'INPUT' && inputTypesWhitelist[type] && !node.readOnly) {
+    return true;
+  }
+
+  if (tagName === 'TEXTAREA' && !node.readOnly) {
+    return true;
+  }
+
+  if (node.isContentEditable) {
+    return true;
+  }
+
+  return false;
+}
+/**
+ * Keep track of our keyboard modality state with `hadKeyboardEvent`.
+ * If the most recent user interaction was via the keyboard;
+ * and the key press did not include a meta, alt/option, or control key;
+ * then the modality is keyboard. Otherwise, the modality is not keyboard.
+ * @param {KeyboardEvent} event
+ */
+
+
+function handleKeyDown(event) {
+  if (event.metaKey || event.altKey || event.ctrlKey) {
+    return;
+  }
+
+  hadKeyboardEvent = true;
+}
+/**
+ * If at any point a user clicks with a pointing device, ensure that we change
+ * the modality away from keyboard.
+ * This avoids the situation where a user presses a key on an already focused
+ * element, and then clicks on a different element, focusing it with a
+ * pointing device, while we still think we're in keyboard modality.
+ */
+
+
+function handlePointerDown() {
+  hadKeyboardEvent = false;
+}
+
+function handleVisibilityChange() {
+  if (this.visibilityState === 'hidden') {
+    // If the tab becomes active again, the browser will handle calling focus
+    // on the element (Safari actually calls it twice).
+    // If this tab change caused a blur on an element with focus-visible,
+    // re-apply the class when the user switches back to the tab.
+    if (hadFocusVisibleRecently) {
+      hadKeyboardEvent = true;
+    }
+  }
+}
+
+function prepare(doc) {
+  doc.addEventListener('keydown', handleKeyDown, true);
+  doc.addEventListener('mousedown', handlePointerDown, true);
+  doc.addEventListener('pointerdown', handlePointerDown, true);
+  doc.addEventListener('touchstart', handlePointerDown, true);
+  doc.addEventListener('visibilitychange', handleVisibilityChange, true);
+}
+
+function isFocusVisible(event) {
+  const {
+    target
+  } = event;
+
+  try {
+    return target.matches(':focus-visible');
+  } catch (error) {// Browsers not implementing :focus-visible will throw a SyntaxError.
+    // We use our own heuristic for those browsers.
+    // Rethrow might be better if it's not the expected error but do we really
+    // want to crash if focus-visible malfunctioned?
+  } // No need for validFocusTarget check. The user does that by attaching it to
+  // focusable events only.
+
+
+  return hadKeyboardEvent || focusTriggersKeyboardModality(target);
+}
+
+function useIsFocusVisible() {
+  const ref = React.useCallback(node => {
+    if (node != null) {
+      prepare(node.ownerDocument);
+    }
+  }, []);
+  const isFocusVisibleRef = React.useRef(false);
+  /**
+   * Should be called if a blur event is fired
+   */
+
+  function handleBlurVisible() {
+    // checking against potential state variable does not suffice if we focus and blur synchronously.
+    // React wouldn't have time to trigger a re-render so `focusVisible` would be stale.
+    // Ideally we would adjust `isFocusVisible(event)` to look at `relatedTarget` for blur events.
+    // This doesn't work in IE11 due to https://github.com/facebook/react/issues/3751
+    // TODO: check again if React releases their internal changes to focus event handling (https://github.com/facebook/react/pull/19186).
+    if (isFocusVisibleRef.current) {
+      // To detect a tab/window switch, we look for a blur event followed
+      // rapidly by a visibility change.
+      // If we don't see a visibility change within 100ms, it's probably a
+      // regular focus change.
+      hadFocusVisibleRecently = true;
+      window.clearTimeout(hadFocusVisibleRecentlyTimeout);
+      hadFocusVisibleRecentlyTimeout = window.setTimeout(() => {
+        hadFocusVisibleRecently = false;
+      }, 100);
+      isFocusVisibleRef.current = false;
+      return true;
+    }
+
+    return false;
+  }
+  /**
+   * Should be called if a blur event is fired
+   */
+
+
+  function handleFocusVisible(event) {
+    if (isFocusVisible(event)) {
+      isFocusVisibleRef.current = true;
+      return true;
+    }
+
+    return false;
+  }
+
+  return {
+    isFocusVisibleRef,
+    onFocus: handleFocusVisible,
+    onBlur: handleBlurVisible,
+    ref
+  };
 }
 
 var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
@@ -1263,5 +1432,5 @@ function _inheritsLoose(subClass, superClass) {
 
 var TransitionGroupContext = React__default.createContext(null);
 
-export { TransitionGroupContext as T, _inheritsLoose as _, composeClasses as a, clsx as b, chainPropTypes as c, useEnhancedEffect$1 as d, useEventCallback as e, styled$1 as f, generateUtilityClasses as g, elementTypeAcceptingRef$1 as h, rootShouldForwardProp as r, setRef as s, useForkRef as u };
-//# sourceMappingURL=TransitionGroupContext-877be942.js.map
+export { TransitionGroupContext as T, _inheritsLoose as _, composeClasses as a, clsx as b, chainPropTypes as c, useEnhancedEffect$1 as d, useEventCallback as e, styled$1 as f, generateUtilityClasses as g, useIsFocusVisible as h, elementTypeAcceptingRef$1 as i, rootShouldForwardProp as r, setRef as s, useForkRef as u };
+//# sourceMappingURL=TransitionGroupContext-eff07461.js.map

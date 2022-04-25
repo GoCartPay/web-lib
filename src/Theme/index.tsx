@@ -13,7 +13,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 const mappedTheme = {
   palette,
   shadows,
-  typography
+  // typography
 }
 
 /** Our full theme */
@@ -21,7 +21,7 @@ export const theme = createTheme({
   ...mappedTheme,
   components: {
     MuiCssBaseline: {
-      styleOverrides: fontFace
+      // styleOverrides: fontFace
     }
   }
 })

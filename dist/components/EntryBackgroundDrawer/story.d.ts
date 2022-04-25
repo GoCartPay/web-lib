@@ -2,9 +2,11 @@
 import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer';
 declare const _default: {
     title: string;
-    component: ({ content, drawerOpened, ...muiProps }: {
+    component: ({ content, drawerOpened, handleOnClose, handleOnOpen, ...muiProps }: {
         content: any;
-        drawerOpened: boolean;
+        drawerOpened?: boolean;
+        handleOnClose?: () => void;
+        handleOnOpen?: () => void;
         muiProps?: SwipeableDrawerProps;
     }) => JSX.Element;
     argTypes: {};
