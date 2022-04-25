@@ -4,6 +4,7 @@ import external from 'rollup-plugin-peer-deps-external'
 import resolve from 'rollup-plugin-node-resolve'
 import json from '@rollup/plugin-json'
 import url from '@rollup/plugin-url'
+import svg from 'rollup-plugin-svg'
 
 import { defineConfig } from 'rollup'
 
@@ -60,6 +61,7 @@ export default defineConfig({
       // setting infinite limit will ensure that the files
       // are always bundled with the code, not copied to /dist
       limit: Infinity
-    })
+    }),
+    svg()
   ]
 })
