@@ -23,7 +23,7 @@ export type TypographyUnit = TokenUnit<{
   fontStyle: string // eg: 'normal'
   fontStretch: string // eg: 'normal'
   letterSpacing: number // eg: -2
-  lineHeight: number // eg: 108
+  lineHeight?: number // eg: 108
   paragraphIndent: number // eg: 0
   paragraphSpacing: number // eg: 0
   textCase: string // eg: 'none'

@@ -1,6 +1,45 @@
 import * as React from 'react'
 import SwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
 import CloseIcon from '@mui/icons-material/Close';
+import { makeStyles } from '@mui/styles'
+import IconButton from '@mui/material/IconButton'
+
+
+const useStyles: any = makeStyles({
+  container: {
+    '& .MuiDrawer-paper': {
+      width: '100%',
+      maxWidth: '430px',
+      margin: '0 auto',
+      fontFamily: 'TWK Lausanne!important',
+      backgroundColor: '#121317',
+      height: '90%'
+    }
+  },
+  innerContainer: {
+
+  },
+  header: {
+    padding: '24px',
+    display: 'flex',
+    flexDirection: 'row',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-between',
+    '& svg': {
+      height: '16px',
+      width: '69px'
+    }
+  },
+  content: {
+
+  },
+  closeIcon: {
+    color: '#fff',
+    height: '24px',
+    width: '24px',
+    backgroundColor: '#38393B'
+  }
+});
 
 export const EntryBackgroundDrawer = ({
   content,
@@ -15,13 +54,7 @@ export const EntryBackgroundDrawer = ({
   handleOnOpen?: () => void,
   muiProps?: SwipeableDrawerProps
 }) => {
-  console.log(handleOnClose)
-  const toggleDrawer = (isOpen: boolean) => (event: React.KeyboardEvent) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-  };
+  const styles = useStyles();
 
   const GoCartLogoReverse = <svg width="137" viewBox="0 0 563 131" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M236.977 64.0964C236.977 21.9893 266.659 0 300.65 0C332.247 0 355.705 17.7786 359.056 44.9143H330.81C328.895 31.8143 316.448 22.925 300.65 22.925C280.064 22.925 264.265 36.9607 264.265 63.6286C264.265 90.2964 280.064 104.332 300.65 104.332C316.927 104.332 329.374 95.4429 331.768 82.8107H359.056C356.662 109.479 333.204 127.725 301.128 127.725C266.18 127.725 236.977 106.204 236.977 64.0964Z" fill="white" />
@@ -38,14 +71,17 @@ export const EntryBackgroundDrawer = ({
       open={drawerOpened}
       onClose={() => handleOnClose()}
       onOpen={() => handleOnOpen()}
+      className={styles.container}
       {...muiProps}
     >
-      <div>
-        <div>
+      <div className={styles.innerContainer}>
+        <div className={styles.header}>
           {GoCartLogoReverse}
-          <CloseIcon onClick={() => { console.log('click'); handleOnClose() }} />
+          <IconButton onClick={() => { handleOnClose() }} className={styles.closeIcon}>
+            <CloseIcon />
+          </IconButton>
         </div>
-        <p>{content}</p>
+        <div className={styles.content}>{content}</div>
       </div>
     </SwipeableDrawer>
   )
