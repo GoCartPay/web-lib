@@ -6,14 +6,14 @@ import {
 } from '@mui/material/styles'
 import { palette } from './palette'
 import { shadows } from './shadows'
-// import { typography, fontFace } from './typography'
+import { typography, fontFace } from './typography'
 import CssBaseline from '@mui/material/CssBaseline'
 
 /** Our partial theme */
 const mappedTheme = {
   palette,
   shadows,
-  // typography
+  typography
 }
 
 /** Our full theme */
@@ -21,7 +21,7 @@ export const theme = createTheme({
   ...mappedTheme,
   components: {
     MuiCssBaseline: {
-      // styleOverrides: fontFace
+      styleOverrides: fontFace
     }
   }
 })
