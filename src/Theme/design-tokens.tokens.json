@@ -910,6 +910,9 @@
   },
   "font": {
     "typography": {
+      "allVariants": {
+        "fontFamily": "TWK Lausanne"
+      },
       "title": {
         "type": "custom-fontStyle",
         "value": {
@@ -1074,7 +1077,6 @@
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
-          "lineHeight": 21,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -1096,7 +1098,6 @@
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
-          "lineHeight": 19,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"

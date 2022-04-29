@@ -1,77 +1,130 @@
+/** @file Types used in theming */
 /** A single unit in the design token, ie: the value of `color.primary.main` */
-export declare type TokenUnit = {
+export interface TokenUnit<Value = string> {
     description?: string;
     type: 'color' | 'custom-fontStyle' | string;
-    value: string | Record<string, string | number>;
+    value: Value;
     extensions: {
         'org.lukasoppermann.figmaDesignTokens': {
             styleId: string;
             exportKey: 'color' | 'font' | string;
         };
     };
+}
+export declare type ColorUnit = TokenUnit<string>;
+export declare type TypographyUnit = TokenUnit<{
+    fontSize: number;
+    textDecoration: string;
+    fontFamily: string;
+    fontWeight: number;
+    fontStyle: string;
+    fontStretch: string;
+    letterSpacing: number;
+    lineHeight: number;
+    paragraphIndent: number;
+    paragraphSpacing: number;
+    textCase: string;
+}>;
+export declare type ElevationUnitValue = {
+    shadowType: string;
+    radius: number;
+    color: string;
+    offsetX: number;
+    offsetY: number;
+    spread: number;
 };
-/** Our base-level design token */
+/** An elevation unit with one light source */
+export declare type SingleElevationUnit = TokenUnit<ElevationUnitValue>;
+/** An elevation unit with two light sources */
+export declare type DoubleElevationUnit = {
+    '0': {
+        type: string;
+        value: ElevationUnitValue;
+    };
+    '1': {
+        type: string;
+        value: ElevationUnitValue;
+    };
+    description: TokenUnit['description'];
+    extensions: TokenUnit['extensions'];
+};
+export declare type ElevationUnit = SingleElevationUnit | DoubleElevationUnit;
+/**
+ * Our base-level design token. Note that the actual design token
+ * has far more data; this is the only data we use
+ **/
 export interface DesignToken {
     color: {
         text: {
-            primary: TokenUnit;
-            secondary: TokenUnit;
-            disabled: TokenUnit;
+            primary: ColorUnit;
+            secondary: ColorUnit;
+            disabled: ColorUnit;
         };
         primary: {
-            main: TokenUnit;
-            dark: TokenUnit;
-            light: TokenUnit;
-            contrast_text: TokenUnit;
+            main: ColorUnit;
+            dark: ColorUnit;
+            light: ColorUnit;
+            contrast_text: ColorUnit;
         };
         secondary: {
-            main: TokenUnit;
-            dark: TokenUnit;
-            light: TokenUnit;
-            contrast: TokenUnit;
+            main: ColorUnit;
+            dark: ColorUnit;
+            light: ColorUnit;
+            contrast: ColorUnit;
         };
         error: {
-            main: TokenUnit;
-            dark: TokenUnit;
-            light: TokenUnit;
-            contrast: TokenUnit;
+            main: ColorUnit;
+            dark: ColorUnit;
+            light: ColorUnit;
+            contrast: ColorUnit;
         };
         warning: {
-            main: TokenUnit;
-            dark: TokenUnit;
-            light: TokenUnit;
-            contrast: TokenUnit;
+            main: ColorUnit;
+            dark: ColorUnit;
+            light: ColorUnit;
+            contrast: ColorUnit;
         };
         info: {
-            main: TokenUnit;
-            dark: TokenUnit;
-            light: TokenUnit;
-            contrast: TokenUnit;
+            main: ColorUnit;
+            dark: ColorUnit;
+            light: ColorUnit;
+            contrast: ColorUnit;
         };
         success: {
-            main: TokenUnit;
-            dark: TokenUnit;
-            light: TokenUnit;
-            contrast: TokenUnit;
+            main: ColorUnit;
+            dark: ColorUnit;
+            light: ColorUnit;
+            contrast: ColorUnit;
         };
     };
     font: {
         typography: {
-            title: TokenUnit;
-            h1: TokenUnit;
-            h2: TokenUnit;
-            h3: TokenUnit;
-            h4: TokenUnit;
-            h5: TokenUnit;
-            h6: TokenUnit;
-            'body 1': TokenUnit;
-            'body 2': TokenUnit;
-            'subtitle 1': TokenUnit;
-            'subtitle 2': TokenUnit;
-            overline: TokenUnit;
-            caption: TokenUnit;
-            legal: TokenUnit;
-            legal_url: TokenUnit;
+            title: TypographyUnit;
+            h1: TypographyUnit;
+            h2: TypographyUnit;
+            h3: TypographyUnit;
+            h4: TypographyUnit;
+            h5: TypographyUnit;
+            h6: TypographyUnit;
+            'body 1': TypographyUnit;
+            'body 2': TypographyUnit;
+            'subtitle 1': TypographyUnit;
+            'subtitle 2': TypographyUnit;
+            overline: TypographyUnit;
+            caption: TypographyUnit;
+            legal: TypographyUnit;
+            legal_url: TypographyUnit;
+        };
+    };
+    effect: {
+        elevation: {
+            1: ElevationUnit;
+            2: ElevationUnit;
+            3: ElevationUnit;
+            4: ElevationUnit;
+            5: ElevationUnit;
+            6: ElevationUnit;
+            7: ElevationUnit;
         };
     };
 }
