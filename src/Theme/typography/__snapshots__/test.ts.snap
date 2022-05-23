@@ -2,6 +2,7 @@
 
 exports[`Produces correct output 1`] = `
 Object {
+  "allVariants": undefined,
   "body1": Object {
     "fontFamily": "TWK Lausanne",
     "fontSize": 16,
@@ -9,7 +10,6 @@ Object {
     "fontStyle": "normal",
     "fontWeight": 400,
     "letterSpacing": 0,
-    "lineHeight": 21,
     "paragraphIndent": 0,
     "paragraphSpacing": 0,
     "textCase": "none",
@@ -22,7 +22,6 @@ Object {
     "fontStyle": "normal",
     "fontWeight": 400,
     "letterSpacing": 0,
-    "lineHeight": 19,
     "paragraphIndent": 0,
     "paragraphSpacing": 0,
     "textCase": "none",

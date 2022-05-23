@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Small button behaves correctly Outlined variant renders button with border state 1`] = `
+exports[`Small button behaves correctly Outlined variant renders button with border state and matches snapshot 1`] = `
 <button
   class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1gihuj7-MuiButtonBase-root-MuiButton-root"
   tabindex="0"

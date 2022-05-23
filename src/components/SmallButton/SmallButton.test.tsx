@@ -15,11 +15,13 @@ describe('Small button behaves correctly',  () => {
 
   it('renders without crashing', () => {
     render(
+      // @ts-expect-error this does have a call signature 
       <Default/>
     );
     expect(screen.getByRole('button')).toBeTruthy();
   });
   it('matches snapshot for a text button', () => {
+    // @ts-expect-error this does have a call signature 
     const { container } = render(<Default/>);
 
     expect(container.firstChild).toMatchSnapshot();
@@ -27,6 +29,7 @@ describe('Small button behaves correctly',  () => {
 
   it('allows for an event to fire onClick', () => {
     render(
+      // @ts-expect-error this does have a call signature 
       <Default 
         onClick={mockOnClick}
       />
@@ -38,6 +41,7 @@ describe('Small button behaves correctly',  () => {
 
   it('Outlined variant renders button with border state and matches snapshot', () => {
     const { container } = render(
+      // @ts-expect-error this does have a call signature 
       <WithBorder />
     );
     expect(container.firstChild).toMatchSnapshot();
