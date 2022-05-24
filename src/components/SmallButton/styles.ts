@@ -11,11 +11,10 @@ const styles = {
     px: 2,
     py: 1.5,
     color: theme.palette.text.primary,
-    borderRadius: 1,
+    borderRadius: 2,
     //translate to 19px on a scale 1:8
     lineHeight: theme.spacing(2.375),
     height: theme.spacing(5.5),
-    width: theme.spacing(8.5),
   },
   "&.MuiButton-text": {
     '&:hover': {
@@ -34,7 +33,7 @@ const styles = {
     borderColor: '#DCDEE5',
     backgroundColor: '#F1F2F5',
     '&:hover': {
-      backgroundColor: '#1213171A',
+      backgroundColor: '#DCDEE5',
       borderColor: '#1213171A'
     },
     '&:focus': {

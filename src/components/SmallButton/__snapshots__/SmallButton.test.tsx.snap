@@ -2,7 +2,7 @@
 
 exports[`Small button behaves correctly Outlined variant renders button with border state and matches snapshot 1`] = `
 <button
-  class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-fhf16q-MuiButtonBase-root-MuiButton-root"
+  class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-120wqw8-MuiButtonBase-root-MuiButton-root"
   tabindex="0"
   type="button"
 >
@@ -15,7 +15,7 @@ exports[`Small button behaves correctly Outlined variant renders button with bor
 
 exports[`Small button behaves correctly matches snapshot for a text button 1`] = `
 <button
-  class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1y2hhty-MuiButtonBase-root-MuiButton-root"
+  class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1fo4vmb-MuiButtonBase-root-MuiButton-root"
   tabindex="0"
   type="button"
 >

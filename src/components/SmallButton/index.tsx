@@ -14,6 +14,7 @@ const SmallButton: React.FC<MuiButtonProps> = ({
     onClick={onClick}
     variant={variant}
     sx={styles}
+    centerRipple
     {...muiProps}
   />
 )
