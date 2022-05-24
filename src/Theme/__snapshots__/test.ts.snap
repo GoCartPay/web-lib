@@ -205,6 +205,7 @@ Object {
     "getAutoHeightDuration": [Function],
   },
   "typography": Object {
+    "allVariants": undefined,
     "body1": Object {
       "fontFamily": "TWK Lausanne",
       "fontSize": 16,
@@ -212,7 +213,7 @@ Object {
       "fontStyle": "normal",
       "fontWeight": 400,
       "letterSpacing": 0,
-      "lineHeight": 21,
+      "lineHeight": 1.5,
       "paragraphIndent": 0,
       "paragraphSpacing": 0,
       "textCase": "none",
@@ -225,7 +226,7 @@ Object {
       "fontStyle": "normal",
       "fontWeight": 400,
       "letterSpacing": 0,
-      "lineHeight": 19,
+      "lineHeight": 1.43,
       "paragraphIndent": 0,
       "paragraphSpacing": 0,
       "textCase": "none",
