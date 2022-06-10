@@ -1,13 +1,13 @@
 import * as React from 'react'
 import Button, { ButtonProps } from '@mui/material/Button'
 
-export type MuiButtonProps = ButtonProps & {
+type MuiButtonProps = ButtonProps & {
   labelText: string
   variant?: ButtonProps['variant']
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const MuiButton = ({
+const MuiButton: React.FC<MuiButtonProps> = ({
   labelText,
   color,
   variant,
