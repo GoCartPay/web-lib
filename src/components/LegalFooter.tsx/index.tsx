@@ -32,7 +32,7 @@ type LegalLinkProps = {
   href: string
 };
 
-const LegalLink: React.FC<LegalLinkProps> = ({ href, children }) => <Link underline='always' target='_blank' href={href}>{children}</Link>
+const LegalLink: React.FC<LegalLinkProps> = ({ href, children }) => <Link underline='hover' target='_blank' href={href}>{children}</Link>
 
 /**
  * Legal Footer component
