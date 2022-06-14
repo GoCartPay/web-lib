@@ -19,9 +19,10 @@ const legalFooterStyles = css`
   color: rgba(53, 57, 70, 0.6);
   font-weight: ${theme.typography.fontWeightRegular};
   line-height: ${theme.spacing(1.75)}!important;
-  a {
-    color: ${theme.palette.secondary.main};
+  .MuiLink-underlineAlways {
+    color: ${theme.palette.text.primary};
     font-weight: 800;
+    text-decoration-color: ${theme.palette.text.primary};
     &:hover {
       cursor: pointer;
     }

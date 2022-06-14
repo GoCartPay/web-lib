@@ -32,7 +32,7 @@ type LegalLinkProps = {
   href: string
 };
 
-const LegalLink: React.FC<LegalLinkProps> = ({ href, children }) => <Link underline='hover' target='_blank' href={href}>{children}</Link>
+const LegalLink: React.FC<LegalLinkProps> = ({ href, children }) => <Link underline='always' target='_blank' href={href}>{children}</Link>
 
 /**
  * Legal Footer component
@@ -41,6 +41,7 @@ const LegalLink: React.FC<LegalLinkProps> = ({ href, children }) => <Link underl
  */
 const LegalFooter: React.FC = (): JSX.Element => (
   <Box sx={legalFooterStyles.containerStyles}>
+    {/* should map these styles to one of our typograpy variants */}
     <Typography css={legalFooterStyles.legalFooterStyles}>
       We never use this information Lorem ipsum legal dolor sit amet according to these{" "}
       <LegalLink href={termsLink}>Terms of Service </LegalLink>

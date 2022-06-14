@@ -5,12 +5,12 @@ exports[`Legal footer renders and behaves correctly renders with expected conten
   class="MuiBox-root css-tx47kv"
 >
   <p
-    class="MuiTypography-root MuiTypography-body1 css-xhvm3g-MuiTypography-root-LegalFooter"
+    class="MuiTypography-root MuiTypography-body1 css-w0ybsn-MuiTypography-root-LegalFooter"
   >
     We never use this information Lorem ipsum legal dolor sit amet according to these
      
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-zr39bh-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
       href="https://www.gocartpay.com/termsofuse"
       target="_blank"
     >
@@ -18,7 +18,7 @@ exports[`Legal footer renders and behaves correctly renders with expected conten
     </a>
     and
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-zr39bh-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
       href="https://www.gocartpay.com/privacy/privacypolicy"
       target="_blank"
     >
