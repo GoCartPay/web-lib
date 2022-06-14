@@ -21,7 +21,7 @@ const Template = () => {
         <>
           <p>Please enter the code sent to the phone ending in 5554 to complete your enrollment.</p>
           <Otp
-            
+            autoFocus
           />
         </>
       }

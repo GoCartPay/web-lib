@@ -36,7 +36,7 @@ const cssStyles = css`
   input {
     text-align: center !important;
     border-radius: 8px;
-    color: #DCDEE5;
+    color: transparent;
     font-family: TWK Lausanne !important;
     font-size: 20px;
     line-height: 25px;
@@ -50,22 +50,23 @@ const cssStyles = css`
   }
 `;
 
-//     margin: ($base + 2) ($base + 2) 0 !important;
-
 const generateOtp = (authCode: string, codeLength: number) => {
   const codeInputs = [];
 
   for (let x = 0; x < codeLength; x++){
     codeInputs.push(
       // these styles are good to go
-    <Box css={css`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    `}>
-      {/* <span>{authCode[x]}-</span> */}
-      <RemoveIcon sx={{fontSize: 32 }}/>
+    <Box
+      sx={{
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 32,
+        mx: 0.25
+      }}
+    >
+    {authCode[x] || <RemoveIcon sx={{fontSize: 32 }}/>}
     </Box>
   )}
 
@@ -78,9 +79,24 @@ type OtpProps = TextFieldProps & {
 
 const Otp: React.FC<OtpProps> = ({
   codeLength = 6,
+  autoFocus = false,
   ...props 
 }) => {
   const [authCode, setAuthCode] = useState('');
+  const [focusedField, setFocusedField] = useState(0);
+
+  const codeInputHandler = (text: string, isBackspace: boolean) => {
+
+    setAuthCode(text);
+
+    // if (isBackspace) {
+    //   setFocusedField(Math.max(focusedField - 1, 0));
+    // } else if (isPasted) {
+    //   setFocusedField(text.length);
+    // } else {
+    //   setFocusedField((focusedField + 1) < codeLength ? focusedField + 1 : -1);
+    // }
+  };
 
   return (
     <Paper css={cssStyles}>
@@ -92,9 +108,13 @@ const Otp: React.FC<OtpProps> = ({
          flex-wrap: nowrap !important;
       `}>
         <Textfield
+          autoFocus={autoFocus}
           variant='outlined'
           fullWidth
           value={authCode}
+          onChange={(e) => {
+            codeInputHandler(e.target.value.substring(0, codeLength), e.target.value.length < authCode.length);
+          }}
           inputProps={{
             maxLength: 6
           }}
@@ -109,16 +129,14 @@ const Otp: React.FC<OtpProps> = ({
           color: transparent;
           caret-color: transparent;
           `}
-        // ref={inputRef}
-        // onChange={onChange}
-        // autoFocus
         />
         <Box sx={{
           position: 'absolute',
           display: 'flex',
           height: 1,
-          width: 0.75,
-          justifyContent: 'center'
+          width: 0.33,
+          justifyContent: 'center',
+          pointerEvents: 'none'
         }}>
           {generateOtp(authCode, codeLength)}
         </Box>
