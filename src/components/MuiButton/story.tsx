@@ -1,10 +1,8 @@
 import React from 'react'
-
-import MuiButton from './index'
+// import { theme } from '../index'
+import { MuiButton } from './index'
 import { ButtonProps } from '@mui/material/Button'
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import Stack from '@mui/material/Stack';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Box from '@mui/material/Box';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -14,52 +12,42 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' }
-  }
+  },
+  parameters: {
+    design: {
+      type: 'figma',
+      url:
+        'https://www.figma.com/file/GDkKRn0hdzPqwrILgdvKr1/Enrollment-with-SPRUCE?node-id=3900%3A32191',
+    },
+  },
 }
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args: ButtonProps & { labelText: string }) => (
-  <Box sx={{ '& button': { m: 1 } }}>
-    <div>
-      <MuiButton size="small">Small</MuiButton>
-      <MuiButton size="medium">Medium</MuiButton>
-      <MuiButton size="large">Large</MuiButton>
-    </div>
-    <div>
-      <MuiButton variant="outlined" size="small">
-        Small
-      </MuiButton>
-      <MuiButton variant="outlined" size="medium">
-        Medium
-      </MuiButton>
-      <MuiButton variant="outlined" size="large">
-        Large
-      </MuiButton>
-    </div>
-    <div>
-      <MuiButton variant="contained" size="small">
-        Small
-      </MuiButton>
-      <MuiButton variant="contained" size="medium">
-        Medium
-      </MuiButton>
-      <MuiButton variant="contained" size="large">
-        Large
-      </MuiButton>
-    </div>
-    <div>
-      <Stack direction="row" spacing={2}>
-        <MuiButton variant="outlined" startIcon={<DeleteIcon />}>
-          Delete
-        </MuiButton>
-        <MuiButton variant="contained" endIcon={<SendIcon />}>
-          Send
-        </MuiButton>
-      </Stack>
-    </div>
-  </Box>
-
-)
+const Template = (args: ButtonProps & { labelText: string }) => {
+  return (
+    <Box>
+      <div>
+        <MuiButton size="small" labelText="Label" {...args} />
+        <MuiButton size="small" labelText="Label" {...args} />
+        <MuiButton size="medium" labelText="Label" {...args} />
+      </div>
+      <div>
+        <MuiButton variant="outlined" size="small" labelText="Label" {...args} />
+        <MuiButton variant="outlined" size="medium" labelText="Label" {...args} />
+        <MuiButton variant="outlined" size="large" labelText="Label" {...args} />
+      </div>
+      <div>
+        <MuiButton variant="contained" size="small" labelText="Label" {...args} />
+        <MuiButton variant="contained" size="medium" labelText="Label" {...args} />
+        <MuiButton variant="contained" size="large" labelText="Label" {...args} />
+      </div>
+      <div>
+        <MuiButton variant="outlined" endIcon={<ArrowRightAltIcon />} labelText="Label" {...args} />
+        <MuiButton variant="contained" endIcon={<ArrowRightAltIcon />} labelText="Label" {...args} />
+      </div>
+    </Box>
+  )
+}
 
 export const Default = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
