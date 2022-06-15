@@ -3,6 +3,7 @@ import Textfield, { TextFieldProps } from '@mui/material/TextField';
 import { FormGroup, Paper } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Box from '@mui/system/Box';
+import Input from '@mui/material/Input';
 
 const otpOuterWrapperStyles = {
   justifyContent: 'center',
@@ -37,7 +38,7 @@ const otpInnerWrapperStyles = {
   position: 'absolute',
   display: 'flex',
   height: 1,
-  width: 0.33,
+  width: 0.545645,
   justifyContent: 'center',
   pointerEvents: 'none'
 };
@@ -49,23 +50,34 @@ const otpDigitStyles = {
   alignItems: 'center',
   fontSize: 32,
   mx: 0.25,
-  color: '#757575'
+  color: '#757575',
+  ".MuiInputBase-input": {
+    textAlign: 'center !important',
+  }
+  // border: 'solid'
 };
 
-const generateOtp = (authCode: string, codeLength: number) => {
+const generateOtp = (authCode: string, codeLength: number, currentIndex: number) => {
   const codeInputs = [];
 
   for (let x = 0; x < codeLength; x++) {
     codeInputs.push(
-      // these styles are good to go
       <Box
         sx={otpDigitStyles}
       >
-        {authCode[x] || <RemoveIcon sx={{ fontSize: 32 }} />}
+        {  authCode[x] 
+            ? authCode[x] 
+            : currentIndex === x 
+              ? <input
+                  style={{height: '100%', width: '100%', zIndex:-1, border: 'none'}}
+                /> 
+              : <RemoveIcon sx={{fontSize: 32}}/>
+        }
+         {/* {authCode[x] || <RemoveIcon sx={{ fontSize: 32 }} />} */}
+        {/* <Input value={authCode[x]} sx={otpDigitStyles}/> */}
       </Box>
-    )
+    );
   }
-
   return codeInputs;
 };
 
@@ -85,20 +97,18 @@ const Otp: React.FC<OtpProps> = ({
 
     setAuthCode(text);
 
-    // if (isBackspace) {
-    //   setFocusedField(Math.max(focusedField - 1, 0));
-    // } else if (isPasted) {
-    //   setFocusedField(text.length);
-    // } else {
-    //   setFocusedField((focusedField + 1) < codeLength ? focusedField + 1 : -1);
-    // }
+    if (isBackspace) {
+      setFocusedField(Math.max(focusedField - 1, 0));
+    } else {
+      setFocusedField((focusedField + 1) < codeLength ? focusedField + 1 : -1);
+    }
   };
 
   return (
     <Paper>
       <FormGroup sx={otpOuterWrapperStyles}>
         <Textfield
-          autoFocus={autoFocus}
+          // autoFocus={autoFocus}
           variant='outlined'
           fullWidth
           value={authCode}
@@ -112,7 +122,7 @@ const Otp: React.FC<OtpProps> = ({
           sx={textFieldSxStyles}
         />
         <Box sx={otpInnerWrapperStyles}>
-          {generateOtp(authCode, codeLength)}
+          {generateOtp(authCode, codeLength, focusedField)}
         </Box>
       </FormGroup>
     </Paper>
