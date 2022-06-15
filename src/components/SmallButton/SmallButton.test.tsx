@@ -23,7 +23,6 @@ describe('Small button behaves correctly',  () => {
   it('matches snapshot for a text button', () => {
     // @ts-expect-error this does have a call signature 
     const { container } = render(<Default/>);
-
     expect(container.firstChild).toMatchSnapshot();
   });
 
