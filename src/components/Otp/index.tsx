@@ -3,7 +3,6 @@ import Textfield, { TextFieldProps } from '@mui/material/TextField';
 import { FormGroup, Paper } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Box from '@mui/system/Box';
-import Input from '@mui/material/Input';
 
 const otpOuterWrapperStyles = {
   justifyContent: 'center',
@@ -11,14 +10,16 @@ const otpOuterWrapperStyles = {
   position: 'relative',
 };
 
-const textFieldSxStyles = {
+const textFieldSxStyles = ({ isComplete }: { isComplete: boolean }) => ({
   ".MuiInputBase-input": {
-    textAlign: 'center !important',
-    borderRadius: '8px',
     color: 'transparent',
     fontSize: '20px',
-    lineHeight: '25px',
-    letterSpacing: '8px',
+    height: '48px',
+  },
+  "& .MuiOutlinedInput-root": {
+    "& > fieldset": {
+      border: isComplete ? 'solid 3px #2AD0624D' : undefined,
+    },
   },
   "& .MuiOutlinedInput-root:hover": {
     "& > fieldset": {
@@ -29,10 +30,16 @@ const textFieldSxStyles = {
   "& .MuiOutlinedInput-root.Mui-focused": {
     "& > fieldset": {
       borderColor: "#117B7433",
+      borderWidth: '3px',
       backgroundColor: '#F5FAF9',
     }
-  }
-};
+  },
+  "& .MuiOutlinedInput-root.Mui-error": {
+    "& > fieldset": {
+      borderColor: '#DF2113',
+    }
+  },
+});
 
 const otpInnerWrapperStyles = {
   position: 'absolute',
@@ -54,7 +61,6 @@ const otpDigitStyles = {
   ".MuiInputBase-input": {
     textAlign: 'center !important',
   }
-  // border: 'solid'
 };
 
 const generateOtp = (authCode: string, codeLength: number, currentIndex: number) => {
@@ -67,14 +73,12 @@ const generateOtp = (authCode: string, codeLength: number, currentIndex: number)
       >
         {  authCode[x] 
             ? authCode[x] 
-            : currentIndex === x 
-              ? <input
-                  style={{height: '100%', width: '100%', zIndex:-1, border: 'none'}}
-                /> 
+            // : currentIndex === x
+            //   ? <Input
+            //       style={{height: '100%', width: '100%', border: 'solid'}}
+            //     /> 
               : <RemoveIcon sx={{fontSize: 32}}/>
         }
-         {/* {authCode[x] || <RemoveIcon sx={{ fontSize: 32 }} />} */}
-        {/* <Input value={authCode[x]} sx={otpDigitStyles}/> */}
       </Box>
     );
   }
@@ -82,47 +86,66 @@ const generateOtp = (authCode: string, codeLength: number, currentIndex: number)
 };
 
 type OtpProps = TextFieldProps & {
-  codeLength: number
+  // the length of the OTP code, defaults to 6
+  codeLength?: number
+  // toggles styles for textfield when OTP is completed
+  isComplete?: boolean
+  // function to be called on blur of the text field
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
+  // fires when textfield value changes
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  // function to be call when text field is focused on
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void,
+  // the value of the input
+  value: string
 };
 
 const Otp: React.FC<OtpProps> = ({
+  autoFocus,
   codeLength = 6,
-  autoFocus = false,
+  disabled,
+  error,
+  isComplete,
+  onBlur,
+  onChange,
+  value,
   ...props
 }) => {
-  const [authCode, setAuthCode] = useState('');
+
   const [focusedField, setFocusedField] = useState(0);
 
-  const codeInputHandler = (text: string, isBackspace: boolean) => {
-
-    setAuthCode(text);
-
-    if (isBackspace) {
-      setFocusedField(Math.max(focusedField - 1, 0));
-    } else {
-      setFocusedField((focusedField + 1) < codeLength ? focusedField + 1 : -1);
-    }
+  const handleFocusFieldChange = (text: string, isBackspace: boolean): void => {
+    setFocusedField((focusedField + 1) < codeLength ? focusedField + 1 : -1);
   };
 
+  const codeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleFocusFieldChange(e.target.value.substring(0, codeLength), e.target.value.length < value.length)
+    onChange(e);
+  };
+  /// render individula inputs insted of one textfield
+  /// if focus field is current render input else render remove icon
+  
   return (
     <Paper>
       <FormGroup sx={otpOuterWrapperStyles}>
         <Textfield
-          // autoFocus={autoFocus}
-          variant='outlined'
+          autoFocus={autoFocus}
+          disabled={disabled}
+          error={error}
           fullWidth
-          value={authCode}
-          onChange={(e) => {
-            codeInputHandler(e.target.value.substring(0, codeLength), e.target.value.length < authCode.length);
-          }}
+          id="otp-input"
           inputProps={{
-            maxLength: 6
+            maxLength: codeLength
           }}
+          onBlur={onBlur}
+          onChange={codeInputHandler}
+          sx={textFieldSxStyles({ isComplete })}
+          value={value}
+          variant='outlined'
           {...props}
-          sx={textFieldSxStyles}
         />
         <Box sx={otpInnerWrapperStyles}>
-          {generateOtp(authCode, codeLength, focusedField)}
+          {generateOtp(value, codeLength, focusedField)}
         </Box>
       </FormGroup>
     </Paper>
