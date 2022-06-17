@@ -14,7 +14,8 @@ export default {
 const Template = () => {
 
   const [otp, setOtp] = useState('');
-
+  const handleChangeOtp = (value: string) => setOtp(value);
+  
   return (
     <Composite
       drawerOpened
@@ -22,37 +23,10 @@ const Template = () => {
         <>
           <p>Please enter the code sent to the phone ending in 5554 to complete your enrollment.</p>
           <Otp
+            codeLength={6}
             value={otp}
-            onChange={(e) => setOtp(e.target.value)}
+            onChange={handleChangeOtp}
           />
-          <Box my={2}>
-            <Otp
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              autoFocus
-            />
-          </Box>
-          <Box my={2}>
-            <Otp
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              isComplete
-            />
-          </Box>
-          <Box my={2}>
-            <Otp
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              error
-            />
-          </Box>
-          <Box my={2}>
-            <Otp
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              disabled
-            />
-          </Box>
         </>
       }
     />

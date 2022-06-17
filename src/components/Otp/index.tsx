@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+/* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
+/** @jsxImportSource @emotion/react */
+import React, { useRef, useState, KeyboardEvent, FocusEvent, ChangeEvent } from 'react';
+import { css } from '@emotion/react';
 import Textfield, { TextFieldProps } from '@mui/material/TextField';
 import { FormGroup, Paper } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Box from '@mui/system/Box';
+
+// keyCode constants
+const BACKSPACE = 8;
+const LEFT_ARROW = 37;
+const RIGHT_ARROW = 39;
+const DELETE = 46;
+const SPACEBAR = 32;
 
 const otpOuterWrapperStyles = {
   justifyContent: 'center',
@@ -63,27 +73,24 @@ const otpDigitStyles = {
   }
 };
 
-const generateOtp = (authCode: string, codeLength: number, currentIndex: number) => {
-  const codeInputs = [];
-
-  for (let x = 0; x < codeLength; x++) {
-    codeInputs.push(
-      <Box
-        sx={otpDigitStyles}
-      >
-        {  authCode[x] 
-            ? authCode[x] 
-            // : currentIndex === x
-            //   ? <Input
-            //       style={{height: '100%', width: '100%', border: 'solid'}}
-            //     /> 
-              : <RemoveIcon sx={{fontSize: 32}}/>
-        }
-      </Box>
-    );
+const stylesCss = css`
+  input {
+    width: 100%;
+    height: 100%; 
+    text-align: center;
+    border: solid 1px black;
+    &:focus {
+      outline: none !important;
+      border: none;
+    }
   }
-  return codeInputs;
-};
+  .MuiLink-underlineAlways {
+    font-weight: 800;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
 
 type OtpProps = TextFieldProps & {
   // the length of the OTP code, defaults to 6
@@ -93,7 +100,7 @@ type OtpProps = TextFieldProps & {
   // function to be called on blur of the text field
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
   // fires when textfield value changes
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange: any,
   // function to be call when text field is focused on
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void,
   // the value of the input
@@ -101,55 +108,142 @@ type OtpProps = TextFieldProps & {
 };
 
 const Otp: React.FC<OtpProps> = ({
-  autoFocus,
-  codeLength = 6,
-  disabled,
-  error,
-  isComplete,
-  onBlur,
-  onChange,
   value,
+  codeLength,
+  onChange,
   ...props
 }) => {
 
   const [focusedField, setFocusedField] = useState(0);
+  console.log(focusedField);
+  // takes value passed in as prop and returns it into an array
+  const getOtpValue = () => (value ? value.toString().split('') : []);
 
-  const handleFocusFieldChange = (text: string, isBackspace: boolean): void => {
-    setFocusedField((focusedField + 1) < codeLength ? focusedField + 1 : -1);
+  // Helper to return OTP from input
+  const handleOtpChange = (otp: string[]) => {
+    const otpValue = otp.join('');
+
+    onChange(otpValue);
   };
 
-  const codeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleFocusFieldChange(e.target.value.substring(0, codeLength), e.target.value.length < value.length)
-    onChange(e);
+  const changeCodeAtFocus = (value: string) => {
+
+    const otp = getOtpValue();
+    otp[focusedField] = value[0];
+
+    handleOtpChange(otp);
   };
-  /// render individula inputs insted of one textfield
-  /// if focus field is current render input else render remove icon
-  
-  return (
-    <Paper>
-      <FormGroup sx={otpOuterWrapperStyles}>
-        <Textfield
-          autoFocus={autoFocus}
-          disabled={disabled}
-          error={error}
-          fullWidth
-          id="otp-input"
-          inputProps={{
-            maxLength: codeLength
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => changeCodeAtFocus(e.target.value);
+
+  const focusNextInput = () => setFocusedField(focusedField + 1);
+  // Focus on previous input
+  const focusPrevInput = () => setFocusedField(focusedField - 1);
+
+  // Handle cases of backspace, delete, left arrow, right arrow, space
+  const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === BACKSPACE || e.key === 'Backspace') {
+      e.preventDefault();
+      changeCodeAtFocus('');
+      focusPrevInput();
+    } else if (e.keyCode === DELETE || e.key === 'Delete') {
+      e.preventDefault();
+      changeCodeAtFocus('');
+    } else if (e.keyCode === LEFT_ARROW || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      focusPrevInput();
+    } else if (e.keyCode === RIGHT_ARROW || e.key === 'ArrowRight') {
+      e.preventDefault();
+      focusNextInput();
+    } else if (e.keyCode === SPACEBAR || e.key === ' ' || e.key === 'Spacebar' || e.key === 'Space') {
+      e.preventDefault();
+    }
+  };
+
+  // The content may not have changed, but some input took place hence change the focus
+  const handleOnInput = () => focusNextInput();
+
+  // renders an array of individual input fields with value as the index of the otp value
+  const renderInputs = () => {
+    const inputs = [];
+    const otp = getOtpValue();
+
+    for (let i = 0; i < codeLength; i++) {
+      const shouldFocus = focusedField === i;
+      console.log(i);
+      console.log(shouldFocus);
+      inputs.push(
+        <SingleOtpInput
+          key={i}
+          value={otp && otp[i]}
+          shouldFocus={focusedField === i}
+          onChange={handleOnChange}
+          onKeyDown={handleOnKeyDown}
+          onInput={handleOnInput}
+          onBlur={() => setFocusedField(-1)}
+          onFocus={(e: FocusEvent<HTMLInputElement>) => {
+            setFocusedField(i);
+            e.target.select();
           }}
-          onBlur={onBlur}
-          onChange={codeInputHandler}
-          sx={textFieldSxStyles({ isComplete })}
-          value={value}
-          variant='outlined'
-          {...props}
         />
-        <Box sx={otpInnerWrapperStyles}>
-          {generateOtp(value, codeLength, focusedField)}
-        </Box>
-      </FormGroup>
+      )
+    }
+    return inputs;
+  };
+
+  return (
+    <Paper style={{ display: 'flex', justifyContent: 'center' }}>
+      <Box
+        display='flex'
+        alignItems={'center'}
+        justifyItems='center'
+        height={48}
+        borderRadius={1}
+        css={stylesCss}
+        width={1 / 2}
+      >
+        {renderInputs()}
+      </Box>
     </Paper>
   );
+};
+
+type SingleOtpInputProps = {
+  value?: string
+  shouldFocus: boolean,
+  onBlur: (e: FocusEvent<HTMLInputElement>) => void
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+  onFocus: (e: FocusEvent<HTMLInputElement>) => void,
+  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void,
+  onInput: (e: ChangeEvent<HTMLInputElement>) => void
+};
+
+const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
+  value,
+  shouldFocus,
+  ...props
+}) => {
+
+  const inputElem = useRef<HTMLInputElement | null>(null);
+
+  return (
+    <input
+      maxLength={1}
+      ref={(node) => {
+        if (node !== null) {
+          if (shouldFocus) { 
+            node.focus();
+          }
+          // if (focusedField >= codeLength || otpLockedOut || otpLoading || authCode.length === codeLength) {
+          //   node.blur();
+          // }
+        }
+      }}
+      autoFocus={shouldFocus}
+      value={value ? value : ''}
+      {...props}
+    />
+  )
 };
 
 export default Otp;
