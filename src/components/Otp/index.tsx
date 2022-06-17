@@ -111,34 +111,36 @@ const Otp: React.FC<OtpProps> = ({
   value,
   codeLength,
   onChange,
-  ...props
 }) => {
 
+  // used to determine which input should have focus
   const [focusedField, setFocusedField] = useState(0);
-  console.log(focusedField);
+
   // takes value passed in as prop and returns it into an array
   const getOtpValue = () => (value ? value.toString().split('') : []);
 
-  // Helper to return OTP from input
+  // converts otp array into string and sends value back to onChange prop event
   const handleOtpChange = (otp: string[]) => {
     const otpValue = otp.join('');
 
     onChange(otpValue);
   };
 
+  // updates otp array with next value then sends to helper func
   const changeCodeAtFocus = (value: string) => {
-
     const otp = getOtpValue();
     otp[focusedField] = value[0];
 
     handleOtpChange(otp);
   };
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => changeCodeAtFocus(e.target.value);
-
+  //focus on next input
   const focusNextInput = () => setFocusedField(focusedField + 1);
+
   // Focus on previous input
-  const focusPrevInput = () => setFocusedField(focusedField - 1);
+  const focusPrevInput = () => {
+    if (focusedField) setFocusedField(focusedField - 1);
+  };
 
   // Handle cases of backspace, delete, left arrow, right arrow, space
   const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -159,28 +161,24 @@ const Otp: React.FC<OtpProps> = ({
       e.preventDefault();
     }
   };
-
-  // The content may not have changed, but some input took place hence change the focus
-  const handleOnInput = () => focusNextInput();
-
+  // console.log(focusedField);
   // renders an array of individual input fields with value as the index of the otp value
   const renderInputs = () => {
     const inputs = [];
     const otp = getOtpValue();
 
     for (let i = 0; i < codeLength; i++) {
-      const shouldFocus = focusedField === i;
-      console.log(i);
-      console.log(shouldFocus);
       inputs.push(
         <SingleOtpInput
           key={i}
           value={otp && otp[i]}
           shouldFocus={focusedField === i}
-          onChange={handleOnChange}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeCodeAtFocus(e.target.value)}
           onKeyDown={handleOnKeyDown}
-          onInput={handleOnInput}
-          onBlur={() => setFocusedField(-1)}
+          onInput={() => { 
+            if (focusedField < codeLength -1) focusNextInput()
+          }}
+          // onBlur={() => setFocusedField(-1)}
           onFocus={(e: FocusEvent<HTMLInputElement>) => {
             setFocusedField(i);
             e.target.select();
@@ -211,7 +209,7 @@ const Otp: React.FC<OtpProps> = ({
 type SingleOtpInputProps = {
   value?: string
   shouldFocus: boolean,
-  onBlur: (e: FocusEvent<HTMLInputElement>) => void
+  // onBlur: (e: FocusEvent<HTMLInputElement>) => void
   onChange: (e: ChangeEvent<HTMLInputElement>) => void,
   onFocus: (e: FocusEvent<HTMLInputElement>) => void,
   onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void,
@@ -224,8 +222,7 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
   ...props
 }) => {
 
-  const inputElem = useRef<HTMLInputElement | null>(null);
-
+  // const inputElem = useRef<HTMLInputElement | null>(null);
   return (
     <input
       maxLength={1}
@@ -234,12 +231,8 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
           if (shouldFocus) { 
             node.focus();
           }
-          // if (focusedField >= codeLength || otpLockedOut || otpLoading || authCode.length === codeLength) {
-          //   node.blur();
-          // }
         }
       }}
-      autoFocus={shouldFocus}
       value={value ? value : ''}
       {...props}
     />
