@@ -1,10 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import React, { useRef, useState, KeyboardEvent, FocusEvent, ChangeEvent } from 'react';
+import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent } from 'react';
 import { css } from '@emotion/react';
-import Textfield, { TextFieldProps } from '@mui/material/TextField';
-import { FormGroup, Paper } from '@mui/material';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { Paper } from '@mui/material';
 import Box from '@mui/system/Box';
 
 // keyCode constants
@@ -14,74 +12,30 @@ const RIGHT_ARROW = 39;
 const DELETE = 46;
 const SPACEBAR = 32;
 
-const otpOuterWrapperStyles = {
-  justifyContent: 'center',
-  alignItems: 'center',
-  position: 'relative',
-};
-
-const textFieldSxStyles = ({ isComplete }: { isComplete: boolean }) => ({
-  ".MuiInputBase-input": {
-    color: 'transparent',
-    fontSize: '20px',
-    height: '48px',
-  },
-  "& .MuiOutlinedInput-root": {
-    "& > fieldset": {
-      border: isComplete ? 'solid 3px #2AD0624D' : undefined,
-    },
-  },
-  "& .MuiOutlinedInput-root:hover": {
-    "& > fieldset": {
-      borderColor: '#DCDEE5',
-      backgroundColor: '#F1F2F5',
-    },
-  },
-  "& .MuiOutlinedInput-root.Mui-focused": {
-    "& > fieldset": {
-      borderColor: "#117B7433",
-      borderWidth: '3px',
-      backgroundColor: '#F5FAF9',
-    }
-  },
-  "& .MuiOutlinedInput-root.Mui-error": {
-    "& > fieldset": {
-      borderColor: '#DF2113',
-    }
-  },
-});
-
-const otpInnerWrapperStyles = {
-  position: 'absolute',
-  display: 'flex',
-  height: 1,
-  width: 0.545645,
-  justifyContent: 'center',
-  pointerEvents: 'none'
-};
-
-const otpDigitStyles = {
-  flex: 1,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontSize: 32,
-  mx: 0.25,
-  color: '#757575',
-  ".MuiInputBase-input": {
-    textAlign: 'center !important',
-  }
-};
-
 const stylesCss = css`
+  background-color: #FFFFFF;
+  &:hover {
+    background-color: #F1F2F5;
+    input {
+      background-color: #F1F2F5;
+    }
+  }
   input {
     width: 100%;
     height: 100%; 
     text-align: center;
-    border: solid 1px black;
+    border: none;
+    font-family: TWK Lausanne!important;
+    color: #121317;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
     &:focus {
       outline: none !important;
       border: none;
+    }
+    &::placeholder {
+      font-size: 48px;
     }
   }
   .MuiLink-underlineAlways {
@@ -92,11 +46,15 @@ const stylesCss = css`
   }
 `;
 
-type OtpProps = TextFieldProps & {
+type OtpProps = {
   // the length of the OTP code, defaults to 6
   codeLength?: number
   // toggles styles for textfield when OTP is completed
   isComplete?: boolean
+  // if OTP should be disabled
+  isDisabled?: boolean
+  //whether an error occured
+  hasError?: boolean
   // function to be called on blur of the text field
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
   // fires when textfield value changes
@@ -107,14 +65,51 @@ type OtpProps = TextFieldProps & {
   value: string
 };
 
+type borderState = {
+  hasError?: boolean,
+  isComplete?: boolean,
+  isActive?: boolean
+};
+
+const getBorderColor = (state: borderState): string => {
+  let borderColor = '';
+  console.log(state);
+  switch(state){
+    case state.hasError:
+      borderColor = '#DF2113';
+      break;
+    case state.isComplete:
+      console.log('made it here');
+      borderColor = '#2AD0624D';
+      break;
+    case state.isActive:
+      console.log('made it under is active');
+      borderColor = '#117B74CC';
+      break;
+    default:
+      console.log('default')
+      borderColor = '#DCDEE5';
+  }
+  console.log(borderColor);
+  return borderColor;
+}
+
+const errorStyle = css`
+  border-color: red !important;
+`;
+
 const Otp: React.FC<OtpProps> = ({
-  value,
   codeLength,
   onChange,
+  isComplete,
+  isDisabled,
+  hasError,
+  value,
 }) => {
 
   // used to determine which input should have focus
   const [focusedField, setFocusedField] = useState(0);
+  const isActive = focusedField >= 0;
 
   // takes value passed in as prop and returns it into an array
   const getOtpValue = () => (value ? value.toString().split('') : []);
@@ -134,11 +129,10 @@ const Otp: React.FC<OtpProps> = ({
     handleOtpChange(otp);
   };
 
-  //focus on next input
   const focusNextInput = () => setFocusedField(focusedField + 1);
 
-  // Focus on previous input
   const focusPrevInput = () => {
+    // prevents focusField getting set to negative number when first field is focused and users hits backspace or delete
     if (focusedField) setFocusedField(focusedField - 1);
   };
 
@@ -161,7 +155,39 @@ const Otp: React.FC<OtpProps> = ({
       e.preventDefault();
     }
   };
-  // console.log(focusedField);
+
+  // Focus on input by index used by onPaste func to set the next active input to the following input
+  const focusInput = (input: number) => {
+
+    const activeInput = Math.max(Math.min(codeLength - 1, input), 0);
+
+    setFocusedField(activeInput);
+  };
+
+  const handleOnPaste = (e: ClipboardEvent) => {
+    e.preventDefault();
+
+    if (isDisabled) return;
+
+    const otp = getOtpValue();
+    let nextActiveInput = focusedField;
+
+    const pastedData = e.clipboardData
+      .getData('text/plain')
+      .slice(0, codeLength - focusedField)
+      .split('');
+
+    // Paste data from focused input onwards
+    for (let pos = 0; pos < codeLength; ++pos) {
+      if (pos >= focusedField && pastedData.length > 0) {
+        otp[pos] = pastedData.shift();
+        nextActiveInput++;
+      }
+    }
+    setFocusedField(nextActiveInput);
+    focusInput(nextActiveInput)
+    handleOtpChange(otp);
+  };
   // renders an array of individual input fields with value as the index of the otp value
   const renderInputs = () => {
     const inputs = [];
@@ -170,19 +196,25 @@ const Otp: React.FC<OtpProps> = ({
     for (let i = 0; i < codeLength; i++) {
       inputs.push(
         <SingleOtpInput
+          disabled={isDisabled}
           key={i}
           value={otp && otp[i]}
+          // only focus on current active focus field
           shouldFocus={focusedField === i}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeCodeAtFocus(e.target.value)}
           onKeyDown={handleOnKeyDown}
-          onInput={() => { 
-            if (focusedField < codeLength -1) focusNextInput()
+          onInput={() => {
+            // prevents focusField getting set to a number higher than code length when user is on last input 
+            if (focusedField < codeLength - 1) focusNextInput()
           }}
-          // onBlur={() => setFocusedField(-1)}
+          // when user clicks out of box reset focus field 
+          onBlur={() => setFocusedField(-1)}
+          // sets the focus field to current index
           onFocus={(e: FocusEvent<HTMLInputElement>) => {
             setFocusedField(i);
             e.target.select();
           }}
+          onPaste={handleOnPaste}
         />
       )
     }
@@ -190,14 +222,27 @@ const Otp: React.FC<OtpProps> = ({
   };
 
   return (
-    <Paper style={{ display: 'flex', justifyContent: 'center' }}>
+    <Paper
+      style={{ display: 'flex', justifyContent: 'center', height: '100%' }}
+      css={css`
+        ${hasError && errorStyle};
+        ${stylesCss};
+        border: solid ${ isComplete ? '3px' : '1px'} ${isComplete ? '#2AD0624D' : isActive ? '#117B74CC' : '#DCDEE5' };
+        input {
+          &::placeholder {
+            color: ${focusedField >= 0 ? '#121317' : '#757575'};
+          }
+        }
+      `}
+      onClick={() => { 
+        setFocusedField(0);
+      }}
+    >
       <Box
         display='flex'
         alignItems={'center'}
         justifyItems='center'
-        height={48}
         borderRadius={1}
-        css={stylesCss}
         width={1 / 2}
       >
         {renderInputs()}
@@ -207,36 +252,37 @@ const Otp: React.FC<OtpProps> = ({
 };
 
 type SingleOtpInputProps = {
-  value?: string
-  shouldFocus: boolean,
-  // onBlur: (e: FocusEvent<HTMLInputElement>) => void
+  disabled: boolean
+  onBlur: (e: FocusEvent<HTMLInputElement>) => void
   onChange: (e: ChangeEvent<HTMLInputElement>) => void,
   onFocus: (e: FocusEvent<HTMLInputElement>) => void,
   onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void,
-  onInput: (e: ChangeEvent<HTMLInputElement>) => void
+  onInput: (e: ChangeEvent<HTMLInputElement>) => void,
+  onPaste: (e: ClipboardEvent) => void,
+  shouldFocus: boolean,
+  value?: string
 };
 
 const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
   value,
   shouldFocus,
   ...props
-}) => {
-
-  // const inputElem = useRef<HTMLInputElement | null>(null);
-  return (
-    <input
-      maxLength={1}
-      ref={(node) => {
-        if (node !== null) {
-          if (shouldFocus) { 
-            node.focus();
-          }
+}) => (
+  <input
+    maxLength={1}
+    ref={(node) => {
+      if (node !== null) {
+        // after user inputs a value for input, shouldFocus updates and the next input should become active
+        if (shouldFocus) {
+          node.focus();
         }
-      }}
-      value={value ? value : ''}
-      {...props}
-    />
-  )
-};
+      }
+    }}
+    onClick={(e) => e.stopPropagation()}
+    placeholder={!shouldFocus && '-'}
+    value={value ? value : ''}
+    {...props}
+  />
+);
 
 export default Otp;

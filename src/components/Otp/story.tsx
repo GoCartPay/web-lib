@@ -22,11 +22,32 @@ const Template = () => {
       content={
         <>
           <p>Please enter the code sent to the phone ending in 5554 to complete your enrollment.</p>
-          <Otp
-            codeLength={6}
-            value={otp}
-            onChange={handleChangeOtp}
-          />
+          <Box height={'48px'} my={2}>
+            <Otp
+              codeLength={6}
+              value={otp}
+              onChange={handleChangeOtp}
+              isDisabled={otp.length === 6}
+            />
+          </Box>
+          <Box height={'48px'} my={2}>
+            <Otp
+              codeLength={6}
+              value={'123123'}
+              onChange={handleChangeOtp}
+              isComplete
+              isDisabled
+            />
+          </Box>
+          <Box height={'48px'} my={2}>
+            <Otp
+              codeLength={6}
+              value={'123123'}
+              onChange={handleChangeOtp}
+              hasError
+              isDisabled
+            />
+          </Box>
         </>
       }
     />
