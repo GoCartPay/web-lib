@@ -2,9 +2,8 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent} from 'react';
 import { css } from '@emotion/react';
-import { Paper } from '@mui/material';
+import { Paper, Theme } from '@mui/material';
 import Box from '@mui/system/Box';
-
 // keyCode constants
 const BACKSPACE = 8;
 const LEFT_ARROW = 37;
@@ -12,39 +11,53 @@ const RIGHT_ARROW = 39;
 const DELETE = 46;
 const SPACEBAR = 32;
 
-const stylesCss = css`
-  background-color: #FFFFFF;
+type BorderState = {
+  hasError: boolean,
+  isComplete: boolean,
+  isActive: boolean
+};
+
+type StylesProps = BorderState & {
+  theme: Theme
+}
+
+const styles= ({ 
+  isActive, 
+  hasError, 
+  isComplete, 
+  theme, 
+}: StylesProps ) => {
+  return css`
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  border: solid ${getBorderColor({ hasError, isComplete, isActive })};
   &:hover {
     background-color: #F1F2F5;
     input {
       background-color: #F1F2F5;
-    }
+    };
   }
   input {
     width: 100%;
-    height: 100%; 
+    height: 100%;
     text-align: center;
     border: none;
-    font-family: TWK Lausanne!important;
-    color: #121317;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 25px;
+    color: ${theme.palette.text.primary};
+    font-weight: ${theme.typography.fontWeightMedium};
+    font-size: ${theme.spacing(2.5)};
+    line-height: ${theme.spacing(3.125)};
     &:focus {
       outline: none !important;
       border: none;
     }
     &::placeholder {
-      font-size: 48px;
-    }
-  }
-  .MuiLink-underlineAlways {
-    font-weight: 800;
-    &:hover {
-      cursor: pointer;
+      font-size: ${theme.spacing(6)};
+      color: ${isActive ? theme.palette.text.primary : theme.palette.grey[500]};
     }
   }
 `;
+}
 
 type OtpProps = {
   // the length of the OTP code, defaults to 6
@@ -65,13 +78,8 @@ type OtpProps = {
   value: string
 };
 
-type borderState = {
-  hasError?: boolean,
-  isComplete?: boolean,
-  isActive?: boolean
-};
-
-const getBorderColor = (state: borderState): string => {
+// none of these colors exist currently in theme
+function getBorderColor(state: BorderState): string {
   if (state.hasError){
     return '1px #DF2113';
   }
@@ -83,7 +91,6 @@ const getBorderColor = (state: borderState): string => {
   }
   return '1px #DCDEE5';
 }
-
 
 const Otp: React.FC<OtpProps> = ({
   codeLength,
@@ -210,17 +217,12 @@ const Otp: React.FC<OtpProps> = ({
 
   return (
     <Paper
-      style={{ display: 'flex', justifyContent: 'center', height: '100%' }}
-      css={css`
-        ${stylesCss};
-        border: solid ${getBorderColor({ hasError, isComplete, isActive })};
-        input {
-          &::placeholder {
-            color: ${focusedField >= 0 ? '#121317' : '#757575'};
-          }
-        }
-      `}
-      onClick={() => { 
+      // css={css`
+      //   ${styles({ isActive })};
+      //   border: solid ${getBorderColor({ hasError, isComplete, isActive })};
+      // `}
+      css={(theme: Theme) => styles({ isActive, hasError, isComplete, theme })}     
+        onClick={() => { 
         setFocusedField(0);
       }}
     >
