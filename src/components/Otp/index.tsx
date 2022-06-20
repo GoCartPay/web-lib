@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent } from 'react';
+import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent} from 'react';
 import { css } from '@emotion/react';
 import { Paper } from '@mui/material';
 import Box from '@mui/system/Box';
@@ -58,7 +58,7 @@ type OtpProps = {
   // function to be called on blur of the text field
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
   // fires when textfield value changes
-  onChange: any,
+  onChange: (value: string) => void,
   // function to be call when text field is focused on
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void,
   // the value of the input
@@ -72,31 +72,18 @@ type borderState = {
 };
 
 const getBorderColor = (state: borderState): string => {
-  let borderColor = '';
-  console.log(state);
-  switch(state){
-    case state.hasError:
-      borderColor = '#DF2113';
-      break;
-    case state.isComplete:
-      console.log('made it here');
-      borderColor = '#2AD0624D';
-      break;
-    case state.isActive:
-      console.log('made it under is active');
-      borderColor = '#117B74CC';
-      break;
-    default:
-      console.log('default')
-      borderColor = '#DCDEE5';
+  if (state.hasError){
+    return '1px #DF2113';
   }
-  console.log(borderColor);
-  return borderColor;
+  if (state.isComplete){
+    return '3px #2AD0624D';
+  }
+  if (state.isActive){
+    return '1px #117B74CC';
+  }
+  return '1px #DCDEE5';
 }
 
-const errorStyle = css`
-  border-color: red !important;
-`;
 
 const Otp: React.FC<OtpProps> = ({
   codeLength,
@@ -225,9 +212,8 @@ const Otp: React.FC<OtpProps> = ({
     <Paper
       style={{ display: 'flex', justifyContent: 'center', height: '100%' }}
       css={css`
-        ${hasError && errorStyle};
         ${stylesCss};
-        border: solid ${ isComplete ? '3px' : '1px'} ${isComplete ? '#2AD0624D' : isActive ? '#117B74CC' : '#DCDEE5' };
+        border: solid ${getBorderColor({ hasError, isComplete, isActive })};
         input {
           &::placeholder {
             color: ${focusedField >= 0 ? '#121317' : '#757575'};
@@ -252,14 +238,23 @@ const Otp: React.FC<OtpProps> = ({
 };
 
 type SingleOtpInputProps = {
+  // should field be disabled determined based on props passed into OTP
   disabled: boolean
+  // fires when input looses focus and updates focus field
   onBlur: (e: FocusEvent<HTMLInputElement>) => void
+  // updates focus field and OTP value. Will also fire onChange handler passed as prop from OTP
   onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+  // sets focus field to index of input
   onFocus: (e: FocusEvent<HTMLInputElement>) => void,
+  // Handle cases of backspace, delete, left arrow, right arrow, space
   onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void,
+  // focuses on next input while otp length is less than code length
   onInput: (e: ChangeEvent<HTMLInputElement>) => void,
+  // handles when users pastes in code 
   onPaste: (e: ClipboardEvent) => void,
+  // determines when input field should have focus based on focusfield
   shouldFocus: boolean,
+  // the single digit value for otp code. If no value will default to placeholder
   value?: string
 };
 
@@ -278,6 +273,7 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
         }
       }
     }}
+    // this prevents onClick handler form OTP component firing when user clicks on individual field
     onClick={(e) => e.stopPropagation()}
     placeholder={!shouldFocus && '-'}
     value={value ? value : ''}

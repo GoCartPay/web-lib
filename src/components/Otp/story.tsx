@@ -27,7 +27,6 @@ const Template = () => {
               codeLength={6}
               value={otp}
               onChange={handleChangeOtp}
-              isDisabled={otp.length === 6}
             />
           </Box>
           <Box height={'48px'} my={2}>
