@@ -74,7 +74,7 @@ describe('OTP renders and works correctly', () => {
         />
       </ThemeProvider>
     );
-    expect(container.firstChild).toHaveStyle('border: solid 3px #2AD0624D')
+    expect(container.firstChild).toHaveStyle('border: 1px solid rgb(42, 208, 98)');
   });
 
   it('will conditionally render error styling when OTP has an error', () => {

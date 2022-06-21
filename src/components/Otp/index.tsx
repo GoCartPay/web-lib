@@ -31,7 +31,8 @@ const styles= ({
   display: flex;
   justify-content: center;
   height: 100%;
-  border: solid ${getBorderColor({ hasError, isComplete, isActive })};
+  border: solid ${getBorderColor({ hasError, isComplete, isActive})};
+  outline: ${isComplete && '3px solid rgba(42, 208, 98, 0.3)'};
   &:hover {
     background-color: #F1F2F5;
     input {
@@ -52,7 +53,7 @@ const styles= ({
       border: none;
     }
     &::placeholder {
-      font-size: ${theme.spacing(4.5)};
+      font-size: ${theme.spacing(2.5)};
       color: ${isActive ? theme.palette.text.primary : theme.palette.grey[500]};
     }
   }
@@ -78,15 +79,10 @@ type OtpProps = {
 
 // none of these colors exist currently in theme
 function getBorderColor(state: BorderState): string {
-  if (state.hasError){
-    return '1px #DF2113';
-  }
-  if (state.isComplete){
-    return '3px #2AD0624D';
-  }
-  if (state.isActive){
-    return '1px #117B74CC';
-  }
+  if (state.hasError) return '1px #DF2113';
+  if (state.isComplete) return '1px rgb(42, 208, 98)';
+  if (state.isActive) return '1px #117B74CC';
+  
   return '1px #DCDEE5';
 }
 
@@ -218,7 +214,7 @@ const Otp: React.FC<OtpProps> = ({
   return (
     <Paper
       css={(theme: Theme) => styles({ isActive, hasError, isComplete, theme })}     
-        onClick={() => { 
+      onClick={() => { 
         setFocusedField(0);
       }}
       data-testid={dataTestId}
@@ -239,6 +235,7 @@ const Otp: React.FC<OtpProps> = ({
 type SingleOtpInputProps = {
   // should field be disabled determined based on props passed into OTP
   disabled: boolean
+  // number that relates to the index of input field in value array
   index: number
   // fires when input looses focus and updates focus field
   onBlur: (e: FocusEvent<HTMLInputElement>) => void
@@ -278,7 +275,7 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
     aria-label={'otp-field-' + index}
     // this prevents onClick handler form OTP component firing when user clicks on individual field
     onClick={(e) => e.stopPropagation()}
-    placeholder={!shouldFocus && '-'}
+    placeholder={!shouldFocus && '―'}
     value={value ? value : ''}
     inputMode='numeric'
     pattern="[0-9]*"
