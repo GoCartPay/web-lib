@@ -275,7 +275,7 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
     aria-label={'otp-field-' + index}
     // this prevents onClick handler form OTP component firing when user clicks on individual field
     onClick={(e) => e.stopPropagation()}
-    placeholder={!shouldFocus && '―'}
+    placeholder={shouldFocus ? undefined : '―'}
     value={value ? value : ''}
     inputMode='numeric'
     pattern="[0-9]*"
