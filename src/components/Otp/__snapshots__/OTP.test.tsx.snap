@@ -2,10 +2,10 @@
 
 exports[`OTP renders and works correctly renders with expected content and does not crash 1`] = `
 <div
-  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-hz402u-MuiPaper-root-Otp"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1rik2fx-MuiPaper-root-Otp"
 >
   <div
-    class="MuiBox-root css-e5am5e"
+    class="MuiBox-root css-afxx7u"
   >
     <input
       aria-label="otp-field-0"

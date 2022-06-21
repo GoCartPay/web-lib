@@ -31,6 +31,7 @@ const styles= ({
   display: flex;
   justify-content: center;
   height: 100%;
+  border-radius: ${theme.spacing(1)} !important;
   border: solid ${getBorderColor({ hasError, isComplete, isActive})};
   outline: ${isComplete && '3px solid rgba(42, 208, 98, 0.3)'};
   &:hover {
@@ -41,7 +42,6 @@ const styles= ({
   }
   input {
     width: 100%;
-    height: 100%;
     text-align: center;
     border: none;
     color: ${theme.palette.text.primary};
@@ -223,7 +223,6 @@ const Otp: React.FC<OtpProps> = ({
         display='flex'
         alignItems={'center'}
         justifyItems='center'
-        borderRadius={1}
         width={1 / 2}
       >
         {renderInputs()}
@@ -275,7 +274,7 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
     aria-label={'otp-field-' + index}
     // this prevents onClick handler form OTP component firing when user clicks on individual field
     onClick={(e) => e.stopPropagation()}
-    placeholder={!shouldFocus && '―'}
+    placeholder={shouldFocus ? undefined : '―'}
     value={value ? value : ''}
     inputMode='numeric'
     pattern="[0-9]*"
