@@ -24,7 +24,6 @@ const Template = () => {
           <p>Please enter the code sent to the phone ending in 5554 to complete your enrollment.</p>
           <Box height={'48px'} my={2}>
             <Otp
-              codeLength={6}
               value={otp}
               onChange={handleChangeOtp}
             />

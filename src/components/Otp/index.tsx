@@ -52,7 +52,7 @@ const styles= ({
       border: none;
     }
     &::placeholder {
-      font-size: ${theme.spacing(6)};
+      font-size: ${theme.spacing(4.5)};
       color: ${isActive ? theme.palette.text.primary : theme.palette.grey[500]};
     }
   }
@@ -62,18 +62,16 @@ const styles= ({
 type OtpProps = {
   // the length of the OTP code, defaults to 6
   codeLength?: number
+  // test id used by react testing library
+  dataTestId?: string
   // toggles styles for textfield when OTP is completed
   isComplete?: boolean
   // if OTP should be disabled
   isDisabled?: boolean
   //whether an error occured
   hasError?: boolean
-  // function to be called on blur of the text field
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
   // fires when textfield value changes
   onChange: (value: string) => void,
-  // function to be call when text field is focused on
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void,
   // the value of the input
   value: string
 };
@@ -93,7 +91,8 @@ function getBorderColor(state: BorderState): string {
 }
 
 const Otp: React.FC<OtpProps> = ({
-  codeLength,
+  codeLength = 6,
+  dataTestId,
   onChange,
   isComplete,
   isDisabled,
@@ -192,6 +191,7 @@ const Otp: React.FC<OtpProps> = ({
         <SingleOtpInput
           disabled={isDisabled}
           key={i}
+          index={i}
           value={otp && otp[i]}
           // only focus on current active focus field
           shouldFocus={focusedField === i}
@@ -217,14 +217,11 @@ const Otp: React.FC<OtpProps> = ({
 
   return (
     <Paper
-      // css={css`
-      //   ${styles({ isActive })};
-      //   border: solid ${getBorderColor({ hasError, isComplete, isActive })};
-      // `}
       css={(theme: Theme) => styles({ isActive, hasError, isComplete, theme })}     
         onClick={() => { 
         setFocusedField(0);
       }}
+      data-testid={dataTestId}
     >
       <Box
         display='flex'
@@ -242,6 +239,7 @@ const Otp: React.FC<OtpProps> = ({
 type SingleOtpInputProps = {
   // should field be disabled determined based on props passed into OTP
   disabled: boolean
+  index: number
   // fires when input looses focus and updates focus field
   onBlur: (e: FocusEvent<HTMLInputElement>) => void
   // updates focus field and OTP value. Will also fire onChange handler passed as prop from OTP
@@ -261,8 +259,9 @@ type SingleOtpInputProps = {
 };
 
 const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
-  value,
+  index,
   shouldFocus,
+  value,
   ...props
 }) => (
   <input
@@ -275,10 +274,14 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
         }
       }
     }}
+    name={'otp-field-' + index}
+    aria-label={'otp-field-' + index}
     // this prevents onClick handler form OTP component firing when user clicks on individual field
     onClick={(e) => e.stopPropagation()}
     placeholder={!shouldFocus && '-'}
     value={value ? value : ''}
+    inputMode='numeric'
+    pattern="[0-9]*"
     {...props}
   />
 );
