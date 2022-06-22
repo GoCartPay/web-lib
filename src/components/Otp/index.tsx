@@ -1,64 +1,16 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent} from 'react';
-import { css } from '@emotion/react';
 import { Paper, Theme } from '@mui/material';
 import Box from '@mui/system/Box';
+import styles from './styles';
+
 // keyCode constants
 const BACKSPACE = 8;
 const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
 const DELETE = 46;
 const SPACEBAR = 32;
-
-type BorderState = {
-  hasError: boolean,
-  isComplete: boolean,
-  isActive: boolean
-};
-
-type StylesProps = BorderState & {
-  theme: Theme
-}
-
-const styles= ({ 
-  isActive, 
-  hasError, 
-  isComplete, 
-  theme, 
-}: StylesProps ) => {
-  return css`
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  border-radius: ${theme.spacing(1)} !important;
-  border: solid ${getBorderColor({ hasError, isComplete, isActive})};
-  outline: ${isComplete && '3px solid rgba(42, 208, 98, 0.3)'};
-  &:hover {
-    background-color: #F1F2F5;
-    input {
-      background-color: #F1F2F5;
-    };
-  }
-  input {
-    width: 100%;
-    text-align: center;
-    border: none;
-    color: ${theme.palette.text.primary};
-    font-weight: ${theme.typography.fontWeightMedium};
-    font-size: ${theme.spacing(2.5)};
-    line-height: ${theme.spacing(3.125)};
-    &:focus {
-      outline: none !important;
-      border: none;
-    }
-    &::placeholder {
-      font-size: ${theme.spacing(2.5)};
-      color: ${isActive ? theme.palette.text.primary : theme.palette.grey[500]};
-    }
-  }
-`;
-}
 
 type OtpProps = {
   // the length of the OTP code, defaults to 6
@@ -76,15 +28,6 @@ type OtpProps = {
   // the value of the input
   value: string
 };
-
-// none of these colors exist currently in theme
-function getBorderColor(state: BorderState): string {
-  if (state.hasError) return '1px #DF2113';
-  if (state.isComplete) return '1px rgb(42, 208, 98)';
-  if (state.isActive) return '1px #117B74CC';
-  
-  return '1px #DCDEE5';
-}
 
 const Otp: React.FC<OtpProps> = ({
   codeLength = 6,
