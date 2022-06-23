@@ -52,7 +52,6 @@ export const EntryBackgroundDrawer = ({
   hasLoader = false,
   ...muiProps
 }: EntryBackgroundDrawerProps) => {
-  console.log(hasLoader)
   const [loading, setLoading] = React.useState(hasLoader);
 
   const styles = useStyles();
@@ -71,8 +70,8 @@ export const EntryBackgroundDrawer = ({
     <SwipeableDrawer
       anchor={'bottom'}
       open={muiProps.open}
-      onClose={() => muiProps.onClose()}
-      onOpen={() => muiProps.onOpen()}
+      onClose={() => muiProps.onClose(null)}
+      onOpen={() => muiProps.onOpen(null)}
       className={styles.container}
       {...muiProps}
     >
@@ -80,7 +79,7 @@ export const EntryBackgroundDrawer = ({
         { loading && <Loader onComplete={() => { setLoading(false) }} />}
         { !loading && <div className={styles.header}>
           {GoCartLogoReverse}
-          <IconButton onClick={() => { muiProps.onClose() }} className={styles.closeIcon}>
+          <IconButton onClick={() => { muiProps.onClose(null) }} className={styles.closeIcon}>
             <CloseIcon />
           </IconButton>
         </div> }

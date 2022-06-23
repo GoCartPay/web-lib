@@ -18,7 +18,7 @@ const Template = () => {
   
   return (
     <Composite
-      drawerOpened
+      open
       content={
         <>
           <p>Please enter the code sent to the phone ending in 5554 to complete your enrollment.</p>
@@ -55,5 +55,4 @@ const Template = () => {
 export const Default = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  // labelText: 'Label'
 };
