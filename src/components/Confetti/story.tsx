@@ -15,7 +15,7 @@ export default {
     design: {
       type: 'figma',
       url:
-        'https://www.figma.com/file/GDkKRn0hdzPqwrILgdvKr1/Enrollment-with-SPRUCE?node-id=3900%3A32191',
+        'https://www.figma.com/file/GDkKRn0hdzPqwrILgdvKr1/Enrollment-with-SPRUCE?node-id=3931%3A32528',
     },
   },
 }

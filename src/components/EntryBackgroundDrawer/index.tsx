@@ -1,6 +1,7 @@
 import * as React from 'react'
 import SwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from '@mui/icons-material/Close'
+import { Loader } from '../Loader/index'
 import { makeStyles } from '@mui/styles'
 import IconButton from '@mui/material/IconButton'
 
@@ -41,19 +42,19 @@ const useStyles: any = makeStyles({
   }
 });
 
+type EntryBackgroundDrawerProps = SwipeableDrawerProps & {
+  hasLoader?: boolean,
+  content: any
+}
+
 export const EntryBackgroundDrawer = ({
   content,
-  drawerOpened = false,
-  handleOnClose = () => { },
-  handleOnOpen = () => { },
+  hasLoader = false,
   ...muiProps
-}: {
-  content: any,
-  drawerOpened?: boolean,
-  handleOnClose?: () => void,
-  handleOnOpen?: () => void,
-  muiProps?: SwipeableDrawerProps
-}) => {
+}: EntryBackgroundDrawerProps) => {
+  console.log(hasLoader)
+  const [loading, setLoading] = React.useState(hasLoader);
+
   const styles = useStyles();
 
   const GoCartLogoReverse = <svg width="137" viewBox="0 0 563 131" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,23 +65,25 @@ export const EntryBackgroundDrawer = ({
     <path d="M64.1514 81.875C64.1514 74.3893 64.1514 66.9036 64.1514 58.95C83.301 58.95 102.929 58.95 122.079 58.95C122.079 80.9393 122.079 102.929 122.079 124.918C113.462 124.918 104.844 124.918 96.227 124.918C96.227 123.514 96.227 122.579 96.227 121.175C99.0995 117.9 102.451 114.157 105.323 109.011C110.111 101.525 112.504 94.5071 113.94 89.3607C113.462 88.8929 112.983 88.425 112.504 87.9571C111.547 92.1679 106.759 106.671 92.3971 117.432C80.4286 125.854 67.9813 127.257 62.2364 127.725C59.3639 127.725 47.8741 128.193 35.4269 122.111C28.7245 118.836 22.9796 114.625 17.7134 109.011C5.7449 96.3786 0 81.4072 0 64.0964C0 52.4 2.39371 42.1071 7.65986 32.2821C12.4473 22.925 20.1071 14.9714 30.1607 8.88929C40.2143 2.80714 52.1828 0 65.5876 0C80.9073 0 93.3546 3.74286 102.451 11.2286C111.547 18.7143 118.249 29.0071 122.079 41.6393H93.3546C88.5672 29.475 79.4711 23.3929 65.5876 23.3929C53.619 23.3929 44.523 27.1357 37.8206 34.6214C31.1182 42.1071 27.767 51.9321 27.767 64.0964C27.767 76.2607 31.1182 86.0857 37.8206 93.5714C39.7355 95.9107 42.1292 97.7822 44.523 99.1857C53.619 105.268 63.1939 104.8 65.5876 104.8C69.4175 104.8 76.5986 104.332 83.7798 99.1857C92.3971 93.1036 94.7908 84.6822 95.7483 82.3429C85.216 81.875 74.6837 81.875 64.1514 81.875Z" fill="white" />
     <path d="M503.157 51.9322C490.71 51.9322 484.965 61.2893 484.965 76.7286V125.386H459.592V30.8786H484.965V45.85C489.753 34.6215 496.455 30.8786 507.466 30.8786H518.477V51.4643L503.157 51.9322Z" fill="white" />
   </svg>;
+  
 
   return (
     <SwipeableDrawer
       anchor={'bottom'}
-      open={drawerOpened}
-      onClose={() => handleOnClose()}
-      onOpen={() => handleOnOpen()}
+      open={muiProps.open}
+      onClose={() => muiProps.onClose()}
+      onOpen={() => muiProps.onOpen()}
       className={styles.container}
       {...muiProps}
     >
       <div className={styles.innerContainer}>
-        <div className={styles.header}>
+        { loading && <Loader onComplete={() => { setLoading(false) }} />}
+        { !loading && <div className={styles.header}>
           {GoCartLogoReverse}
-          <IconButton onClick={() => { handleOnClose() }} className={styles.closeIcon}>
+          <IconButton onClick={() => { muiProps.onClose() }} className={styles.closeIcon}>
             <CloseIcon />
           </IconButton>
-        </div>
+        </div> }
         <div className={styles.content}>{content}</div>
       </div>
     </SwipeableDrawer>
