@@ -1,5 +1,5 @@
 import React from 'react';
-import MuiButton, { MuiButtonProps } from "../MuiButton";
+import { MuiButton, MuiButtonProps } from "../MuiButton";
 import styles  from './styles';
 
 const SmallButton: React.FC<MuiButtonProps> = ({
