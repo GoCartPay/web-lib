@@ -1,18 +1,23 @@
-import { L as css, Q as __makeTemplateObject, a as __assign, _ as __rest } from '../../useThemeProps-560a50aa.js';
-import { a as jsx } from '../../emotion-react-jsx-runtime.esm-c0b026aa.js';
+import { a as __assign, N as css, W as __makeTemplateObject, _ as __rest } from '../../useThemeProps-ebbcf03e.js';
+import { a as jsx } from '../../emotion-react-jsx-runtime.esm-7152dcf4.js';
 import { useState } from 'react';
-import { c as createBox } from '../../createBox-d8e207da.js';
-import { P as Paper } from '../../Paper-421f1514.js';
+import { c as createBox } from '../../createBox-4356b238.js';
+import { P as Paper } from '../../Paper-c7c4b5f6.js';
 import 'react-is';
 import 'react/jsx-runtime';
-import '../../styled-8e5efa1c.js';
-import '../../useTheme-fbe8df83.js';
+import '../../styled-e7ad2f0c.js';
+import '../../useTheme-683cb905.js';
 import '../../chainPropTypes-6eba90ab.js';
 
 const Box = createBox();
 var Box$1 = Box;
 
-// none of these colors exist currently in theme
+// keyCode constants
+var BACKSPACE = 8;
+var LEFT_ARROW = 37;
+var RIGHT_ARROW = 39;
+var DELETE = 46;
+var SPACEBAR = 32;
 function getBorderColor(state) {
     if (state.hasError)
         return '1px #DF2113';
@@ -22,18 +27,6 @@ function getBorderColor(state) {
         return '1px #117B74CC';
     return '1px #DCDEE5';
 }
-var styles = function (_a) {
-    var isActive = _a.isActive, hasError = _a.hasError, isComplete = _a.isComplete, theme = _a.theme;
-    return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  justify-content: center;\n  height: 100%;\n  border-radius: ", " !important;\n  border: solid ", ";\n  outline: ", ";\n  &:hover {\n    background-color: #F1F2F5;\n    input {\n      background-color: #F1F2F5;\n    };\n  }\n  input {\n    width: 100%;\n    text-align: center;\n    border: none;\n    color: ", ";\n    font-weight: ", ";\n    font-size: ", ";\n    line-height: ", ";\n    &:focus {\n      outline: none !important;\n      border: none;\n    }\n    &::placeholder {\n      font-size: ", ";\n      color: ", ";\n    }\n  }\n"], ["\n  display: flex;\n  justify-content: center;\n  height: 100%;\n  border-radius: ", " !important;\n  border: solid ", ";\n  outline: ", ";\n  &:hover {\n    background-color: #F1F2F5;\n    input {\n      background-color: #F1F2F5;\n    };\n  }\n  input {\n    width: 100%;\n    text-align: center;\n    border: none;\n    color: ", ";\n    font-weight: ", ";\n    font-size: ", ";\n    line-height: ", ";\n    &:focus {\n      outline: none !important;\n      border: none;\n    }\n    &::placeholder {\n      font-size: ", ";\n      color: ", ";\n    }\n  }\n"])), theme.spacing(1), getBorderColor({ hasError: hasError, isComplete: isComplete, isActive: isActive }), isComplete && '3px solid rgba(42, 208, 98, 0.3)', theme.palette.text.primary, theme.typography.fontWeightMedium, theme.spacing(2.5), theme.spacing(3.125), theme.spacing(2.5), isActive ? theme.palette.text.primary : theme.palette.grey[500]);
-};
-var templateObject_1;
-
-// keyCode constants
-var BACKSPACE = 8;
-var LEFT_ARROW = 37;
-var RIGHT_ARROW = 39;
-var DELETE = 46;
-var SPACEBAR = 32;
 var Otp = function (_a) {
     var _b = _a.codeLength, codeLength = _b === void 0 ? 6 : _b, dataTestId = _a.dataTestId, onChange = _a.onChange, isComplete = _a.isComplete, isDisabled = _a.isDisabled, hasError = _a.hasError, value = _a.value;
     // used to determine which input should have focus
@@ -132,7 +125,7 @@ var Otp = function (_a) {
         }
         return inputs;
     };
-    return (jsx(Paper, __assign({ css: function (theme) { return styles({ isActive: isActive, hasError: hasError, isComplete: isComplete, theme: theme }); }, onClick: function () {
+    return (jsx(Paper, __assign({ css: css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      display: flex;\n      justify-content: center;\n      height: 100%;\n      border-radius: 8px !important;\n      border: solid ", ";\n      outline: ", ";\n      &:hover {\n        background-color: #F1F2F5;\n        input {\n          background-color: #F1F2F5;\n        };\n      }\n      input {\n        width: 100%;\n        text-align: center;\n        border: none;\n        color: #121317ff;\n        font-weight: 500;\n        font-size: 20px;\n        line-height: 25px;\n        &:focus {\n          outline: none !important;\n          border: none;\n        }\n        &::placeholder {\n          font-size: 25px;\n          color: ", ";\n        }\n      }\n    "], ["\n      display: flex;\n      justify-content: center;\n      height: 100%;\n      border-radius: 8px !important;\n      border: solid ", ";\n      outline: ", ";\n      &:hover {\n        background-color: #F1F2F5;\n        input {\n          background-color: #F1F2F5;\n        };\n      }\n      input {\n        width: 100%;\n        text-align: center;\n        border: none;\n        color: #121317ff;\n        font-weight: 500;\n        font-size: 20px;\n        line-height: 25px;\n        &:focus {\n          outline: none !important;\n          border: none;\n        }\n        &::placeholder {\n          font-size: 25px;\n          color: ", ";\n        }\n      }\n    "])), getBorderColor({ hasError: hasError, isComplete: isComplete, isActive: isActive }), isComplete && '3px solid rgba(42, 208, 98, 0.3)', isActive ? '#121317ff' : '#9e9e9e'), onClick: function () {
             setFocusedField(0);
         }, "data-testid": dataTestId }, { children: jsx(Box$1, __assign({ display: 'flex', alignItems: 'center', justifyItems: 'center', width: 1 / 2 }, { children: renderInputs() })) })));
 };
@@ -149,6 +142,7 @@ var SingleOtpInput = function (_a) {
         // this prevents onClick handler form OTP component firing when user clicks on individual field
         onClick: function (e) { return e.stopPropagation(); }, placeholder: shouldFocus ? undefined : '―', value: value ? value : '', inputMode: 'numeric', pattern: "[0-9]*" }, props)));
 };
+var templateObject_1;
 
 export { Otp as default };
 //# sourceMappingURL=index.js.map

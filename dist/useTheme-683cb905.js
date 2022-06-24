@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { h as useTheme$1, D as defaultTheme } from './useThemeProps-560a50aa.js';
+import { h as useTheme$1, D as defaultTheme } from './useThemeProps-ebbcf03e.js';
 
 function useTheme() {
   const theme = useTheme$1(defaultTheme);
@@ -13,4 +13,4 @@ function useTheme() {
 }
 
 export { useTheme as u };
-//# sourceMappingURL=useTheme-fbe8df83.js.map
+//# sourceMappingURL=useTheme-683cb905.js.map

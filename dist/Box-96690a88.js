@@ -1,5 +1,5 @@
-import { c as createTheme, C as ClassNameGenerator } from './useThemeProps-560a50aa.js';
-import { c as createBox } from './createBox-d8e207da.js';
+import { c as createTheme, C as ClassNameGenerator } from './useThemeProps-ebbcf03e.js';
+import { c as createBox } from './createBox-4356b238.js';
 
 const defaultTheme = createTheme();
 /**
@@ -14,4 +14,4 @@ const Box = createBox({
 var Box$1 = Box;
 
 export { Box$1 as B };
-//# sourceMappingURL=Box-d4911273.js.map
+//# sourceMappingURL=Box-96690a88.js.map
