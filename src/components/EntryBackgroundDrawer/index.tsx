@@ -15,7 +15,6 @@ const useStyles: any = makeStyles({
       width: '100%',
       maxWidth: '430px',
       margin: '0 auto',
-      fontFamily: 'TWK Lausanne!important',
       backgroundColor: '#121317',
       height: '90%',
       [theme.breakpoints.up('sm')]: {
@@ -53,10 +52,12 @@ const useStyles: any = makeStyles({
 
 type EntryBackgroundDrawerProps = SwipeableDrawerProps & {
   hasLoader?: boolean,
+  headerContent?: any,
   content: any
 }
 
 export const EntryBackgroundDrawer = ({
+  headerContent,
   content,
   hasLoader = false,
   ...muiProps
@@ -94,7 +95,8 @@ export const EntryBackgroundDrawer = ({
             <CloseIcon />
           </IconButton>
         </div>}
-        { false && <div className={styles.content}>{content}</div> }
+        <div className={styles.headerContent}>{headerContent}</div>
+        {!loading && <div className={styles.content}>{content}</div>}
       </div>
     </SwipeableDrawer>
   )

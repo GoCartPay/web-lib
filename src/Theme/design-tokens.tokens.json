@@ -2112,7 +2112,7 @@
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 21
+          "value": "21px"
         },
         "paragraphIndent": {
           "type": "dimension",
