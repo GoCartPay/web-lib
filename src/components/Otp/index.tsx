@@ -3,13 +3,27 @@
 import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent} from 'react';
 import { Paper } from '@mui/material';
 import Box from '@mui/system/Box';
-import styles from './styles';
+import { css } from '@emotion/react';
 // keyCode constants
 const BACKSPACE = 8;
 const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
 const DELETE = 46;
 const SPACEBAR = 32;
+
+type BorderState = {
+  hasError: boolean,
+  isComplete: boolean,
+  isActive: boolean
+};
+
+function getBorderColor(state: BorderState): string {
+  if (state.hasError) return '1px #DF2113';
+  if (state.isComplete) return '1px rgb(42, 208, 98)';
+  if (state.isActive) return '1px #117B74CC';
+  
+  return '1px #DCDEE5';
+}
 
 type OtpProps = {
   // the length of the OTP code, defaults to 6
@@ -37,7 +51,6 @@ const Otp: React.FC<OtpProps> = ({
   hasError,
   value,
 }) => {
-
   // used to determine which input should have focus
   const [focusedField, setFocusedField] = useState(0);
   const isActive = focusedField >= 0;
@@ -155,7 +168,37 @@ const Otp: React.FC<OtpProps> = ({
 
   return (
     <Paper
-      css={styles({ isActive, hasError, isComplete })}     
+      css={css`
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      border-radius: 8px !important;
+      border: solid ${getBorderColor({ hasError, isComplete, isActive})};
+      outline: ${isComplete && '3px solid rgba(42, 208, 98, 0.3)'};
+      &:hover {
+        background-color: #F1F2F5;
+        input {
+          background-color: #F1F2F5;
+        };
+      }
+      input {
+        width: 100%;
+        text-align: center;
+        border: none;
+        color: #121317ff;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 25px;
+        &:focus {
+          outline: none !important;
+          border: none;
+        }
+        &::placeholder {
+          font-size: 25px;
+          color: ${isActive ? '#121317ff' : '#9e9e9e'};
+        }
+      }
+    `}     
       onClick={() => { 
         setFocusedField(0);
       }}

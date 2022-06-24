@@ -9,4 +9,4 @@ declare const _default: {
     argTypes: {};
 };
 export default _default;
-export declare const Default: any;
+export declare const Composite: any;
