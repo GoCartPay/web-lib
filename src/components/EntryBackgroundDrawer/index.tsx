@@ -18,7 +18,12 @@ const useStyles: any = makeStyles({
       fontFamily: 'TWK Lausanne!important',
       backgroundColor: '#121317',
       height: '90%',
-      borderRadius: `${theme.breakpoints.up('sm')} ? '${theme.shape.borderRadius} ${theme.shape.borderRadius} 0px 0px' : '0px 0px ${theme.shape.borderRadius} ${theme.shape.borderRadius}'`
+      [theme.breakpoints.up('sm')]: {
+        borderRadius: `0px 0px ${theme.shape.borderRadius} ${theme.shape.borderRadius}`
+      },
+      [theme.breakpoints.down('sm')]: {
+        borderRadius: `${theme.shape.borderRadius} ${theme.shape.borderRadius} 0px 0px `
+      }
     }
   },
   innerContainer: {
@@ -70,7 +75,7 @@ export const EntryBackgroundDrawer = ({
   </svg>;
 
   const theme = useTheme();
-  const mobileAnchor = useMediaQuery(theme.breakpoints.up('sm')) ? 'bottom' : 'top';
+  const mobileAnchor = useMediaQuery(theme.breakpoints.up('sm')) ? 'top' : 'bottom';
 
   return (
     <SwipeableDrawer

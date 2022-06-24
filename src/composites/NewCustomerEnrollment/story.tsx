@@ -39,7 +39,6 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
   }, [args.open]);
 
   const onClose = () => {
-    console.log('closed')
     setIsOpen(false);
   }
 
