@@ -17,13 +17,20 @@ const useStyles: any = makeStyles({
       margin: '0 auto',
       backgroundColor: '#121317',
       height: '90%',
+      overflowY: 'scroll',
+      scrollbarWidth: 'none',
+      '-ms-overflow-style': 'none',
       [theme.breakpoints.up('sm')]: {
         borderRadius: `0px 0px ${theme.shape.borderRadius} ${theme.shape.borderRadius}`
       },
       [theme.breakpoints.down('sm')]: {
         borderRadius: `${theme.shape.borderRadius} ${theme.shape.borderRadius} 0px 0px `
       }
-    }
+    },
+    '& .MuiDrawer-paper::-webkit-scrollbar': {
+      width: 0,
+      height: 0
+    },
   },
   innerContainer: {
 

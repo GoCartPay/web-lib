@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
+import { makeStyles } from '@mui/styles'
+import { theme } from '../../Theme'
+
 import { EntryBackgroundDrawer } from '../../components/EntryBackgroundDrawer/index'
 import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
-import { makeStyles } from '@mui/styles'
-import { theme } from '../../Theme';
 import { Typography } from '@mui/material';
 import LegalFooter from '../../components/LegalFooter';
 import Otp from '../../components/Otp';
 import Box from '@mui/material/Box'
+import { BigButton } from '../../components/BigButton';
 import SmallButton from '../../components/SmallButton';
+import ConfettiExplosion from 'react-confetti-explosion';
+
+import './fade.css'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -31,6 +36,7 @@ const useStyles: any = makeStyles({
         backgroundColor: '#fff',
         position: 'absolute',
         bottom: '0',
+        height: '100%',
         width: '100%',
         maxWidth: '430px',
         padding: '48px',
@@ -60,7 +66,20 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
     const styles = useStyles();
     const [isOpen, setIsOpen] = React.useState(() => args.open);
     const [otp, setOtp] = useState('');
-    const handleChangeOtp = (value: string) => setOtp(value);
+    const [warning, setWarning] = useState(false);
+    const [confetti, setConfetti] = useState(false);
+    const [finish, setFinish] = useState(false);
+
+    const handleChangeOtp = (value: string) => {
+        setOtp(value);
+        if (value === '123456') {
+            setFinish(true);
+            setConfetti(true);
+            setTimeout(() => {
+                setConfetti(false);
+            }, 1500)
+        }
+    }
 
     useEffect(() => {
         if (args.open !== isOpen) {
@@ -74,33 +93,74 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
 
     const headerContent = (
         <div className={styles.headerContent}>
-            <Typography variant="h4">Thanks for choosing to enroll with GoCart.</Typography>
-            <Typography variant="body1" className={styles.subhead}>GoCart will automatically recognize your email and send you a one-time code.</Typography>
+            <Typography variant="h4" sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>Thanks for choosing to enroll with GoCart.</Typography>
+            <Typography variant="body1" className={styles.subhead} sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>GoCart will automatically recognize your email and send you a one-time code.</Typography>
         </div>
     );
 
     const content = (
-        <div className={styles.container}>
-            <div>
-                <Typography variant="h6">
-                    Let’s validate your account
-                </Typography>
-                <Typography variant="body1">
-                Please enter the code sent to (•••) ••••• 554 to complete your enrollment.
-                </Typography>
+        <>
+            <div className={styles.container}>
+                {!finish && <>
+                    <div>
+                        <Typography variant="h6">
+                            Let’s validate your account
+                        </Typography>
+                        <Typography variant="body1">
+                            Please enter the code sent to (•••) ••••• 554 to complete your enrollment.
+                        </Typography>
+                    </div>
+                    <Box height={'48px'} my={2}>
+                        <Otp onChange={handleChangeOtp} value={otp} />
+                    </Box>
+                    <Box sx={{
+                        textAlign: 'center',
+                        paddingBottom: 12
+                    }}>
+                        <SmallButton onClick={() => setWarning(true)} variant="outlined" labelText="More ways to validate" />
+                        {warning && <Typography component="div" variant="caption" color="error" sx={{ marginTop: 2 }} >The more ways to validate component does not exist in Spruce (it lives in gocart currently) so it cannot be displayed in this composite.</Typography>}
+                    </Box>
+                </>}
+                {finish && <>
+                    <div>
+                        <Typography variant="h6" sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>
+                            Your GoCart details:
+                        </Typography>
+                        <Typography variant="caption" sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>
+                            Full Name
+                        </Typography>
+                        <Typography variant="h6" sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>
+                            alex@alexsmithfam.com
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>
+                            When you use this email in the future, GoCart will recognize it and make your payment process smooth and secure.
+                        </Typography>
+                        <Box sx={{ marginBottom: 8 }}>
+                            <BigButton variant="contained" labelText="Got It" onClick={() => setIsOpen(false)} disabled={confetti ? true : false} />
+                        </Box>
+                    </div>
+                </>}
+                <Box sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>
+                    <LegalFooter />
+                </Box>
             </div>
-            <Box height={'48px'} my={2}>
-                <Otp onChange={handleChangeOtp} value={otp} />
-            </Box>
-            <div>
-                <SmallButton labelText="More ways to validate" />
-            </div>
-            <LegalFooter />
-        </div>
+        </>
     );
 
     return (
         <>
+            {confetti && <>
+                <Box sx={{
+                    width: '100%',
+                    marginTop: '180px',
+                    left: '50%',
+                    zIndex: '9999',
+                    position: 'absolute',
+                    animation: `fadeOut 1800ms`
+                }} >
+                    <ConfettiExplosion particleCount={150} particleSize={8} duration={2000} colors={['#22974A', '#2AD062', '#5EF391', '#CBFFDD']} force={0.75} floorHeight={300} floorWidth={425} />
+                </Box>
+            </>}
             <EntryBackgroundDrawer onOpen={() => { }} onClose={() => onClose()} open={isOpen} headerContent={headerContent} content={content} hasLoader={true} />
         </>
     )

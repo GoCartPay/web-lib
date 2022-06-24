@@ -11,17 +11,19 @@ const styles = {
     px: 2,
     py: 1.5,
     color: theme.palette.text.primary,
-    borderRadius: 2,
+    borderRadius: '8px',
     //translate to 19px on a scale 1:8
     lineHeight: theme.spacing(2.375),
     height: theme.spacing(5.5),
+    border: 0.5,
+    borderStyle: 'solid',
   },
   "&.MuiButton-text": {
+    borderColor: 'transparent',
     '&:hover': {
       backgroundColor: '#DCDEE533',
     },
     '&:focus': {
-      border: 0.5,
       borderColor:'#117B7433',
       backgroundColor: '#F1F2F5',
       boxShadow: `0px 0px ${theme.spacing(0.5)}px 0px #CFE5E31`
@@ -30,6 +32,7 @@ const styles = {
   "&.MuiButton-outlined": {
     // translates to 1px on a scale 1:8
     border: theme.spacing(0.125),
+    borderStyle: 'solid',
     borderColor: '#DCDEE5',
     backgroundColor: '#F1F2F5',
     '&:hover': {

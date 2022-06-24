@@ -1,5 +1,5 @@
 import React from 'react'
-import { MuiButton } from './index'
+import { BigButton } from './index'
 import { ButtonProps } from '@mui/material/Button'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Box from '@mui/material/Box';
@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Spruce/Components/BigButton',
-  component: MuiButton,
+  component: BigButton,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' }
@@ -26,17 +26,17 @@ const Template = (args: ButtonProps & { labelText: string }) => {
   return (
     <Box>
       <div>
-        <MuiButton size="large" labelText="Label" {...args} />
+        <BigButton size="large" labelText="Label" {...args} />
       </div>
       <div>
-        <MuiButton variant="outlined" size="large" labelText="Label" {...args} />
+        <BigButton variant="outlined" size="large" labelText="Label" {...args} />
       </div>
       <div>
-        <MuiButton variant="contained" size="large" labelText="Label" {...args} />
+        <BigButton variant="contained" size="large" labelText="Label" {...args} />
       </div>
       <div>
-        <MuiButton variant="outlined" endIcon={<ArrowRightAltIcon />} labelText="Label" {...args} />
-        <MuiButton variant="contained" endIcon={<ArrowRightAltIcon />} labelText="Label" {...args} />
+        <BigButton variant="outlined" endIcon={<ArrowRightAltIcon />} labelText="Label" {...args} />
+        <BigButton variant="contained" endIcon={<ArrowRightAltIcon />} labelText="Label" {...args} />
       </div>
     </Box>
   )
