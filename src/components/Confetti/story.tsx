@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Spruce/Confetti',
+  title: 'Spruce/Components/Confetti',
   component: ConfettiExplosion,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
