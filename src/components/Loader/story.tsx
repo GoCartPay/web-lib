@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Spruce/Loader',
+  title: 'Spruce/Components/Loader',
   component: Loader,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {

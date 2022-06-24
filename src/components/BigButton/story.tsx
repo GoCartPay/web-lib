@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Spruce/BigButton',
+  title: 'Spruce/Components/BigButton',
   component: MuiButton,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {

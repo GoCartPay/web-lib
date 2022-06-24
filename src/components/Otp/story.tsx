@@ -6,7 +6,7 @@ import {
 import Box from '@mui/material/Box';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Spruce/Otp',
+  title: 'Spruce/Components/Otp',
   component: Otp,
 }
 
