@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { EntryBackgroundDrawer } from '../../components/EntryBackgroundDrawer/index'
 import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
 import { makeStyles } from '@mui/styles'
 import { theme } from '../../Theme';
 import { Typography } from '@mui/material';
+import LegalFooter from '../../components/LegalFooter';
+import Otp from '../../components/Otp';
+import Box from '@mui/material/Box'
+import SmallButton from '../../components/SmallButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -32,6 +36,9 @@ const useStyles: any = makeStyles({
         padding: '48px',
         borderRadius: '20px 20px 0 0',
         top: '250px',
+        [theme.breakpoints.down('sm')]: {
+            top: '300px'
+        }
     },
     headerContent: {
         color: `${theme.palette.primary.contrastText}`,
@@ -52,6 +59,8 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
 
     const styles = useStyles();
     const [isOpen, setIsOpen] = React.useState(() => args.open);
+    const [otp, setOtp] = useState('');
+    const handleChangeOtp = (value: string) => setOtp(value);
 
     useEffect(() => {
         if (args.open !== isOpen) {
@@ -70,7 +79,25 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
         </div>
     );
 
-    const content = <div className={styles.container}><p>{args.content}</p></div>
+    const content = (
+        <div className={styles.container}>
+            <div>
+                <Typography variant="h6">
+                    Let’s validate your account
+                </Typography>
+                <Typography variant="body1">
+                Please enter the code sent to (•••) ••••• 554 to complete your enrollment.
+                </Typography>
+            </div>
+            <Box height={'48px'} my={2}>
+                <Otp onChange={handleChangeOtp} value={otp} />
+            </Box>
+            <div>
+                <SmallButton labelText="More ways to validate" />
+            </div>
+            <LegalFooter />
+        </div>
+    );
 
     return (
         <>
