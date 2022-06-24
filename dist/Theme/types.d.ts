@@ -20,7 +20,7 @@ export declare type TypographyUnit = TokenUnit<{
     fontStyle: string;
     fontStretch: string;
     letterSpacing: number;
-    lineHeight: number;
+    lineHeight?: number;
     paragraphIndent: number;
     paragraphSpacing: number;
     textCase: string;
