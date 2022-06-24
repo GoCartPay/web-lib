@@ -2,7 +2,7 @@
 
 exports[`OTP renders and works correctly renders with expected content and does not crash 1`] = `
 <div
-  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1rik2fx-MuiPaper-root-Otp"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1xebixy-MuiPaper-root-Otp"
 >
   <div
     class="MuiBox-root css-afxx7u"
