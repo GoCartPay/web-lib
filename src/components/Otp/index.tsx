@@ -1,10 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
 import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent} from 'react';
-import { Paper, Theme } from '@mui/material';
+import { Paper } from '@mui/material';
 import Box from '@mui/system/Box';
 import styles from './styles';
-
 // keyCode constants
 const BACKSPACE = 8;
 const LEFT_ARROW = 37;
@@ -156,7 +155,7 @@ const Otp: React.FC<OtpProps> = ({
 
   return (
     <Paper
-      css={(theme: Theme) => styles({ isActive, hasError, isComplete, theme })}     
+      css={() => styles({ isActive, hasError, isComplete })}     
       onClick={() => { 
         setFocusedField(0);
       }}
