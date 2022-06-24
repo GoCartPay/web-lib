@@ -1,15 +1,11 @@
 import { css } from '@emotion/react';
-import { Theme } from '@mui/material';
+import { theme } from '../../Theme';
 
 type BorderState = {
   hasError: boolean,
   isComplete: boolean,
   isActive: boolean
 };
-
-type StylesProps = BorderState & {
-  theme: Theme
-}
 
 // none of these colors exist currently in theme
 function getBorderColor(state: BorderState): string {
@@ -24,8 +20,7 @@ const styles= ({
   isActive, 
   hasError, 
   isComplete, 
-  theme, 
-}: StylesProps ) => {
+}:BorderState ) => {
   return css`
   display: flex;
   justify-content: center;
