@@ -7,7 +7,7 @@ import {
 import { palette } from './palette'
 import { shadows } from './shadows'
 import { typography, fontFace } from './typography'
-import tokens from './tokens'
+import { tokens } from './tokens'
 import CssBaseline from '@mui/material/CssBaseline'
 
 /** Our partial theme */
