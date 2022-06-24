@@ -155,7 +155,7 @@ const Otp: React.FC<OtpProps> = ({
 
   return (
     <Paper
-      css={() => styles({ isActive, hasError, isComplete })}     
+      css={styles({ isActive, hasError, isComplete })}     
       onClick={() => { 
         setFocusedField(0);
       }}
