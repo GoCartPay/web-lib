@@ -2,32 +2,32 @@ import * as React from 'react'
 import Button, { ButtonProps } from '@mui/material/Button'
 import Box from '@mui/material/Box';
 
-type MuiButtonProps = ButtonProps & {
+type BigButtonProps = ButtonProps & {
   labelText?: string
   variant?: ButtonProps['variant']
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const MuiButton: React.FC<MuiButtonProps> = ({
+const BigButton: React.FC<BigButtonProps> = ({
   labelText,
   color,
   variant,
   ...muiProps
-}: MuiButtonProps) => {
+}: BigButtonProps) => {
   return (
     <Box sx={{
       '& button': {
         m: 1,
         width: '100%',
-        maxWidth: '310px',
         height: 64,
         textTransform: 'capitalize',
         py: 2,
         px: 3,
+        margin: 0,
         fontWeight: 600,
         letterSpacing: '-0.25px',
         position: 'relative',
-        borderRadius: 2,
+        borderRadius: '8px',
         ...(muiProps.endIcon && {
           justifyContent: 'space-between'
         }),
@@ -59,4 +59,4 @@ const MuiButton: React.FC<MuiButtonProps> = ({
 }
 
 
-export { MuiButton, MuiButtonProps }
+export { BigButton, BigButtonProps }

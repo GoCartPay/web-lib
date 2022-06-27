@@ -96,8 +96,6 @@ const ColorObj = ({
   )
 }
 
-console.log({ theme: theme.palette, colors })
-
 const Palette = () => {
   return (
     <ul style={{ display: 'flex', flexWrap: 'wrap' }}>

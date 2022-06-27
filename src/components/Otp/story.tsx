@@ -12,7 +12,7 @@ const Template = () => {
 
   const [otp, setOtp] = useState('');
   const handleChangeOtp = (value: string) => setOtp(value);
-  
+
   return (
         <>
           <p>Please enter the code sent to the phone ending in 5554 to complete your enrollment.</p>

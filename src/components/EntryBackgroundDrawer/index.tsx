@@ -15,11 +15,22 @@ const useStyles: any = makeStyles({
       width: '100%',
       maxWidth: '430px',
       margin: '0 auto',
-      fontFamily: 'TWK Lausanne!important',
       backgroundColor: '#121317',
       height: '90%',
-      borderRadius: `${theme.breakpoints.up('sm')} ? '${theme.shape.borderRadius} ${theme.shape.borderRadius} 0px 0px' : '0px 0px ${theme.shape.borderRadius} ${theme.shape.borderRadius}'`
-    }
+      overflowY: 'scroll',
+      scrollbarWidth: 'none',
+      '-ms-overflow-style': 'none',
+      [theme.breakpoints.up('sm')]: {
+        borderRadius: `0px 0px ${theme.shape.borderRadius} ${theme.shape.borderRadius}`
+      },
+      [theme.breakpoints.down('sm')]: {
+        borderRadius: `${theme.shape.borderRadius} ${theme.shape.borderRadius} 0px 0px `
+      }
+    },
+    '& .MuiDrawer-paper::-webkit-scrollbar': {
+      width: 0,
+      height: 0
+    },
   },
   innerContainer: {
 
@@ -48,10 +59,12 @@ const useStyles: any = makeStyles({
 
 type EntryBackgroundDrawerProps = SwipeableDrawerProps & {
   hasLoader?: boolean,
+  headerContent?: any,
   content: any
 }
 
 export const EntryBackgroundDrawer = ({
+  headerContent,
   content,
   hasLoader = false,
   ...muiProps
@@ -70,7 +83,7 @@ export const EntryBackgroundDrawer = ({
   </svg>;
 
   const theme = useTheme();
-  const mobileAnchor = useMediaQuery(theme.breakpoints.up('sm')) ? 'bottom' : 'top';
+  const mobileAnchor = useMediaQuery(theme.breakpoints.up('sm')) ? 'top' : 'bottom';
 
   return (
     <SwipeableDrawer
@@ -89,7 +102,8 @@ export const EntryBackgroundDrawer = ({
             <CloseIcon />
           </IconButton>
         </div>}
-        { false && <div className={styles.content}>{content}</div> }
+        <div className={styles.headerContent}>{headerContent}</div>
+        {!loading && <div className={styles.content}>{content}</div>}
       </div>
     </SwipeableDrawer>
   )
