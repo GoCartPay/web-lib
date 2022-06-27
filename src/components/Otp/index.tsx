@@ -34,6 +34,8 @@ type OtpProps = {
   isComplete?: boolean
   // if OTP should be disabled
   isDisabled?: boolean
+  //whether otp is loading, toggles css color
+  isLoading?: boolean
   //whether an error occured
   hasError?: boolean
   // fires when textfield value changes
@@ -48,6 +50,7 @@ const Otp: React.FC<OtpProps> = ({
   onChange,
   isComplete,
   isDisabled,
+  isLoading,
   hasError,
   value,
 }) => {
@@ -185,7 +188,7 @@ const Otp: React.FC<OtpProps> = ({
         width: 100%;
         text-align: center;
         border: none;
-        color: #121317ff;
+        color: ${isLoading ? '#9e9e9e' : '#121317ff'};
         font-weight: 500;
         font-size: 20px;
         line-height: 25px;

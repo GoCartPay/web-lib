@@ -16,13 +16,22 @@ const Template = () => {
   return (
         <>
           <p>Please enter the code sent to the phone ending in 5554 to complete your enrollment.</p>
-          <Box height={'48px'} my={2}>
+          <Box height={'48px'} my={2} width={400}>
             <Otp
               value={otp}
               onChange={handleChangeOtp}
             />
           </Box>
-          <Box height={'48px'} my={2}>
+          <Box height={'48px'} my={2}  width={400}>
+            <Otp
+              codeLength={6}
+              value={'123123'}
+              onChange={handleChangeOtp}
+              isDisabled
+              isLoading
+            />
+          </Box>
+          <Box height={'48px'} my={2} width={400}>
             <Otp
               codeLength={6}
               value={'123123'}
@@ -31,7 +40,7 @@ const Template = () => {
               isDisabled
             />
           </Box>
-          <Box height={'48px'} my={2}>
+          <Box height={'48px'} my={2} width={400}>
             <Otp
               codeLength={6}
               value={'123123'}

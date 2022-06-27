@@ -5,6 +5,7 @@ declare type OtpProps = {
     dataTestId?: string;
     isComplete?: boolean;
     isDisabled?: boolean;
+    isLoading?: boolean;
     hasError?: boolean;
     onChange: (value: string) => void;
     value: string;
