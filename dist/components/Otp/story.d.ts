@@ -6,6 +6,7 @@ declare const _default: {
         dataTestId?: string;
         isComplete?: boolean;
         isDisabled?: boolean;
+        isLoading?: boolean;
         hasError?: boolean;
         onChange: (value: string) => void;
         value: string;
