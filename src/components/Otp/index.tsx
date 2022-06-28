@@ -40,6 +40,8 @@ type OtpProps = {
   hasError?: boolean
   // fires when textfield value changes
   onChange: (value: string) => void,
+  // whether the OTP field should autofocus defaults to true
+  shouldFocus?: boolean
   // the value of the input
   value: string
 };
@@ -52,6 +54,7 @@ const Otp: React.FC<OtpProps> = ({
   isDisabled,
   isLoading,
   hasError,
+  shouldFocus = true,
   value,
 }) => {
   // used to determine which input should have focus
@@ -148,7 +151,7 @@ const Otp: React.FC<OtpProps> = ({
           index={i}
           value={otp && otp[i]}
           // only focus on current active focus field
-          shouldFocus={focusedField === i}
+          shouldFocus={shouldFocus && focusedField === i}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeCodeAtFocus(e.target.value)}
           onKeyDown={handleOnKeyDown}
           onInput={() => {

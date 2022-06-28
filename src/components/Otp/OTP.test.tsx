@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { getAllByRole, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import OTP from './';
@@ -88,6 +88,23 @@ describe('OTP renders and works correctly', () => {
       </ThemeProvider>
     );
     expect(container.firstChild).toHaveStyle('border: solid 1px #DF2113');
+  });
+
+  it('when prop shouldFocus is passed in as false, no input field should have autoFocus', () => {
+    render(
+      <ThemeProvider>
+        <OTP
+          onChange={mockOnChange}
+          value={'123123'}
+          hasError
+          shouldFocus={false}
+        />
+      </ThemeProvider>
+    );
+
+   const inputFields = screen.getAllByRole('textbox');
+
+   inputFields.forEach(input => expect(input).not.toHaveFocus());
   });
 
   it('when a user types into OTP field, the focus field should be updated and the following input whould become active', () => {

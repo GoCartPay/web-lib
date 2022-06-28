@@ -2,6 +2,14 @@
 
 exports[`Produces correct output 1`] = `
 Object {
+  "animation": Object {
+    "duration": Object {
+      "short": "1500",
+    },
+    "easing": Object {
+      "easeOut": "cubic-bezier(0.0, 0, 0.2, 1)",
+    },
+  },
   "breakpoints": Object {
     "between": [Function],
     "down": [Function],

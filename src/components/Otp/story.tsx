@@ -46,7 +46,7 @@ const Template = () => {
               value={'123123'}
               onChange={handleChangeOtp}
               hasError
-              isDisabled
+              shouldFocus={false}
             />
           </Box>
         </>

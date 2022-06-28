@@ -1,8 +1,6 @@
 import { muiTheme } from 'storybook-addon-material-ui5'
 import theme, { ThemeProvider } from '../src/Theme'
 
-console.log('preview ', { theme })
-
 export const decorators = [
   muiTheme([theme]),
   (Story) => (

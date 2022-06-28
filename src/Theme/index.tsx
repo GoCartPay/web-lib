@@ -28,8 +28,6 @@ export const theme = createTheme({
   }
 })
 
-console.log('final theme', {theme})
-
 /** Theme provider, pre-filled with Spruce theme */
 export const ThemeProvider = (props?: Record<string, unknown>) => {
   const { children, ...otherProps } = props
