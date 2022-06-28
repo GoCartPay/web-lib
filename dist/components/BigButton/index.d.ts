@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ButtonProps } from '@mui/material/Button';
-declare type MuiButtonProps = ButtonProps & {
+declare type BigButtonProps = ButtonProps & {
     labelText?: string;
     variant?: ButtonProps['variant'];
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
-declare const MuiButton: React.FC<MuiButtonProps>;
-export { MuiButton, MuiButtonProps };
+declare const BigButton: React.FC<BigButtonProps>;
+export { BigButton, BigButtonProps };

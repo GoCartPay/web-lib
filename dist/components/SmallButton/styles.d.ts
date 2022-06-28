@@ -7,16 +7,18 @@ declare const styles: {
         px: number;
         py: number;
         color: string;
-        borderRadius: number;
+        borderRadius: string;
         lineHeight: string;
         height: string;
+        border: number;
+        borderStyle: string;
     };
     "&.MuiButton-text": {
+        borderColor: string;
         '&:hover': {
             backgroundColor: string;
         };
         '&:focus': {
-            border: number;
             borderColor: string;
             backgroundColor: string;
             boxShadow: string;
@@ -24,6 +26,7 @@ declare const styles: {
     };
     "&.MuiButton-outlined": {
         border: string;
+        borderStyle: string;
         borderColor: string;
         backgroundColor: string;
         '&:hover': {

@@ -10,10 +10,10 @@ import '../../ButtonBase-4df34325.js';
 import '../../useIsFocusVisible-6dbd9294.js';
 import '../../chainPropTypes-6eba90ab.js';
 
-var MuiButton = function (_a) {
+var BigButton = function (_a) {
     var labelText = _a.labelText, color = _a.color, variant = _a.variant, muiProps = __rest(_a, ["labelText", "color", "variant"]);
     return (React.createElement(Box, { sx: {
-            '& button': __assign(__assign(__assign(__assign({ m: 1, width: '100%', maxWidth: '310px', height: 64, textTransform: 'capitalize', py: 2, px: 3, fontWeight: 600, letterSpacing: '-0.25px', position: 'relative', borderRadius: 2 }, (muiProps.endIcon && {
+            '& button': __assign(__assign(__assign(__assign({ m: 1, width: '100%', height: 64, textTransform: 'capitalize', py: 2, px: 3, margin: 0, fontWeight: 600, letterSpacing: '-0.25px', position: 'relative', borderRadius: '8px' }, (muiProps.endIcon && {
                 justifyContent: 'space-between'
             })), (variant !== 'contained' && {
                 backgroundColor: 'white',
@@ -30,5 +30,5 @@ var MuiButton = function (_a) {
         React.createElement(Button, __assign({ color: color, variant: variant, focusRipple: false }, muiProps), labelText)));
 };
 
-export { MuiButton };
+export { BigButton };
 //# sourceMappingURL=index.js.map

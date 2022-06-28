@@ -9,6 +9,7 @@ declare const _default: {
         isLoading?: boolean;
         hasError?: boolean;
         onChange: (value: string) => void;
+        shouldFocus?: boolean;
         value: string;
     }>;
 };

@@ -28,9 +28,9 @@ function getBorderColor(state) {
     return '1px #DCDEE5';
 }
 var Otp = function (_a) {
-    var _b = _a.codeLength, codeLength = _b === void 0 ? 6 : _b, dataTestId = _a.dataTestId, onChange = _a.onChange, isComplete = _a.isComplete, isDisabled = _a.isDisabled, isLoading = _a.isLoading, hasError = _a.hasError, value = _a.value;
+    var _b = _a.codeLength, codeLength = _b === void 0 ? 6 : _b, dataTestId = _a.dataTestId, onChange = _a.onChange, isComplete = _a.isComplete, isDisabled = _a.isDisabled, isLoading = _a.isLoading, hasError = _a.hasError, _c = _a.shouldFocus, shouldFocus = _c === void 0 ? true : _c, value = _a.value;
     // used to determine which input should have focus
-    var _c = useState(0), focusedField = _c[0], setFocusedField = _c[1];
+    var _d = useState(0), focusedField = _d[0], setFocusedField = _d[1];
     var isActive = focusedField >= 0;
     // takes value passed in as prop and returns it into an array
     var getOtpValue = function () { return (value ? value.toString().split('') : []); };
@@ -107,7 +107,7 @@ var Otp = function (_a) {
         var _loop_1 = function (i) {
             inputs.push(jsx(SingleOtpInput, { disabled: isDisabled, index: i, value: otp && otp[i], 
                 // only focus on current active focus field
-                shouldFocus: focusedField === i, onChange: function (e) { return changeCodeAtFocus(e.target.value); }, onKeyDown: handleOnKeyDown, onInput: function () {
+                shouldFocus: shouldFocus && focusedField === i, onChange: function (e) { return changeCodeAtFocus(e.target.value); }, onKeyDown: handleOnKeyDown, onInput: function () {
                     // prevents focusField getting set to a number higher than code length when user is on last input 
                     if (focusedField < codeLength - 1)
                         focusNextInput();

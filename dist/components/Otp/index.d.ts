@@ -8,6 +8,7 @@ declare type OtpProps = {
     isLoading?: boolean;
     hasError?: boolean;
     onChange: (value: string) => void;
+    shouldFocus?: boolean;
     value: string;
 };
 declare const Otp: React.FC<OtpProps>;

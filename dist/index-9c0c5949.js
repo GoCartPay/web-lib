@@ -2274,7 +2274,7 @@ var typography$1 = {
 			},
 			lineHeight: {
 				type: "dimension",
-				value: 21
+				value: "21px"
 			},
 			paragraphIndent: {
 				type: "dimension",
@@ -3434,6 +3434,14 @@ var typography = Object.keys(token.font.typography).reduce(function (acc, cur) {
 const tokens = {
     shape: {
         borderRadius: '20px'
+    },
+    animation: {
+        duration: {
+            short: '1500'
+        },
+        easing: {
+            easeOut: 'cubic-bezier(0.0, 0, 0.2, 1)'
+        }
     }
 };
 
@@ -3573,4 +3581,4 @@ var ThemeProvider = function (props) {
 };
 
 export { ThemeProvider as T, exactProp as e, nested as n, theme as t };
-//# sourceMappingURL=index-7d952f08.js.map
+//# sourceMappingURL=index-9c0c5949.js.map
