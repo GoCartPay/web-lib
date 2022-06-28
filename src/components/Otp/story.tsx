@@ -20,7 +20,6 @@ const Template = () => {
             <Otp
               value={otp}
               onChange={handleChangeOtp}
-              shouldFocus={false}
             />
           </Box>
           <Box height={'48px'} my={2}  width={400}>
@@ -47,7 +46,7 @@ const Template = () => {
               value={'123123'}
               onChange={handleChangeOtp}
               hasError
-              shouldFocus={true}
+              shouldFocus={false}
             />
           </Box>
         </>
