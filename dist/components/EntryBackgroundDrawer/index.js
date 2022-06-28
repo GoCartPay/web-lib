@@ -6,7 +6,7 @@ import { g as generateUtilityClasses, a as composeClasses, c as clsx, s as style
 import { u as useForkRef, s as setRef, a as useIsFocusVisible, e as elementTypeAcceptingRef } from '../../useIsFocusVisible-6dbd9294.js';
 import { u as useEnhancedEffect, a as useEventCallback, _ as _inheritsLoose, T as TransitionGroupContext, b as _assertThisInitialized, B as ButtonBase } from '../../ButtonBase-4df34325.js';
 import { Loader } from '../Loader/index.js';
-import { e as exactProp, n as nested, t as theme } from '../../index-7d952f08.js';
+import { e as exactProp, n as nested, t as theme } from '../../index-9c0c5949.js';
 import { u as useTheme } from '../../useTheme-683cb905.js';
 import { c as chainPropTypes } from '../../chainPropTypes-6eba90ab.js';
 import { P as Paper, i as integerPropType } from '../../Paper-c7c4b5f6.js';
@@ -36730,17 +36730,30 @@ function useMediaQuery(queryInput, options = {}) {
   return match;
 }
 
+var _a;
 var useStyles = makeStyles({
     container: {
-        '& .MuiDrawer-paper': {
-            width: '100%',
-            maxWidth: '430px',
-            margin: '0 auto',
-            fontFamily: 'TWK Lausanne!important',
-            backgroundColor: '#121317',
-            height: '90%',
-            borderRadius: "".concat(theme.breakpoints.up('sm'), " ? '").concat(theme.shape.borderRadius, " ").concat(theme.shape.borderRadius, " 0px 0px' : '0px 0px ").concat(theme.shape.borderRadius, " ").concat(theme.shape.borderRadius, "'")
-        }
+        '& .MuiDrawer-paper': (_a = {
+                width: '100%',
+                maxWidth: '430px',
+                margin: '0 auto',
+                backgroundColor: '#121317',
+                height: '90%',
+                overflowY: 'scroll',
+                scrollbarWidth: 'none',
+                '-ms-overflow-style': 'none'
+            },
+            _a[theme.breakpoints.up('sm')] = {
+                borderRadius: "0px 0px ".concat(theme.shape.borderRadius, " ").concat(theme.shape.borderRadius)
+            },
+            _a[theme.breakpoints.down('sm')] = {
+                borderRadius: "".concat(theme.shape.borderRadius, " ").concat(theme.shape.borderRadius, " 0px 0px ")
+            },
+            _a),
+        '& .MuiDrawer-paper::-webkit-scrollbar': {
+            width: 0,
+            height: 0
+        },
     },
     innerContainer: {},
     header: {
@@ -36763,7 +36776,7 @@ var useStyles = makeStyles({
     }
 });
 var EntryBackgroundDrawer = function (_a) {
-    _a.content; var _b = _a.hasLoader, hasLoader = _b === void 0 ? false : _b, muiProps = __rest(_a, ["content", "hasLoader"]);
+    var headerContent = _a.headerContent, content = _a.content, _b = _a.hasLoader, hasLoader = _b === void 0 ? false : _b, muiProps = __rest(_a, ["headerContent", "content", "hasLoader"]);
     var _c = React.useState(hasLoader), loading = _c[0], setLoading = _c[1];
     var styles = useStyles();
     var GoCartLogoReverse = React.createElement("svg", { width: "137", viewBox: "0 0 563 131", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
@@ -36774,7 +36787,7 @@ var EntryBackgroundDrawer = function (_a) {
         React.createElement("path", { d: "M64.1514 81.875C64.1514 74.3893 64.1514 66.9036 64.1514 58.95C83.301 58.95 102.929 58.95 122.079 58.95C122.079 80.9393 122.079 102.929 122.079 124.918C113.462 124.918 104.844 124.918 96.227 124.918C96.227 123.514 96.227 122.579 96.227 121.175C99.0995 117.9 102.451 114.157 105.323 109.011C110.111 101.525 112.504 94.5071 113.94 89.3607C113.462 88.8929 112.983 88.425 112.504 87.9571C111.547 92.1679 106.759 106.671 92.3971 117.432C80.4286 125.854 67.9813 127.257 62.2364 127.725C59.3639 127.725 47.8741 128.193 35.4269 122.111C28.7245 118.836 22.9796 114.625 17.7134 109.011C5.7449 96.3786 0 81.4072 0 64.0964C0 52.4 2.39371 42.1071 7.65986 32.2821C12.4473 22.925 20.1071 14.9714 30.1607 8.88929C40.2143 2.80714 52.1828 0 65.5876 0C80.9073 0 93.3546 3.74286 102.451 11.2286C111.547 18.7143 118.249 29.0071 122.079 41.6393H93.3546C88.5672 29.475 79.4711 23.3929 65.5876 23.3929C53.619 23.3929 44.523 27.1357 37.8206 34.6214C31.1182 42.1071 27.767 51.9321 27.767 64.0964C27.767 76.2607 31.1182 86.0857 37.8206 93.5714C39.7355 95.9107 42.1292 97.7822 44.523 99.1857C53.619 105.268 63.1939 104.8 65.5876 104.8C69.4175 104.8 76.5986 104.332 83.7798 99.1857C92.3971 93.1036 94.7908 84.6822 95.7483 82.3429C85.216 81.875 74.6837 81.875 64.1514 81.875Z", fill: "white" }),
         React.createElement("path", { d: "M503.157 51.9322C490.71 51.9322 484.965 61.2893 484.965 76.7286V125.386H459.592V30.8786H484.965V45.85C489.753 34.6215 496.455 30.8786 507.466 30.8786H518.477V51.4643L503.157 51.9322Z", fill: "white" }));
     var theme = useTheme();
-    var mobileAnchor = useMediaQuery(theme.breakpoints.up('sm')) ? 'bottom' : 'top';
+    var mobileAnchor = useMediaQuery(theme.breakpoints.up('sm')) ? 'top' : 'bottom';
     return (React.createElement(SwipeableDrawer$1, __assign({ anchor: mobileAnchor, open: muiProps.open, onClose: function () { return muiProps.onClose(null); }, onOpen: function () { return muiProps.onOpen(null); }, className: styles.container }, muiProps),
         React.createElement("div", { className: styles.innerContainer },
             loading && React.createElement(Loader, { onComplete: function () { setLoading(false); } }),
@@ -36782,7 +36795,8 @@ var EntryBackgroundDrawer = function (_a) {
                 GoCartLogoReverse,
                 React.createElement(IconButton$1, { onClick: function () { muiProps.onClose(null); }, className: styles.closeIcon },
                     React.createElement(CloseIcon, null))),
-            false )));
+            React.createElement("div", { className: styles.headerContent }, headerContent),
+            !loading && React.createElement("div", { className: styles.content }, content))));
 };
 
 export { EntryBackgroundDrawer, EntryBackgroundDrawer as default };
