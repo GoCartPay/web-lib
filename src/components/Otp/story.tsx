@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Otp from './index'
 import Box from '@mui/material/Box';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -11,7 +11,38 @@ export default {
 const Template = () => {
 
   const [otp, setOtp] = useState('');
+  const [errorOtp, setErrorOtp] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   const handleChangeOtp = (value: string) => setOtp(value);
+
+  const handleChangeErrOtp = (value: string) => {
+    setErrorOtp(value);
+  }
+
+  useEffect(() => {
+      // check correct length first before triggering auth
+      if (errorOtp.length === 6){
+        // then check to see if it is correct code
+        if (errorOtp === '123123') {
+          setIsComplete(true);
+          setIsError(false);
+        } else {
+          // if not then set error to true
+          setIsError(true);
+        }
+      }
+  },[errorOtp]);
+
+  useEffect(() => {
+    if (isError){
+      setTimeout(() => {
+        setIsError(false);
+        setErrorOtp('');
+      },1000)
+    }
+  },[isError]);
 
   return (
         <>
@@ -43,10 +74,11 @@ const Template = () => {
           <Box height={'48px'} my={2} width={400}>
             <Otp
               codeLength={6}
-              value={'123123'}
-              onChange={handleChangeOtp}
-              hasError
-              shouldFocus={false}
+              value={errorOtp}
+              onChange={handleChangeErrOtp}
+              hasError={isError}
+              isComplete={isComplete}
+              shouldFocus={!isError}
             />
           </Box>
         </>

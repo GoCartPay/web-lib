@@ -137,6 +137,9 @@ var SingleOtpInput = function (_a) {
                 if (shouldFocus) {
                     node.focus();
                 }
+                else {
+                    node.blur();
+                }
             }
         }, name: 'otp-field-' + index, "aria-label": 'otp-field-' + index, 
         // this prevents onClick handler form OTP component firing when user clicks on individual field
