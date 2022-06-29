@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope -- Unaware of jsxImportSource */
 /** @jsxImportSource @emotion/react */
-import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent} from 'react';
+import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent } from 'react';
 import { Paper } from '@mui/material';
 import Box from '@mui/system/Box';
 import { css } from '@emotion/react';
@@ -258,6 +258,8 @@ const SingleOtpInput: React.FC<SingleOtpInputProps> = ({
         // after user inputs a value for input, shouldFocus updates and the next input should become active
         if (shouldFocus) {
           node.focus();
+        } else {
+          node.blur();
         }
       }
     }}
