@@ -31,4 +31,16 @@ describe('Radio button renders and behaves correctly', () => {
     expect(radioElem).toBeTruthy()
     expect(radioElem).toHaveAttribute('value', mockValue)
   });
+
+  it('displays proper styling when value is checked', () => {
+    const { container } = render(
+      <RadioButton
+      label={mockLabel}
+      value={mockValue}
+      checked
+    />
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
 })
