@@ -16,6 +16,7 @@ type RadioGroupProps = {
 
 const RadioGroup: React.FC<RadioGroupProps> = ({ radioOptions, value, ...props}) => (
   <MuiRadioGroup
+    value={value}
     {...props}
   >
     {radioOptions.map(radio => 

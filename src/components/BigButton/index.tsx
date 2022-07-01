@@ -12,6 +12,7 @@ const BigButton: React.FC<BigButtonProps> = ({
   labelText,
   color,
   variant,
+  children,
   ...muiProps
 }: BigButtonProps) => {
   return (
@@ -52,7 +53,7 @@ const BigButton: React.FC<BigButtonProps> = ({
         focusRipple={false}
         {...muiProps}
       >
-        {labelText}
+        {children || labelText}
       </Button>
     </Box >
   )
