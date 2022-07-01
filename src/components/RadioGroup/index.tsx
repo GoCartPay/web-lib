@@ -1,7 +1,7 @@
 import React from 'react';
 import MuiRadioGroup, { RadioGroupProps as MuiRadioGroupProps } from '@mui/material/RadioGroup';
 import Box from '@mui/material/Box';
-import RadioButton from '../RabioButton';
+import RadioButton from '../RadioButton';
 
 type Radio = {
   label: string
