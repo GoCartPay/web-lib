@@ -3,6 +3,8 @@ import Button, { ButtonProps } from '@mui/material/Button'
 import Box from '@mui/material/Box';
 
 type BigButtonProps = ButtonProps & {
+  // if a child is passed through this component, it will override the labelText prop. 
+  // Component should only have children or labelText prop passed in, but not both
   labelText?: string
   variant?: ButtonProps['variant']
   onClick?: React.MouseEventHandler<HTMLButtonElement>
