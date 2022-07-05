@@ -13,6 +13,8 @@ import { BigButton } from '../../components/BigButton';
 import SmallButton from '../../components/SmallButton';
 import ConfettiExplosion from 'react-confetti-explosion';
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 import './fade.css'
 import RadioGroup from '../../components/RadioGroup';
@@ -63,8 +65,8 @@ const useStyles: any = makeStyles({
 });
 
 const radioOTPOptions = [
-    { value: 'tel', label: 'Send to (xxx) xxxx 554' },
-    { value: 'email', label: 'send to pxxl@philj.com' }
+    { value: 'tel', label: 'Send to (•••) ••••• 554' },
+    { value: 'email', label: 'Send to p••l@philj.com' }
 ];
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -107,6 +109,7 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
     };
 
     const handleResend = () => {
+        setOtp('');
         if (!resendSuccess) {
 
             setIsOTPResending(true);
@@ -165,14 +168,19 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                             onChange={handleRadioBtnChange}
                             radioOptions={radioOTPOptions}
                         />
-                        <Box mt={7}>
+                        <Box sx={{mt:4, borderTop:1, borderColor: '#DCDEE5', pt:3.5}}>
+                            { resendSuccess && 
+                                <Box sx={{my: 1.5}}>
+                                    <Alert severity="success" icon={<CheckBoxIcon sx={{height:32, width:32}}/>} sx={{borderRadius: '8px', height: '56px', display:'flex', alignItems:'center', lineHeight:'56px', fontWeight:600}}>Sent to xxx xxx xxx</Alert>
+                                </Box>
+                            }
                             <Box sx={{ my: 1.5 }}>
-                                <BigButton variant="contained" labelText={resendSuccess ? 'Enter new code' : 'Resend code'} onClick={handleResend}>
+                                <BigButton variant="contained" sx={{height:'56px !important'}} labelText={resendSuccess ? 'Enter new code' : 'Resend code'} onClick={handleResend}>
                                     {isOTPResending && <CircularProgress sx={{ color: '#ffffff' }} />}
                                 </BigButton>
                             </Box>
                             <Box sx={{ my: 1.5 }}>
-                                {!resendSuccess && <BigButton variant="outlined" labelText='Cancel' onClick={() => setOpenMoreWays(false)} />}
+                                {!resendSuccess && <BigButton variant="outlined" sx={{height:'56px !important'}} labelText='Cancel' onClick={() => setOpenMoreWays(false)} />}
                             </Box>
                         </Box>
                     </>

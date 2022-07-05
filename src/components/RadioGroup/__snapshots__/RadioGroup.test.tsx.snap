@@ -15,9 +15,10 @@ exports[`RadioGroup functions as expected matches snapshot 1`] = `
         class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
       >
         <span
-          class="MuiRadio-root MuiRadio-colorPrimary MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary PrivateSwitchBase-root css-vqmohf-MuiButtonBase-root-MuiRadio-root"
+          class="MuiRadio-root MuiRadio-colorPrimary MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary PrivateSwitchBase-root Mui-checked css-vqmohf-MuiButtonBase-root-MuiRadio-root"
         >
           <input
+            checked=""
             class="PrivateSwitchBase-input css-1m9pwf3"
             name="mui-2"
             type="radio"
@@ -39,7 +40,7 @@ exports[`RadioGroup functions as expected matches snapshot 1`] = `
             </svg>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hhw7if-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-11zohuh-MuiSvgIcon-root"
               data-testid="RadioButtonCheckedIcon"
               focusable="false"
               viewBox="0 0 24 24"
