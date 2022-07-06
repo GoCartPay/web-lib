@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { makeStyles } from '@mui/styles'
 import { theme } from '../../Theme'
 
@@ -17,6 +16,7 @@ import Alert from '@mui/material/Alert';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 import './fade.css'
+
 import RadioGroup from '../../components/RadioGroup';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -82,6 +82,7 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
     const [resendSuccess, setResendSuccess] = useState(false);
     const [confetti, setConfetti] = useState(false);
     const [finish, setFinish] = useState(false);
+    const [fadeIn, setFadeIn] = useState(true);
 
     const handleChangeOtp = (value: string) => {
         setOtp(value);
@@ -108,17 +109,21 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
         setSelectedOTPMethod((event.target as HTMLInputElement).value)
     };
 
+    const handleOnExitOpenMoreWays = () => { 
+        setFadeIn(false);
+        setTimeout(() => {setOpenMoreWays(false)}, 400);
+    };
+
     const handleResend = () => {
         setOtp('');
         if (!resendSuccess) {
-
             setIsOTPResending(true);
             setTimeout(() => {
                 setIsOTPResending(false);
                 setResendSuccess(true);
             }, 2000)
         } else {
-            setOpenMoreWays(false);
+           handleOnExitOpenMoreWays();
         }
     };
 
@@ -148,18 +153,21 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                         textAlign: 'center',
                         paddingBottom: 12
                     }}>
-                        <SmallButton 
-                            onClick={() => { 
-                                setOpenMoreWays(true); 
-                                setResendSuccess(false); 
+                        <SmallButton
+                            onClick={() => {
+                                setOpenMoreWays(true);
+                                setResendSuccess(false);
+                                setFadeIn(true);
                             }}
-                            variant="outlined" 
-                            labelText="More ways to validate" 
+                            variant="outlined"
+                            labelText="More ways to validate"
                         />
                     </Box>
                 </>}
                 {openMoreWays &&
-                    <>
+                    <Box
+                        sx={{ animation: `${fadeIn ? 'fadeInUp 400ms' : 'fadeOutDown 400ms'}`}}
+                    >
                         <Typography variant='body1' sx={{ opacity: 0.6, mb: 2 }}>
                             Where would you like to receive a new validation code?
                         </Typography>
@@ -168,22 +176,22 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                             onChange={handleRadioBtnChange}
                             radioOptions={radioOTPOptions}
                         />
-                        <Box sx={{mt:4, borderTop:1, borderColor: '#DCDEE5', pt:3.5}}>
-                            { resendSuccess && 
-                                <Box sx={{my: 1.5}}>
-                                    <Alert severity="success" icon={<CheckBoxIcon sx={{height:32, width:32}}/>} sx={{borderRadius: '8px', height: '56px', display:'flex', alignItems:'center', lineHeight:'56px', fontWeight:600}}>Sent to xxx xxx xxx</Alert>
+                        <Box sx={{ mt: 4, borderTop: 1, borderColor: '#DCDEE5', pt: 3.5 }}>
+                            {resendSuccess &&
+                                <Box sx={{ my: 1.5 }}>
+                                    <Alert severity="success" icon={<CheckBoxIcon sx={{ height: 32, width: 32 }} />} sx={{ borderRadius: '8px', height: '56px', display: 'flex', alignItems: 'center', lineHeight: '56px', fontWeight: 600 }}>Sent to xxx xxx xxx</Alert>
                                 </Box>
                             }
                             <Box sx={{ my: 1.5 }}>
-                                <BigButton variant="contained" sx={{height:'56px !important'}} labelText={resendSuccess ? 'Enter new code' : 'Resend code'} onClick={handleResend}>
+                                <BigButton variant="contained" sx={{ height: '56px !important' }} labelText={resendSuccess ? 'Enter new code' : 'Resend code'} onClick={handleResend}>
                                     {isOTPResending && <CircularProgress sx={{ color: '#ffffff' }} />}
                                 </BigButton>
                             </Box>
                             <Box sx={{ my: 1.5 }}>
-                                {!resendSuccess && <BigButton variant="outlined" sx={{height:'56px !important'}} labelText='Cancel' onClick={() => setOpenMoreWays(false)} />}
+                                {!resendSuccess && <BigButton variant="outlined" sx={{ height: '56px !important' }} labelText='Cancel' onClick={handleOnExitOpenMoreWays} />}
                             </Box>
                         </Box>
-                    </>
+                    </Box>
                 }
                 {finish && <>
                     <div>
