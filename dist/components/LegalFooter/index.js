@@ -1,224 +1,16 @@
-import { g as generateUtilityClass, b as capitalize, d as _extends, u as useThemeProps, f as _objectWithoutPropertiesLoose, P as PropTypes, V as getPath, e as alpha, N as css, W as __makeTemplateObject, a as __assign } from '../../useThemeProps-ebbcf03e.js';
-import { j as jsxs, a as jsx$1 } from '../../emotion-react-jsx-runtime.esm-7152dcf4.js';
-import { t as theme } from '../../index-9c0c5949.js';
+import { g as generateUtilityClass, b as capitalize, V as getPath, d as _extends, e as alpha, u as useThemeProps, f as _objectWithoutPropertiesLoose, P as PropTypes, N as css, W as __makeTemplateObject, a as __assign } from '../../useThemeProps-a5059ad6.js';
+import { j as jsxs, a as jsx$1 } from '../../emotion-react-jsx-runtime.esm-1623b618.js';
+import { t as theme } from '../../index-63846ff7.js';
+import { T as Typography } from '../../Typography-37e6cb56.js';
+import { B as Box } from '../../Box-3753702e.js';
 import * as React from 'react';
-import { g as generateUtilityClasses, s as styled, a as composeClasses, c as clsx } from '../../styled-e7ad2f0c.js';
+import { g as generateUtilityClasses, s as styled, a as composeClasses, c as clsx } from '../../styled-ae0cc523.js';
 import { jsx } from 'react/jsx-runtime';
-import { e as extendSxProp } from '../../createBox-4356b238.js';
-import { B as Box } from '../../Box-96690a88.js';
-import { a as useIsFocusVisible, u as useForkRef, e as elementTypeAcceptingRef } from '../../useIsFocusVisible-6dbd9294.js';
+import { a as useIsFocusVisible, u as useForkRef, e as elementTypeAcceptingRef } from '../../useIsFocusVisible-ca8204d2.js';
 import 'react-is';
+import '../../extendSxProp-e384a26a.js';
+import '../../createBox-442aae1d.js';
 import '../../chainPropTypes-6eba90ab.js';
-
-function getTypographyUtilityClass(slot) {
-  return generateUtilityClass('MuiTypography', slot);
-}
-generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
-
-const _excluded$1 = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
-
-const useUtilityClasses$1 = ownerState => {
-  const {
-    align,
-    gutterBottom,
-    noWrap,
-    paragraph,
-    variant,
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root', variant, ownerState.align !== 'inherit' && `align${capitalize(align)}`, gutterBottom && 'gutterBottom', noWrap && 'noWrap', paragraph && 'paragraph']
-  };
-  return composeClasses(slots, getTypographyUtilityClass, classes);
-};
-
-const TypographyRoot = styled('span', {
-  name: 'MuiTypography',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, ownerState.variant && styles[ownerState.variant], ownerState.align !== 'inherit' && styles[`align${capitalize(ownerState.align)}`], ownerState.noWrap && styles.noWrap, ownerState.gutterBottom && styles.gutterBottom, ownerState.paragraph && styles.paragraph];
-  }
-})(({
-  theme,
-  ownerState
-}) => _extends({
-  margin: 0
-}, ownerState.variant && theme.typography[ownerState.variant], ownerState.align !== 'inherit' && {
-  textAlign: ownerState.align
-}, ownerState.noWrap && {
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap'
-}, ownerState.gutterBottom && {
-  marginBottom: '0.35em'
-}, ownerState.paragraph && {
-  marginBottom: 16
-}));
-const defaultVariantMapping = {
-  h1: 'h1',
-  h2: 'h2',
-  h3: 'h3',
-  h4: 'h4',
-  h5: 'h5',
-  h6: 'h6',
-  subtitle1: 'h6',
-  subtitle2: 'h6',
-  body1: 'p',
-  body2: 'p',
-  inherit: 'p'
-}; // TODO v6: deprecate these color values in v5.x and remove the transformation in v6
-
-const colorTransformations$1 = {
-  primary: 'primary.main',
-  textPrimary: 'text.primary',
-  secondary: 'secondary.main',
-  textSecondary: 'text.secondary',
-  error: 'error.main'
-};
-
-const transformDeprecatedColors$1 = color => {
-  return colorTransformations$1[color] || color;
-};
-
-const Typography = /*#__PURE__*/React.forwardRef(function Typography(inProps, ref) {
-  const themeProps = useThemeProps({
-    props: inProps,
-    name: 'MuiTypography'
-  });
-  const color = transformDeprecatedColors$1(themeProps.color);
-  const props = extendSxProp(_extends({}, themeProps, {
-    color
-  }));
-
-  const {
-    align = 'inherit',
-    className,
-    component,
-    gutterBottom = false,
-    noWrap = false,
-    paragraph = false,
-    variant = 'body1',
-    variantMapping = defaultVariantMapping
-  } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1);
-
-  const ownerState = _extends({}, props, {
-    align,
-    color,
-    className,
-    component,
-    gutterBottom,
-    noWrap,
-    paragraph,
-    variant,
-    variantMapping
-  });
-
-  const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
-  const classes = useUtilityClasses$1(ownerState);
-  return /*#__PURE__*/jsx(TypographyRoot, _extends({
-    as: Component,
-    ref: ref,
-    ownerState: ownerState,
-    className: clsx(classes.root, className)
-  }, other));
-});
-process.env.NODE_ENV !== "production" ? Typography.propTypes
-/* remove-proptypes */
-= {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * Set the text-align on the component.
-   * @default 'inherit'
-   */
-  align: PropTypes.oneOf(['center', 'inherit', 'justify', 'left', 'right']),
-
-  /**
-   * The content of the component.
-   */
-  children: PropTypes.node,
-
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-
-  /**
-   * If `true`, the text will have a bottom margin.
-   * @default false
-   */
-  gutterBottom: PropTypes.bool,
-
-  /**
-   * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
-   *
-   * Note that text overflow can only happen with block or inline-block level elements
-   * (the element needs to have a width in order to overflow).
-   * @default false
-   */
-  noWrap: PropTypes.bool,
-
-  /**
-   * If `true`, the element will be a paragraph element.
-   * @default false
-   */
-  paragraph: PropTypes.bool,
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
-
-  /**
-   * Applies the theme typography styles.
-   * @default 'body1'
-   */
-  variant: PropTypes
-  /* @typescript-to-proptypes-ignore */
-  .oneOfType([PropTypes.oneOf(['body1', 'body2', 'button', 'caption', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'inherit', 'overline', 'subtitle1', 'subtitle2']), PropTypes.string]),
-
-  /**
-   * The component maps the variant prop to a range of different HTML element types.
-   * For instance, subtitle1 to `<h6>`.
-   * If you wish to change that mapping, you can provide your own.
-   * Alternatively, you can use the `component` prop.
-   * @default {
-   *   h1: 'h1',
-   *   h2: 'h2',
-   *   h3: 'h3',
-   *   h4: 'h4',
-   *   h5: 'h5',
-   *   h6: 'h6',
-   *   subtitle1: 'h6',
-   *   subtitle2: 'h6',
-   *   body1: 'p',
-   *   body2: 'p',
-   *   inherit: 'p',
-   * }
-   */
-  variantMapping: PropTypes
-  /* @typescript-to-proptypes-ignore */
-  .object
-} : void 0;
-var Typography$1 = Typography;
 
 function getLinkUtilityClass(slot) {
   return generateUtilityClass('MuiLink', slot);
@@ -252,7 +44,7 @@ const useUtilityClasses = ownerState => {
   return composeClasses(slots, getLinkUtilityClass, classes);
 };
 
-const LinkRoot = styled(Typography$1, {
+const LinkRoot = styled(Typography, {
   name: 'MuiLink',
   slot: 'Root',
   overridesResolver: (props, styles) => {
@@ -483,7 +275,7 @@ var LegalLink = function (_a) {
  * @see {@link https://www.figma.com/file/GDkKRn0hdzPqwrILgdvKr1/Enrollment-with-SPRUCE?node-id=1%3A173}
  * @returns {JSX.Element}
  */
-var LegalFooter = function () { return (jsxs(Box, __assign({ sx: legalFooterStyles$1.containerStyles }, { children: [jsxs(Typography$1, __assign({ css: legalFooterStyles$1.legalFooterStyles }, { children: ["We never use this information Lorem ipsum legal dolor sit amet according to these", " ", jsx$1(LegalLink, __assign({ href: termsLink }, { children: "Terms of Service " })), "and", jsx$1(LegalLink, __assign({ href: privacyLink }, { children: " Privacy Policy." })), " ", "By entering the code sent to you, you agree to the Terms of Service and Privacy Policy"] })), jsx$1(Box, __assign({ sx: { mt: 1 } }, { children: PoweredBy }))] }))); };
+var LegalFooter = function () { return (jsxs(Box, __assign({ sx: legalFooterStyles$1.containerStyles }, { children: [jsxs(Typography, __assign({ css: legalFooterStyles$1.legalFooterStyles }, { children: ["We never use this information Lorem ipsum legal dolor sit amet according to these", " ", jsx$1(LegalLink, __assign({ href: termsLink }, { children: "Terms of Service " })), "and", jsx$1(LegalLink, __assign({ href: privacyLink }, { children: " Privacy Policy." })), " ", "By entering the code sent to you, you agree to the Terms of Service and Privacy Policy"] })), jsx$1(Box, __assign({ sx: { mt: 1 } }, { children: PoweredBy }))] }))); };
 
 export { LegalFooter as default };
 //# sourceMappingURL=index.js.map
