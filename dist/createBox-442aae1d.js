@@ -1,57 +1,8 @@
-import { f as _objectWithoutPropertiesLoose, d as _extends, i as isPlainObject, P as PropTypes, h as useTheme } from './useThemeProps-ebbcf03e.js';
+import { P as PropTypes, h as useTheme, f as _objectWithoutPropertiesLoose, d as _extends } from './useThemeProps-a5059ad6.js';
 import * as React from 'react';
-import { p as propToStyleFunction, b as styled, d as defaultStyleFunctionSx, c as clsx } from './styled-e7ad2f0c.js';
+import { b as styled, d as defaultStyleFunctionSx, c as clsx } from './styled-ae0cc523.js';
 import { jsx } from 'react/jsx-runtime';
-
-const _excluded$1 = ["sx"];
-
-const splitProps = props => {
-  const result = {
-    systemProps: {},
-    otherProps: {}
-  };
-  Object.keys(props).forEach(prop => {
-    if (propToStyleFunction[prop]) {
-      result.systemProps[prop] = props[prop];
-    } else {
-      result.otherProps[prop] = props[prop];
-    }
-  });
-  return result;
-};
-
-function extendSxProp(props) {
-  const {
-    sx: inSx
-  } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1);
-
-  const {
-    systemProps,
-    otherProps
-  } = splitProps(other);
-  let finalSx;
-
-  if (Array.isArray(inSx)) {
-    finalSx = [systemProps, ...inSx];
-  } else if (typeof inSx === 'function') {
-    finalSx = (...args) => {
-      const result = inSx(...args);
-
-      if (!isPlainObject(result)) {
-        return systemProps;
-      }
-
-      return _extends({}, systemProps, result);
-    };
-  } else {
-    finalSx = _extends({}, systemProps, inSx);
-  }
-
-  return _extends({}, otherProps, {
-    sx: finalSx
-  });
-}
+import { e as extendSxProp } from './extendSxProp-e384a26a.js';
 
 const _excluded = ["className", "component"];
 function createBox(options = {}) {
@@ -106,5 +57,5 @@ function createBox(options = {}) {
   return Box;
 }
 
-export { createBox as c, extendSxProp as e };
-//# sourceMappingURL=createBox-4356b238.js.map
+export { createBox as c };
+//# sourceMappingURL=createBox-442aae1d.js.map

@@ -1,11 +1,12 @@
-import { g as generateUtilityClass, E as keyframes, b as capitalize, d as _extends, N as css, u as useThemeProps, f as _objectWithoutPropertiesLoose, P as PropTypes, O as lighten, Q as darken, _ as __rest } from '../../useThemeProps-ebbcf03e.js';
+import { g as generateUtilityClass, D as keyframes, b as capitalize, d as _extends, N as css, u as useThemeProps, f as _objectWithoutPropertiesLoose, P as PropTypes, O as lighten, Q as darken, _ as __rest } from '../../useThemeProps-a5059ad6.js';
 import * as React from 'react';
-import { B as Box } from '../../Box-96690a88.js';
-import { g as generateUtilityClasses, s as styled, a as composeClasses, c as clsx } from '../../styled-e7ad2f0c.js';
-import { u as useTheme } from '../../useTheme-683cb905.js';
+import { B as Box } from '../../Box-3753702e.js';
+import { g as generateUtilityClasses, s as styled, a as composeClasses, c as clsx } from '../../styled-ae0cc523.js';
+import { u as useTheme } from '../../useTheme-ef3d54b4.js';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import 'react-is';
-import '../../createBox-4356b238.js';
+import '../../createBox-442aae1d.js';
+import '../../extendSxProp-e384a26a.js';
 
 function getLinearProgressUtilityClass(slot) {
   return generateUtilityClass('MuiLinearProgress', slot);

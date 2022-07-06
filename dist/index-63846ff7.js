@@ -1,4 +1,4 @@
-import { d as _extends, R as Global, P as PropTypes, K as useTheme, S as ThemeContext, h as useTheme$1, T as ThemeContext$1, a as __assign, c as createTheme, U as __spreadArray, D as defaultTheme$1, u as useThemeProps, _ as __rest } from './useThemeProps-ebbcf03e.js';
+import { d as _extends, R as Global, P as PropTypes, K as useTheme, S as ThemeContext, h as useTheme$1, T as ThemeContext$1, a as __assign, c as createTheme, U as __spreadArray, B as defaultTheme$1, u as useThemeProps, _ as __rest } from './useThemeProps-a5059ad6.js';
 import * as React from 'react';
 import React__default from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
@@ -3581,4 +3581,4 @@ var ThemeProvider = function (props) {
 };
 
 export { ThemeProvider as T, exactProp as e, nested as n, theme as t };
-//# sourceMappingURL=index-9c0c5949.js.map
+//# sourceMappingURL=index-63846ff7.js.map

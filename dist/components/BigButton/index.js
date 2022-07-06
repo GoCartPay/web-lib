@@ -1,17 +1,18 @@
-import { _ as __rest, a as __assign } from '../../useThemeProps-ebbcf03e.js';
+import { _ as __rest, a as __assign } from '../../useThemeProps-a5059ad6.js';
 import * as React from 'react';
-import { B as Box } from '../../Box-96690a88.js';
-import { B as Button } from '../../Button-d7293d18.js';
+import { B as Box } from '../../Box-3753702e.js';
+import { B as Button } from '../../Button-92201bd0.js';
 import 'react-is';
-import '../../createBox-4356b238.js';
-import '../../styled-e7ad2f0c.js';
+import '../../createBox-442aae1d.js';
+import '../../styled-ae0cc523.js';
 import 'react/jsx-runtime';
-import '../../ButtonBase-4df34325.js';
-import '../../useIsFocusVisible-6dbd9294.js';
+import '../../extendSxProp-e384a26a.js';
+import '../../ButtonBase-b9ca4b82.js';
+import '../../useIsFocusVisible-ca8204d2.js';
 import '../../chainPropTypes-6eba90ab.js';
 
 var BigButton = function (_a) {
-    var labelText = _a.labelText, color = _a.color, variant = _a.variant, muiProps = __rest(_a, ["labelText", "color", "variant"]);
+    var labelText = _a.labelText, color = _a.color, variant = _a.variant, children = _a.children, muiProps = __rest(_a, ["labelText", "color", "variant", "children"]);
     return (React.createElement(Box, { sx: {
             '& button': __assign(__assign(__assign(__assign({ m: 1, width: '100%', height: 64, textTransform: 'capitalize', py: 2, px: 3, margin: 0, fontWeight: 600, letterSpacing: '-0.25px', position: 'relative', borderRadius: '8px' }, (muiProps.endIcon && {
                 justifyContent: 'space-between'
@@ -27,7 +28,7 @@ var BigButton = function (_a) {
                     backgroundClip: 'padding-box'
                 } })
         } },
-        React.createElement(Button, __assign({ color: color, variant: variant, focusRipple: false }, muiProps), labelText)));
+        React.createElement(Button, __assign({ color: color, variant: variant, focusRipple: false }, muiProps), children || labelText)));
 };
 
 export { BigButton };
