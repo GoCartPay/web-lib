@@ -64,11 +64,6 @@ const useStyles: any = makeStyles({
     }
 });
 
-const radioOTPOptions = [
-    { value: 'tel', label: 'Send to (•••) ••••• 554' },
-    { value: 'email', label: 'Send to p••l@philj.com' }
-];
-
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // eslint-disable-next-line complexity
 const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, hasLoader: boolean }) => {
@@ -83,6 +78,14 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
     const [confetti, setConfetti] = useState(false);
     const [finish, setFinish] = useState(false);
     const [fadeIn, setFadeIn] = useState(true);
+
+    const userPhone = '(•••) ••••• 554';
+    const userEmail = 'p••l@philj.com';
+
+    const radioOTPOptions = [
+        { value: 'tel', label: `Send to ${userPhone}` },
+        { value: 'email', label: `Send to ${userEmail}`}
+    ];
 
     const handleChangeOtp = (value: string) => {
         setOtp(value);
@@ -143,7 +146,7 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                             Let’s validate your account
                         </Typography>
                         <Typography variant="body1">
-                            Please enter the code sent to (•••) ••••• 554 to complete your enrollment.
+                            Please enter the code sent to {selectedOTPMethod === 'tel' ? userPhone : userEmail} to complete your enrollment.
                         </Typography>
                     </div>
                     <Box height={'48px'} my={2}>
@@ -179,7 +182,13 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                         <Box sx={{ mt: 4, borderTop: 1, borderColor: '#DCDEE5', pt: 3.5 }}>
                             {resendSuccess &&
                                 <Box sx={{ my: 1.5 }}>
-                                    <Alert severity="success" icon={<CheckBoxIcon sx={{ height: 32, width: 32 }} />} sx={{ borderRadius: '8px', height: '56px', display: 'flex', alignItems: 'center', lineHeight: '56px', fontWeight: 600 }}>Sent to xxx xxx xxx</Alert>
+                                    <Alert 
+                                        severity="success" 
+                                        icon={<CheckBoxIcon sx={{ height: 32, width: 32 }} />} 
+                                        sx={{ borderRadius: '8px', height: '56px', display: 'flex', alignItems: 'center', lineHeight: '56px', fontWeight: 600 }}
+                                    >
+                                        Sent to {selectedOTPMethod === 'tel' ? userPhone : userEmail}
+                                    </Alert>
                                 </Box>
                             }
                             <Box sx={{ my: 1.5 }}>
