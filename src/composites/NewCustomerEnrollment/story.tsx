@@ -242,7 +242,14 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                     <ConfettiExplosion particleCount={150} particleSize={8} duration={2000} colors={['#22974A', '#2AD062', '#5EF391', '#CBFFDD']} force={0.75} floorHeight={300} floorWidth={425} />
                 </Box>
             </>}
-            <EntryBackgroundDrawer onOpen={() => { }} onClose={() => onClose()} open={isOpen} headerContent={headerContent} content={content} hasLoader={true} />
+            <EntryBackgroundDrawer 
+                onOpen={() => { }} 
+                onClose={() => onClose()} 
+                open={isOpen} 
+                headerContent={headerContent} 
+                content={content} 
+                hasLoader={true} 
+            />
         </>
     )
 }
