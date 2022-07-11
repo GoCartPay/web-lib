@@ -61,8 +61,7 @@ const MoreWaysToValidate: React.FC<MoreWaysToValidateProps> = ({
   const handleResend = () => onResend(selectedOTPMethod);
 
   const handleEnterNewCode = () => {
-    handleOnExit();
-    setTimeout(() => {onEnterNewCode()}, 400);
+    setTimeout(() => { onEnterNewCode()}, 400);
   };
 
   return isOpen ? (
