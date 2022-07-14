@@ -1,7 +1,7 @@
 {
   "name": "@gocartpay/web-lib",
   "description": "",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "main": "dist/cjs",
   "module": "dist/esm",
   "files": [
@@ -74,7 +74,6 @@
     "build-storybook": "build-storybook",
     "build": "npm run clean ; rollup --config",
     "prepare": "husky install",
-    "prepublishOnly": "npm run build",
     "type:check": "tsc --skipLibCheck --noEmit",
     "chromatic": "source .env && npx chromatic --allow-console-errors --project-token=$CHROMATIC_PROJECT_TOKEN",
     "chromatic-ci": "chromatic --exit-zero-on-changes --allow-console-errors"
