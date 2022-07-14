@@ -8,6 +8,8 @@ import svg from 'rollup-plugin-svg'
 
 import { defineConfig } from 'rollup'
 
+const packageJson = require("./package.json");
+
 const glob = require('glob')
 
 // Collect all components
