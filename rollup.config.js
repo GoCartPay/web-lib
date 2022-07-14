@@ -4,7 +4,8 @@ import external from 'rollup-plugin-peer-deps-external'
 import resolve from 'rollup-plugin-node-resolve'
 import json from '@rollup/plugin-json'
 import url from '@rollup/plugin-url'
-import svg from 'rollup-plugin-svg'
+import svg from 'rollup-plugin-svg-import'
+import { terser } from "rollup-plugin-terser"
 
 import { defineConfig } from 'rollup'
 
@@ -34,12 +35,12 @@ export default defineConfig({
   input: { ...components, ...theme, ...utils },
   output: [
     {
-      file: packageJson.main,
+      dir: packageJson.main,
       format: "cjs",
       sourcemap: true
     },
     {
-      file: packageJson.module,
+      dir: packageJson.module,
       format: "esm",
       sourcemap: true
     }
@@ -61,7 +62,9 @@ export default defineConfig({
     // Helps with things like default exports
     commonjs({
       include: ['node_modules/**'],
-      namedExports: {}
+      namedExports: {
+        'node_modules/react-dom/index.js': ['createPortal']
+      }
     }),
     url({
       // by default, rollup-plugin-url will not handle font files
@@ -70,6 +73,7 @@ export default defineConfig({
       // are always bundled with the code, not copied to /dist
       limit: Infinity
     }),
-    svg()
+    svg(),
+    terser()
   ]
 })
