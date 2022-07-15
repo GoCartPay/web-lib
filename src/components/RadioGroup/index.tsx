@@ -3,7 +3,7 @@ import MuiRadioGroup, { RadioGroupProps as MuiRadioGroupProps } from '@mui/mater
 import Box from '@mui/material/Box';
 import RadioButton from '../RadioButton';
 
-type Radio = {
+export type Radio = {
   label: string
   value: string
 }
