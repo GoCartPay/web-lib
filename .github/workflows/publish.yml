@@ -28,6 +28,6 @@ jobs:
       # Copy fonts and svgs
       - run: cp ./src/assets -r ./dist/
       # Publish dist folder
-      - run: npm publish
+      - run: npm publish ./dist/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
