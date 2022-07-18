@@ -4,7 +4,7 @@
  **/
 
 import design from '../design-tokens.tokens.json'
-import TWKLausanne from './fonts/TWK-Lausanne/TWKLausanne-400.ttf'
+import TWKLausanne from '../../assets/fonts/TWK-Lausanne/TWKLausanne-400.ttf'
 import type { DesignToken } from '../types'
 
 // Allow custom variants in TS
