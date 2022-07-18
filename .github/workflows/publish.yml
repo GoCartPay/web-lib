@@ -24,9 +24,10 @@ jobs:
       # Run build
       - run: npm run build; pwd; ls
       # Copy files to dist dir (package.json is required)
+      - run: cd dist; ls -a
       - run: cp ./package.json ./dist/ && cp ./README.md ./dist/
       # Copy fonts and svgs
-      - run: cp ./src/assets -r ./dist/
+      - run: cp -r ./src/assets ./dist/
       # Publish dist folder
       - run: npm publish ./dist/
         env:
