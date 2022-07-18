@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { makeStyles } from '@mui/styles'
 import { theme } from '../../Theme'
 
@@ -12,12 +11,8 @@ import Box from '@mui/material/Box'
 import { BigButton } from '../../components/BigButton';
 import SmallButton from '../../components/SmallButton';
 import ConfettiExplosion from 'react-confetti-explosion';
-import CircularProgress from '@mui/material/CircularProgress';
-import Alert from '@mui/material/Alert';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-
+import MoreWaysToValidate from '../../components/MoreWaysToValidate';
 import './fade.css'
-import RadioGroup from '../../components/RadioGroup';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -64,11 +59,6 @@ const useStyles: any = makeStyles({
     }
 });
 
-const radioOTPOptions = [
-    { value: 'tel', label: 'Send to (•••) ••••• 554' },
-    { value: 'email', label: 'Send to p••l@philj.com' }
-];
-
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // eslint-disable-next-line complexity
 const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, hasLoader: boolean }) => {
@@ -77,11 +67,19 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
     const [isOpen, setIsOpen] = React.useState(() => args.open);
     const [otp, setOtp] = useState('');
     const [openMoreWays, setOpenMoreWays] = useState(false);
-    const [selectedOTPMethod, setSelectedOTPMethod] = useState('tel');
     const [isOTPResending, setIsOTPResending] = useState(false);
     const [resendSuccess, setResendSuccess] = useState(false);
     const [confetti, setConfetti] = useState(false);
     const [finish, setFinish] = useState(false);
+    const [authType, setAuthType] = useState('SMS');
+
+    const userPhone = '(•••) ••••• 554';
+    const userEmail = 'p••l@philj.com';
+
+    const radioOTPOptions = [
+        { value: 'SMS', label: `Send to ${userPhone}` },
+        { value: 'email', label: `Send to ${userEmail}`}
+    ];
 
     const handleChangeOtp = (value: string) => {
         setOtp(value);
@@ -104,22 +102,18 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
         setIsOpen(false);
     }
 
-    const handleRadioBtnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedOTPMethod((event.target as HTMLInputElement).value)
-    };
-
-    const handleResend = () => {
-        setOtp('');
-        if (!resendSuccess) {
-
-            setIsOTPResending(true);
-            setTimeout(() => {
-                setIsOTPResending(false);
-                setResendSuccess(true);
-            }, 2000)
-        } else {
-            setOpenMoreWays(false);
-        }
+    const handleResendOTP = (val: string) => {
+        setIsOTPResending(true);
+        setAuthType(val);
+        setTimeout(() => {
+          setIsOTPResending(false);
+          setResendSuccess(true);
+        },1000);
+      };
+    
+    const handleEnterNewCode = () => {
+        setOpenMoreWays(false);
+        setResendSuccess(false);
     };
 
     const headerContent = (
@@ -138,7 +132,7 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                             Let’s validate your account
                         </Typography>
                         <Typography variant="body1">
-                            Please enter the code sent to (•••) ••••• 554 to complete your enrollment.
+                            Please enter the code sent to { authType === 'SMS' ? userPhone : userEmail} to complete your enrollment.
                         </Typography>
                     </div>
                     <Box height={'48px'} my={2}>
@@ -148,43 +142,25 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                         textAlign: 'center',
                         paddingBottom: 12
                     }}>
-                        <SmallButton 
-                            onClick={() => { 
-                                setOpenMoreWays(true); 
-                                setResendSuccess(false); 
+                        <SmallButton
+                            onClick={() => {
+                                setOpenMoreWays(true);
                             }}
-                            variant="outlined" 
-                            labelText="More ways to validate" 
+                            variant="outlined"
+                            labelText="More ways to validate"
                         />
                     </Box>
                 </>}
-                {openMoreWays &&
-                    <>
-                        <Typography variant='body1' sx={{ opacity: 0.6, mb: 2 }}>
-                            Where would you like to receive a new validation code?
-                        </Typography>
-                        <RadioGroup
-                            value={selectedOTPMethod}
-                            onChange={handleRadioBtnChange}
-                            radioOptions={radioOTPOptions}
-                        />
-                        <Box sx={{mt:4, borderTop:1, borderColor: '#DCDEE5', pt:3.5}}>
-                            { resendSuccess && 
-                                <Box sx={{my: 1.5}}>
-                                    <Alert severity="success" icon={<CheckBoxIcon sx={{height:32, width:32}}/>} sx={{borderRadius: '8px', height: '56px', display:'flex', alignItems:'center', lineHeight:'56px', fontWeight:600}}>Sent to xxx xxx xxx</Alert>
-                                </Box>
-                            }
-                            <Box sx={{ my: 1.5 }}>
-                                <BigButton variant="contained" sx={{height:'56px !important'}} labelText={resendSuccess ? 'Enter new code' : 'Resend code'} onClick={handleResend}>
-                                    {isOTPResending && <CircularProgress sx={{ color: '#ffffff' }} />}
-                                </BigButton>
-                            </Box>
-                            <Box sx={{ my: 1.5 }}>
-                                {!resendSuccess && <BigButton variant="outlined" sx={{height:'56px !important'}} labelText='Cancel' onClick={() => setOpenMoreWays(false)} />}
-                            </Box>
-                        </Box>
-                    </>
-                }
+                <MoreWaysToValidate
+                     isLoading={isOTPResending}
+                     isOpen={openMoreWays}
+                     radioOptions={radioOTPOptions}
+                     onCancel={() => setOpenMoreWays(false)}
+                     onEnterNewCode={handleEnterNewCode}
+                     onResend={handleResendOTP}
+                     showSuccess={resendSuccess}
+                     successMessage={`Sent to ${authType === 'SMS' ? userPhone : userEmail}`}
+                />
                 {finish && <>
                     <div>
                         <Typography variant="h6" sx={{ color: `${confetti ? theme.palette.grey[500] : theme.palette.primary}` }}>
@@ -225,7 +201,14 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                     <ConfettiExplosion particleCount={150} particleSize={8} duration={2000} colors={['#22974A', '#2AD062', '#5EF391', '#CBFFDD']} force={0.75} floorHeight={300} floorWidth={425} />
                 </Box>
             </>}
-            <EntryBackgroundDrawer onOpen={() => { }} onClose={() => onClose()} open={isOpen} headerContent={headerContent} content={content} hasLoader={true} />
+            <EntryBackgroundDrawer 
+                onOpen={() => { }} 
+                onClose={() => onClose()} 
+                open={isOpen} 
+                headerContent={headerContent} 
+                content={content} 
+                hasLoader={true} 
+            />
         </>
     )
 }
