@@ -82,7 +82,6 @@
     "build-storybook": "build-storybook",
     "build": "npm run clean ; rollup --config",
     "prepare": "husky install",
-    "prepublishOnly": "cp -r ./dist/* .",
     "type:check": "tsc --skipLibCheck --noEmit",
     "chromatic": "source .env && npx chromatic --allow-console-errors --project-token=$CHROMATIC_PROJECT_TOKEN",
     "chromatic-ci": "chromatic --exit-zero-on-changes --allow-console-errors"
