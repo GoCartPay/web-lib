@@ -1,9 +1,9 @@
 {
   "name": "@gocartpay/web-lib",
   "description": "",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "module": "dist",
-  "main": "dist/index.js",
+  "main": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -79,6 +79,7 @@
     "build-storybook": "build-storybook",
     "build": "npm run clean ; rollup --config",
     "prepare": "husky install",
+    "prepublishOnly": "cp -r ./dist/* ."
     "type:check": "tsc --skipLibCheck --noEmit",
     "chromatic": "source .env && npx chromatic --allow-console-errors --project-token=$CHROMATIC_PROJECT_TOKEN",
     "chromatic-ci": "chromatic --exit-zero-on-changes --allow-console-errors"
