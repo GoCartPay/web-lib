@@ -5,6 +5,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import json from '@rollup/plugin-json'
 import svg from 'rollup-plugin-svg-import'
 import { terser } from "rollup-plugin-terser"
+import url from '@rollup/plugin-url'
 
 import { defineConfig } from 'rollup'
 
@@ -34,7 +35,7 @@ export default defineConfig({
   input: { ...components, ...theme, ...utils },
   output: 
     {
-      dir: packageJson.module,
+      file: packageJson.module,
       format: 'es',
       exports: 'named',
       sourcemap: true
@@ -52,6 +53,9 @@ export default defineConfig({
       rollupCommonJSResolveHack: true,
       exclude: ['**/*.tests.tsx', '**/*.stories.*'],
       clean: true
+    }),
+    url({
+      include: ['**/*.woff', '**/*.woff2', '**/*.ttf', '**/*.svg'],
     }),
     // Helps with things like default exports
     commonjs({
