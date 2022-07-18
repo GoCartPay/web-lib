@@ -33,13 +33,13 @@ const theme = { 'Theme/index': './src/Theme/index.tsx' }
 
 export default defineConfig({
   input: { ...components, ...theme, ...utils },
-  output: 
-    {
-      file: packageJson.module,
-      format: 'es',
-      exports: 'named',
-      sourcemap: true
-    },
+  output:
+  {
+    dir: packageJson.module,
+    format: 'es',
+    exports: 'named',
+    sourcemap: true
+  },
   external: ['react', 'react-is', 'react/jsx-runtime', 'react-dom', '@material-ui/core', '@mui'],
   plugins: [
     // Allow loading json files
