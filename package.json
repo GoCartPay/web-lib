@@ -1,7 +1,7 @@
 {
   "name": "@gocartpay/web-lib",
   "description": "",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "module": "dist",
   "main": "dist/index.d.ts",
   "files": [
