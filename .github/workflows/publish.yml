@@ -28,7 +28,9 @@ jobs:
       - run: cp ./package.json dist && cp ./README.md dist
       # Copy fonts and svgs
       - run: cp -r src/assets dist
+      # Package contents
+      - run: npm pack
       # Publish dist folder
-      - run: npm publish dist
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
