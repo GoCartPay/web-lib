@@ -1,7 +1,7 @@
 {
   "name": "@gocartpay/web-lib",
   "description": "",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "module": "dist",
   "main": "dist/index.d.ts",
   "files": [
@@ -13,7 +13,7 @@
   "typings": "dist/index.d.ts",
   "types": "dist/index.d.ts",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/@gocartpay"
   },
   "peerDependencies": {
     "react": "^17.0.2",
