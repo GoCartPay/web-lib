@@ -31,6 +31,6 @@ jobs:
       # Package contents
       - run: npm pack
       # Publish dist folder
-      - run: npm publish
+      - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
