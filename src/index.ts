@@ -6,6 +6,7 @@ import Otp from './components/Otp';
 import RadioGroup from './components/RadioGroup';
 import RadioButton from './components/RadioButton';
 import SmallButton from './components/SmallButton';
+import MoreWaysToValidate from './components/MoreWaysToValidate';
 
 export {
     BigButton,
@@ -15,5 +16,6 @@ export {
     Otp,
     RadioGroup,
     RadioButton,
-    SmallButton
+    SmallButton,
+    MoreWaysToValidate,
 }
