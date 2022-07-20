@@ -30,13 +30,15 @@ const PurchaseDetails: React.FC<PurchaseDetailsProps> = ({
   merchantName,
 }) => (
   <Box sx={{ width: '327px', height: '191px'}}>
-    <Typography variant='h6' sx={{ fontWeight: 500, mb: '12px' }}>
+    <Typography variant='h6' sx={{ fontWeight: 500, mb: '12px', lineHeight: '26px' }}>
       {title}
     </Typography>
     <Box sx={{ display: 'flex' }}>
-      <Box sx={{ maxWidth: '148px', maxHeight: '148px' }}>
-        <img width='100%' height='100%' src={logoSrc} alt={merchantName} />
-      </Box>
+      { logoSrc && (
+        <Box sx={{ maxWidth: '148px', maxHeight: '148px', mr: '9px' }}>
+          <img width='100%' height='100%' src={logoSrc} alt={merchantName} />
+        </Box>
+      )}
       <Box>
       { purchaseDetails.map((purchaseDetail) => {
         const { label, description, level } = {...purchaseDetail};
@@ -45,10 +47,10 @@ const PurchaseDetails: React.FC<PurchaseDetailsProps> = ({
 
         return displayPair && (
           <>
-            <Typography variant={level === 1 ? 'subtitle1' : 'subtitle2'} sx={{ ml: '9px' }}>
+            <Typography variant={level === 1 ? 'subtitle1' : 'subtitle2'}>
               { label }
             </Typography>
-            <Typography variant='body2' noWrap={!containsNewLine} color='textSecondary' sx={{ mb: '6px', ml: '9px'}}>
+            <Typography variant='body2' noWrap={!containsNewLine} color='textSecondary' sx={{ mb: '6px' }}>
               {description.split('\n').map(str =>
                 <span key={`${str}-line-br`}>{str} <br/> </span>
               )}
