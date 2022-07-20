@@ -49,12 +49,6 @@ const useStyles: any = makeStyles({
   content: {
 
   },
-  closeIcon: {
-    color: '#fff',
-    height: '24px',
-    width: '24px',
-    backgroundColor: '#38393B'
-  }
 });
 
 type EntryBackgroundDrawerProps = DrawerProps & {
@@ -97,7 +91,15 @@ export const EntryBackgroundDrawer = ({
         {loading && <Loader onComplete={() => { setLoading(false) }} />}
         {!loading && <div className={styles.header}>
           {GoCartLogoReverse}
-          <IconButton onClick={() => { muiProps.onClose(null, 'backdropClick') }} className={styles.closeIcon}>
+          <IconButton
+            onClick={() => { muiProps.onClose(null, 'backdropClick') }}
+            sx={{
+              color: '#fff',
+              height: '24px',
+              width: '24px',
+              backgroundColor: '#38393B'
+            }}
+          >
             <CloseIcon />
           </IconButton>
         </div>}
