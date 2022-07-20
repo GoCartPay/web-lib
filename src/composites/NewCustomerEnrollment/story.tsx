@@ -202,7 +202,6 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
                 </Box>
             </>}
             <EntryBackgroundDrawer 
-                onOpen={() => { }} 
                 onClose={() => onClose()} 
                 open={isOpen} 
                 headerContent={headerContent} 
