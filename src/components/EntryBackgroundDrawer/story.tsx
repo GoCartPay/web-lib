@@ -29,7 +29,7 @@ const Template = (args: SwipeableDrawerProps & { content: any, open: boolean, ha
 
   return (
   <>
-    <EntryBackgroundDrawer onOpen={() => {}} onClose={() => onClose()} open={isOpen} content={args.content} hasLoader={true} />
+    <EntryBackgroundDrawer onClose={() => onClose()} open={isOpen} content={args.content} hasLoader={true} />
   </>
   )
 }
