@@ -58,7 +58,7 @@ const PurchaseDetails: React.FC<PurchaseDetailsProps> = ({
         { purchaseDetails?.map((purchaseDetail) => {
           const { label, description, level } = {...purchaseDetail};
           const displayPair = label && description;
-          const containsNewLine = description.includes('\n')
+          const containsNewLine = description?.includes('\n')
 
           return displayPair && (
             <div key={`label-and-description-pair-level${level}`}>
@@ -66,7 +66,7 @@ const PurchaseDetails: React.FC<PurchaseDetailsProps> = ({
                 { label }
               </Typography>
               <Typography key={`description-level${level}`} variant='body2' noWrap={!containsNewLine} color='textSecondary' sx={{ mb: '6px' }}>
-                {description.split('\n').map(str =>
+                {description?.split('\n').map(str =>
                   <span key={`${str}-line-br`}>{str} <br/> </span>
                 )}
               </Typography>
