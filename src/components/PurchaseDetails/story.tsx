@@ -8,7 +8,7 @@ export default {
 
 const purchaseDetails = [
   {
-    label: 'California Fish Grill',
+    label: 'GoCart',
     description: '3 Items',
     level: 1,
   },
@@ -24,7 +24,7 @@ const purchaseDetails = [
   }
 ];
 
-const logoSrc = 'https://media-dev.gocartpay.com/logo_0edb75d7-1161-4369-a375-d3955fee416f';
+const logoSrc = 'https://www.fisglobal.com/-/media/GoCart/img/logonew.png?sc_lang=en';
 
 
 const Template = (args: PurchaseDetailsProps) => (
@@ -38,5 +38,5 @@ export const Default = Template.bind({})
 Default.args = {
   purchaseDetails: purchaseDetails,
   logoSrc,
-  merchantName: 'California Fish Grill',
+  merchantName: 'GoCart',
 }
