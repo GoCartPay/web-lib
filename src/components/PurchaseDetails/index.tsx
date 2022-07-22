@@ -50,11 +50,11 @@ const PurchaseDetails: React.FC<PurchaseDetailsProps> = ({
       </Typography>
       <Box sx={{ display: 'flex' }}>
         { logoSrc && (
-          <Box sx={{ maxWidth: '148px', maxHeight: '148px', mr: '9px' }}>
+          <Box sx={{ maxWidth: '148px', maxHeight: '148px', mr: '8px' }}>
             <img className={styles.logo} src={logoSrc} alt={merchantName} />
           </Box>
         )}
-        <Box sx={{ maxWidth: '170px'}}>
+        <Box sx={{ maxWidth: logoSrc ? '170px' : '327px'}}>
         { purchaseDetails?.map((purchaseDetail) => {
           const { label, description, level } = {...purchaseDetail};
           const displayPair = label && description;
