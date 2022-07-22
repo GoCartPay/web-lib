@@ -27,7 +27,7 @@ export const theme = createTheme({
     }
   }
 })
-
+export { fontFace }
 /** Theme provider, pre-filled with Spruce theme */
 export const ThemeProvider = (props?: Record<string, unknown>) => {
   const { children, ...otherProps } = props

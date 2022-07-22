@@ -407,7 +407,7 @@
       "default": {
         "description": "Reflects the background.default variable from the theme object",
         "type": "color",
-        "value": "#fafafaff",
+        "value": "transparent",
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
             "styleId": "S:ced60fb745da49a6979f8f1a179b2fb81b881fd6,",
