@@ -1,5 +1,5 @@
 import * as React from 'react'
-import SwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
+import Drawer, { DrawerProps } from '@mui/material/Drawer'
 import CloseIcon from '@mui/icons-material/Close'
 import { Loader } from '../Loader/index'
 import { makeStyles } from '@mui/styles'
@@ -49,15 +49,9 @@ const useStyles: any = makeStyles({
   content: {
 
   },
-  closeIcon: {
-    color: '#fff',
-    height: '24px',
-    width: '24px',
-    backgroundColor: '#38393B'
-  }
 });
 
-type EntryBackgroundDrawerProps = SwipeableDrawerProps & {
+type EntryBackgroundDrawerProps = DrawerProps & {
   hasLoader?: boolean,
   headerContent?: any,
   content: any
@@ -86,11 +80,10 @@ export const EntryBackgroundDrawer = ({
   const mobileAnchor = useMediaQuery(theme.breakpoints.up('sm')) ? 'top' : 'bottom';
 
   return (
-    <SwipeableDrawer
+    <Drawer
       anchor={mobileAnchor}
       open={muiProps.open}
-      onClose={() => muiProps.onClose(null)}
-      onOpen={() => muiProps.onOpen(null)}
+      onClose={() => muiProps.onClose(null, 'backdropClick')}
       className={styles.container}
       {...muiProps}
     >
@@ -98,14 +91,22 @@ export const EntryBackgroundDrawer = ({
         {loading && <Loader onComplete={() => { setLoading(false) }} />}
         {!loading && <div className={styles.header}>
           {GoCartLogoReverse}
-          <IconButton onClick={() => { muiProps.onClose(null) }} className={styles.closeIcon}>
+          <IconButton
+            onClick={() => { muiProps.onClose(null, 'backdropClick') }}
+            sx={{
+              color: '#fff',
+              height: '24px',
+              width: '24px',
+              backgroundColor: '#38393B'
+            }}
+          >
             <CloseIcon />
           </IconButton>
         </div>}
         <div className={styles.headerContent}>{headerContent}</div>
         {!loading && <div className={styles.content}>{content}</div>}
       </div>
-    </SwipeableDrawer>
+    </Drawer>
   )
 }
 

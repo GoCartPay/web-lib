@@ -48,6 +48,8 @@ Component Library for GoCart's UI
 
 Component library based on MUI
 
+Please note, you will need to be on node 16+ to use precommit hooks.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With

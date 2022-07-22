@@ -3,10 +3,13 @@ import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import resolve from 'rollup-plugin-node-resolve'
 import json from '@rollup/plugin-json'
+import svg from 'rollup-plugin-svg-import'
+import { terser } from "rollup-plugin-terser"
 import url from '@rollup/plugin-url'
-import svg from 'rollup-plugin-svg'
 
 import { defineConfig } from 'rollup'
+
+const packageJson = require("./package.json");
 
 const glob = require('glob')
 
@@ -30,13 +33,14 @@ const theme = { 'Theme/index': './src/Theme/index.tsx' }
 
 export default defineConfig({
   input: { ...components, ...theme, ...utils },
-  output: {
-    dir: './dist',
+  output:
+  {
+    dir: packageJson.module,
     format: 'es',
     exports: 'named',
     sourcemap: true
   },
-  external: ['react', 'react-is', 'react/jsx-runtime'],
+  external: ['react', 'react-is', 'react/jsx-runtime', 'react-dom', '@material-ui/core', '@mui'],
   plugins: [
     // Allow loading json files
     json(),
@@ -50,18 +54,17 @@ export default defineConfig({
       exclude: ['**/*.tests.tsx', '**/*.stories.*'],
       clean: true
     }),
+    url({
+      include: ['**/*.woff', '**/*.woff2', '**/*.ttf', '**/*.svg'],
+    }),
     // Helps with things like default exports
     commonjs({
       include: ['node_modules/**'],
-      namedExports: {}
+      namedExports: {
+        'node_modules/react-dom/index.js': ['createPortal']
+      }
     }),
-    url({
-      // by default, rollup-plugin-url will not handle font files
-      include: ['**/*.woff', '**/*.woff2', '**/*.ttf'],
-      // setting infinite limit will ensure that the files
-      // are always bundled with the code, not copied to /dist
-      limit: Infinity
-    }),
-    svg()
+    svg(),
+    terser()
   ]
 })
