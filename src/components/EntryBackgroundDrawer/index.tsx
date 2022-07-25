@@ -38,7 +38,7 @@ const useStyles: any = makeStyles({
   header: {
     padding: '24px',
     display: 'flex',
-    flexDirection: 'row', 
+    flexDirection: 'row',
     flexFlow: 'row wrap',
     justifyContent: 'space-between',
     '& svg': {
