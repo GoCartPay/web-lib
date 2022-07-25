@@ -4,10 +4,33 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { keyframes } from '@emotion/react';
 
 import { BigButton } from '../BigButton';
 import RadioGroup from '../RadioGroup';
 import { Radio } from '../RadioGroup';
+
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`
+
+const fadeOutDown = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+`
+
 
 type MoreWaysToValidateProps = {
   /** whether loading icon should be displayed inside main button */
@@ -66,7 +89,7 @@ const MoreWaysToValidate: React.FC<MoreWaysToValidateProps> = ({
 
   return isOpen ? (
     <Box
-      sx={{ animation: `${fadeIn ? 'fadeInUp 400ms' : 'fadeOutDown 400ms'}` }}
+      sx={{ animation: `${fadeIn ? `${fadeInUp} 400ms` : `${fadeOutDown} 400ms`}` }}
     >
       <Typography variant='body1' sx={{ opacity: 0.6, mb: 2 }}>
         Where would you like to receive a new validation code?

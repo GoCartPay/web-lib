@@ -77,7 +77,7 @@ Object {
     },
     "augmentColor": [Function],
     "background": Object {
-      "default": "#fafafaff",
+      "default": "transparent",
       "paper": "#ffffffff",
     },
     "common": Object {
