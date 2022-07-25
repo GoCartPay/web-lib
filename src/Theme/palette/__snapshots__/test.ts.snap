@@ -12,7 +12,7 @@ Object {
     "shades": undefined,
   },
   "background": Object {
-    "default": "#fafafaff",
+    "default": "transparent",
     "paper": "#ffffffff",
   },
   "common": Object {

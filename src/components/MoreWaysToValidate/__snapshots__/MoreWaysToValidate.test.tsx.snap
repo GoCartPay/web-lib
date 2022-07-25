@@ -2,7 +2,7 @@
 
 exports[`More Ways to Validate Screen behaves correctly renders without crashing and matches snapshot 1`] = `
 <div
-  class="MuiBox-root css-14ft4zl"
+  class="MuiBox-root css-ajuqhe"
 >
   <p
     class="MuiTypography-root MuiTypography-body1 css-lwiwm9-MuiTypography-root"
@@ -172,7 +172,7 @@ exports[`More Ways to Validate Screen behaves correctly renders without crashing
 
 exports[`More Ways to Validate Screen behaves correctly shows the correct layout when success is true 1`] = `
 <div
-  class="MuiBox-root css-14ft4zl"
+  class="MuiBox-root css-ajuqhe"
 >
   <p
     class="MuiTypography-root MuiTypography-body1 css-lwiwm9-MuiTypography-root"
