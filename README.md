@@ -32,7 +32,7 @@ Component Library for GoCart's UI
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a> 
+      <a href="#about-the-project">About The Project</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -120,7 +120,6 @@ This is a library, meant to be used within other applications.
 
 ## Contact
 
-Dan Woodson - daniel.woodson@fisglobal.com  
 Simon Willems - simon.willems@fisglobal.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
