@@ -36,7 +36,7 @@ const PurchaseDetails: React.FC<PurchaseDetailsProps> = ({
   logoSrc,
   merchantName,
 }) => (
-  <Box sx={{ width: '327px', height: '191px'}}>
+  <Box sx={{ width: '327px' }}>
     <Typography variant='h6' sx={{ fontWeight: 500, mb: '12px', lineHeight: '26px' }}>
       {title}
     </Typography>
