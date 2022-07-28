@@ -4,11 +4,11 @@ exports[`More Ways to Validate Screen behaves correctly renders without crashing
 <div
   class="MuiBox-root css-ajuqhe"
 >
-  <p
-    class="MuiTypography-root MuiTypography-body1 css-lwiwm9-MuiTypography-root"
+  <h6
+    class="MuiTypography-root MuiTypography-h6 css-7vlfn4-MuiTypography-root"
   >
-    Where would you like to receive a new validation code?
-  </p>
+    Where should we send a new validation code?
+  </h6>
   <div
     class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
     role="radiogroup"
@@ -174,11 +174,11 @@ exports[`More Ways to Validate Screen behaves correctly shows the correct layout
 <div
   class="MuiBox-root css-ajuqhe"
 >
-  <p
-    class="MuiTypography-root MuiTypography-body1 css-lwiwm9-MuiTypography-root"
+  <h6
+    class="MuiTypography-root MuiTypography-h6 css-7vlfn4-MuiTypography-root"
   >
-    Where would you like to receive a new validation code?
-  </p>
+    Where should we send a new validation code?
+  </h6>
   <div
     class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
     role="radiogroup"
