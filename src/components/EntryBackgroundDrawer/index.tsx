@@ -2,7 +2,7 @@ import * as React from 'react'
 import Drawer, { DrawerProps } from '@mui/material/Drawer'
 import CloseIcon from '@mui/icons-material/Close'
 import { Loader } from '../Loader/index'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import IconButton from '@mui/material/IconButton'
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery'

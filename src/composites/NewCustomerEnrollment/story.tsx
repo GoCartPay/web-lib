@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import { theme } from '../../Theme'
 
 import { EntryBackgroundDrawer } from '../../components/EntryBackgroundDrawer/index'

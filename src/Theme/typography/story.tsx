@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import { Variant } from '@mui/material/styles/createTypography'
 import { TypographyUnit } from '../types'
 import { Theme } from '@mui/material'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 
 /** Default sort */
