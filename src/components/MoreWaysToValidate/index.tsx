@@ -91,8 +91,8 @@ const MoreWaysToValidate: React.FC<MoreWaysToValidateProps> = ({
     <Box
       sx={{ animation: `${fadeIn ? `${fadeInUp} 400ms` : `${fadeOutDown} 400ms`}` }}
     >
-      <Typography variant='body1' sx={{ opacity: 0.6, mb: 2 }}>
-        Where would you like to receive a new validation code?
+      <Typography variant='h6' sx={{ fontWeight: 500, }}>
+        Where should we send a new validation code?
       </Typography>
       <RadioGroup
         value={selectedOTPMethod}

@@ -4,8 +4,8 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
 import legalFooterStyles from './styles';
+import { css } from '@emotion/react';
 
 const termsLink = 'https://www.gocartpay.com/termsofuse';
 const privacyLink = 'https://www.gocartpay.com/privacy/privacypolicy';
@@ -33,7 +33,7 @@ type LegalLinkProps = {
 };
 
 const LegalLink: React.FC<LegalLinkProps> = ({ href, children }) => <Link underline='always' target='_blank' href={href}>{children}</Link>
-
+const GoCartText: React.FC = () => <span css={css`font-weight: 600;`}>GoCart</span>;
 /**
  * Legal Footer component
  * @see {@link https://www.figma.com/file/GDkKRn0hdzPqwrILgdvKr1/Enrollment-with-SPRUCE?node-id=1%3A173}
@@ -43,11 +43,14 @@ const LegalFooter: React.FC = (): JSX.Element => (
   <Box sx={legalFooterStyles.containerStyles}>
     {/* should map these styles to one of our typograpy variants */}
     <Typography css={legalFooterStyles.legalFooterStyles}>
-      We never use this information Lorem ipsum legal dolor sit amet according to these{" "}
+      <GoCartText />
+      {" "}
+      provides you with faster and more secure checkout. By signing up, you agree to the {" "}
+      <GoCartText />
+      {" "}
       <LegalLink href={termsLink}>Terms of Service </LegalLink>
       and
       <LegalLink href={privacyLink}> Privacy Policy.</LegalLink>
-      {" "}By entering the code sent to you, you agree to the Terms of Service and Privacy Policy
     </Typography>
     <Box sx={{ mt: 1 }}>
       {PoweredBy}
