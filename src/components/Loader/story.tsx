@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { Loader } from './index'
-import { makeStyles } from '@mui/styles'
+import { makeStyles } from '@mui/material/styles'
 import Box from '@mui/material/Box';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
