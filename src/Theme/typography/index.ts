@@ -3,7 +3,7 @@
  * something ready to use with MUI's `createTheme`
  **/
 
-import design from '../design-tokens.tokens.json'
+import { tokens } from '../tokens.js'
 import TWKLausanne from '../../assets/fonts/TWK-Lausanne/TWKLausanne-400.ttf'
 import type { DesignToken } from '../types'
 
@@ -44,8 +44,7 @@ export const fontFace = `
   }
 `
 
-/** Typed imported JSON */
-const token: DesignToken = design
+const token: DesignToken = tokens;
 
 /** Typography, ready to be added to theme or used on it's own */
 export const typography = Object.keys(token.font.typography).reduce(
