@@ -74,6 +74,15 @@ const Template = () => {
           <Box height={'48px'} my={2} width={400}>
             <Otp
               codeLength={6}
+              value={'111111'}
+              onChange={handleChangeOtp}
+              hasError
+              isDisabled
+            />
+          </Box>
+          <Box height={'48px'} my={2} width={400}>
+            <Otp
+              codeLength={6}
               value={errorOtp}
               onChange={handleChangeErrOtp}
               hasError={isError}

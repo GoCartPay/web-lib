@@ -181,6 +181,7 @@ const Otp: React.FC<OtpProps> = ({
       border-radius: 8px !important;
       border: solid ${getBorderColor({ hasError, isComplete, isActive})};
       outline: ${isComplete && '3px solid rgba(42, 208, 98, 0.3)'};
+      background-color: ${hasError && 'rgba(223, 33, 19, 0.04)'};
       &:hover {
         background-color: #F1F2F5;
         input {
@@ -192,6 +193,7 @@ const Otp: React.FC<OtpProps> = ({
         text-align: center;
         border: none;
         color: ${isLoading ? '#9e9e9e' : '#121317ff'};
+        background-color: transparent;
         font-weight: 500;
         font-size: 20px;
         line-height: 25px;
