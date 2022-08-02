@@ -7,7 +7,19 @@ exports[`Legal footer renders and behaves correctly renders with expected conten
   <p
     class="MuiTypography-root MuiTypography-body1 css-w0ybsn-MuiTypography-root-LegalFooter"
   >
-    We never use this information Lorem ipsum legal dolor sit amet according to these
+    <span
+      class="css-1s4583u-GoCartText"
+    >
+      GoCart
+    </span>
+     
+    provides you with faster and more secure checkout. By signing up, you agree to the 
+     
+    <span
+      class="css-1s4583u-GoCartText"
+    >
+      GoCart
+    </span>
      
     <a
       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
@@ -24,8 +36,6 @@ exports[`Legal footer renders and behaves correctly renders with expected conten
     >
        Privacy Policy.
     </a>
-     
-    By entering the code sent to you, you agree to the Terms of Service and Privacy Policy
   </p>
   <div
     class="MuiBox-root css-164r41r"

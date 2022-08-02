@@ -40,7 +40,7 @@ export default defineConfig({
     exports: 'named',
     sourcemap: true
   },
-  external: ['react', 'react-is', 'react/jsx-runtime', 'react-dom', '@material-ui/core', '@mui'],
+  external: ['react', 'react-is', 'react/jsx-runtime', 'react-dom', '@material-ui/core', '@mui', '@mui/styles', '@mui/system', '@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
   plugins: [
     // Allow loading json files
     json(),

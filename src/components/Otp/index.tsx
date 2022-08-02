@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, KeyboardEvent, FocusEvent, ChangeEvent, ClipboardEvent } from 'react';
 import { Paper } from '@mui/material';
-import Box from '@mui/system/Box';
+import Box from '@mui/material/Box';
 import { css } from '@emotion/react';
 // keyCode constants
 const BACKSPACE = 8;
