@@ -7,7 +7,7 @@ exports[`More Ways to Validate Screen behaves correctly renders without crashing
   <h6
     class="MuiTypography-root MuiTypography-h6 css-7vlfn4-MuiTypography-root"
   >
-    Where should we send a new validation code?
+    Where should we send your new code?
   </h6>
   <div
     class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
@@ -141,7 +141,7 @@ exports[`More Ways to Validate Screen behaves correctly renders without crashing
           tabindex="0"
           type="button"
         >
-          Resend code
+          Send code
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -177,7 +177,7 @@ exports[`More Ways to Validate Screen behaves correctly shows the correct layout
   <h6
     class="MuiTypography-root MuiTypography-h6 css-7vlfn4-MuiTypography-root"
   >
-    Where should we send a new validation code?
+    Where should we send your new code?
   </h6>
   <div
     class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"

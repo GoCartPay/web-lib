@@ -60,7 +60,7 @@ describe('More Ways to Validate Screen behaves correctly', () => {
       <Base/>
     );
 
-    const resendBtn = screen.getByRole('button', { name: 'Resend code'});
+    const resendBtn = screen.getByRole('button', { name: 'Send code'});
     const cancelBtn = screen.getByRole('button', { name: 'Cancel'});
 
     userEvent.click(resendBtn);

@@ -92,7 +92,7 @@ const MoreWaysToValidate: React.FC<MoreWaysToValidateProps> = ({
       sx={{ animation: `${fadeIn ? `${fadeInUp} 400ms` : `${fadeOutDown} 400ms`}` }}
     >
       <Typography variant='h6' sx={{ fontWeight: 500, }}>
-        Where should we send a new validation code?
+        Where should we send your new code?
       </Typography>
       <RadioGroup
         value={selectedOTPMethod}
@@ -115,7 +115,7 @@ const MoreWaysToValidate: React.FC<MoreWaysToValidateProps> = ({
           <BigButton 
             variant="contained" 
             sx={{ height: '56px !important' }} 
-            labelText={showSuccess ? 'Enter new code' : 'Resend code'} 
+            labelText={showSuccess ? 'Enter new code' : 'Send code'} 
             onClick={showSuccess ?  handleEnterNewCode : handleResend}
           >
             {isLoading && <CircularProgress sx={{ color: '#ffffff' }} />}
