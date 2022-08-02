@@ -1,6 +1,6 @@
 const tokens = {
     shape: {
-        borderRadius: '20px'
+        borderRadius: 20
     },
     animation: {
         duration: {
