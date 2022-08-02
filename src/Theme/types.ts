@@ -5,29 +5,28 @@ export interface TokenUnit<Value = string> {
   description?: string // eg: "Reflects the text.primary variable from the theme object",
   type: 'color' | 'custom-fontStyle' | string
   value: Value // string | Record<string, string | number> // eg: "#000000de" or {"fontSize": 12},
-  extensions: {
-    'org.lukasoppermann.figmaDesignTokens': {
-      styleId: string // eg: "S:3954b6510df8a66fae1298393ec2109cd4f52516,",
-      exportKey: 'color' | 'font' | string
-    }
-  }
 }
 
 export type ColorUnit = TokenUnit<string>
 
 export type TypographyUnit = TokenUnit<{
-  fontSize: number // eg: 96,
-  textDecoration: string // eg: 'none'
-  fontFamily: string // eg: 'TWK Lausanne'
-  fontWeight: number // eg: 400
-  fontStyle: string // eg: 'normal'
-  fontStretch: string // eg: 'normal'
-  letterSpacing: number // eg: -2
-  lineHeight?: number // eg: 108
-  paragraphIndent: number // eg: 0
-  paragraphSpacing: number // eg: 0
-  textCase: string // eg: 'none'
+  fontSize?: UnitDefinition // eg: 96,
+  textDecoration?: UnitDefinition // eg: 'none'
+  fontFamily?: UnitDefinition // eg: 'TWK Lausanne'
+  fontWeight?: UnitDefinition // eg: 400
+  fontStyle?: UnitDefinition // eg: 'normal'
+  fontStretch?: UnitDefinition // eg: 'normal'
+  letterSpacing?: UnitDefinition // eg: -2
+  lineHeight?: UnitDefinition // eg: 108
+  paragraphIndent?: UnitDefinition // eg: 0
+  paragraphSpacing?: UnitDefinition // eg: 0
+  textCase?: UnitDefinition // eg: 'none'
 }>
+
+export type UnitDefinition = {
+  type: string,
+  value: any
+}
 
 export type ElevationUnitValue = {
   shadowType: string // eg: "dropShadow",
@@ -108,25 +107,12 @@ export interface DesignToken {
       h4: TypographyUnit
       h5: TypographyUnit
       h6: TypographyUnit
-      'body 1': TypographyUnit
-      'body 2': TypographyUnit
-      'subtitle 1': TypographyUnit
-      'subtitle 2': TypographyUnit
+      body: TypographyUnit
+      subtitle: TypographyUnit
       overline: TypographyUnit
       caption: TypographyUnit
       legal: TypographyUnit
       legal_url: TypographyUnit
-    }
-  }
-  effect: {
-    elevation: {
-      1: ElevationUnit
-      2: ElevationUnit
-      3: ElevationUnit
-      4: ElevationUnit
-      5: ElevationUnit
-      6: ElevationUnit
-      7: ElevationUnit
     }
   }
 }
